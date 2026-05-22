@@ -1,0 +1,357 @@
+/* ─── RESET & BASE ─────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg-primary:   #010612;
+  --deep-navy:    #041840;
+  --accent:       #60C8FF;
+  --text-primary: #EAF4FF;
+  --text-muted:   #80B0D0;
+  --cta:          #1060E0;
+  --amber:        #D09030;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+  background: var(--bg-primary);
+}
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 300;
+  color: var(--text-primary);
+}
+
+/* ─── Z-INDEX SCALE ─────────────────────────────────────────── */
+/* 10: particles | 20: content | 30: video | 40: overlay | 50: copy | 60: ui-above */
+
+/* ─── BLOQUE 1 ──────────────────────────────────────────────── */
+.bloque1 {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  background: var(--bg-primary);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.particles-layer {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+  -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 42%, black 40%, transparent 100%);
+  mask-image:         radial-gradient(ellipse 70% 60% at 50% 42%, black 40%, transparent 100%);
+}
+
+.bloque1-content {
+  position: relative;
+  z-index: 20;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+}
+
+.brand-name {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 800;
+  font-size: 3.2rem;
+  color: var(--text-primary);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  text-align: center;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+/* LED line — 4 stacked layers */
+.led-line {
+  position: relative;
+  width: 70%;
+  height: 20px;
+  display: flex;
+  align-items: flex-start;
+  margin-top: 6px;
+}
+
+.led-line span {
+  position: absolute;
+  left: 0;
+  right: 0;
+  background: linear-gradient(90deg, transparent 0%, var(--accent) 50%, transparent 100%);
+  border-radius: 9999px;
+}
+
+.led-1 { top: 0;  height: 3px;  filter: none; }
+.led-2 { top: 0;  height: 3px;  filter: blur(4px); }
+.led-3 { top: 0;  height: 6px;  filter: blur(8px); }
+.led-4 { top: 0;  height: 12px; filter: blur(16px); }
+
+/* scroll hint */
+.scroll-hint {
+  position: absolute;
+  bottom: 48px;
+  left: 0;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  z-index: 20;
+}
+
+.scroll-text {
+  font-family: 'Barlow', sans-serif;
+  font-weight: 500;
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.chevron {
+  width: 18px;
+  height: 18px;
+  color: var(--accent);
+  animation: chevron-bounce 1.8s ease-in-out infinite;
+}
+
+@keyframes chevron-bounce {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(8px); }
+}
+
+/* ─── BLOQUE 1 → TRANSITION ─────────────────────────────────── */
+.bloque1 {
+  transition: opacity 0.7s ease-in-out, transform 0.7s ease-in-out;
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.bloque1.exit {
+  opacity: 0;
+  transform: translateY(-100vh);
+  pointer-events: none;
+}
+
+/* ─── BLOQUE 3: HERO ─────────────────────────────────────────── */
+.bloque3 {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  opacity: 0;
+  transition: opacity 0.7s ease-in-out;
+  pointer-events: none;
+  z-index: 5;
+}
+
+.bloque3.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* videos */
+.hero-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  z-index: 30;
+  opacity: 1;
+  transition: opacity 0.4s ease-in-out;
+}
+
+.hero-video--hidden {
+  opacity: 0;
+}
+
+/* overlay */
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 40;
+  background: linear-gradient(
+    to top,
+    rgba(1, 6, 18, 0.85) 0%,
+    rgba(1, 6, 18, 0.35) 50%,
+    rgba(1, 6, 18, 0.15) 100%
+  );
+}
+
+/* play button (fallback for autoplay blocked) */
+.play-btn {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 60;
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(1, 6, 18, 0.7);
+  color: var(--accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s;
+}
+
+.play-btn.visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.play-btn svg {
+  width: 28px;
+  height: 28px;
+  margin-left: 4px;
+}
+
+/* ─── HERO COPY ──────────────────────────────────────────────── */
+.hero-copy {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 50;
+  padding: 0 24px 48px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.hero-copy.reveal {
+  pointer-events: auto;
+}
+
+/* stagger children via CSS animation with delay */
+.hero-copy .eyebrow,
+.hero-copy .headline,
+.hero-copy .subheadline,
+.hero-copy .badge,
+.hero-copy .cta-btn {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: none;
+}
+
+.hero-copy.reveal .eyebrow      { animation: fade-up 0.5s ease forwards 0.00s; }
+.hero-copy.reveal .headline     { animation: fade-up 0.5s ease forwards 0.15s; }
+.hero-copy.reveal .subheadline  { animation: fade-up 0.5s ease forwards 0.30s; }
+.hero-copy.reveal .badge        { animation: fade-up 0.5s ease forwards 0.45s; }
+.hero-copy.reveal .cta-btn      { animation: fade-up 0.5s ease forwards 0.60s; }
+
+@keyframes fade-up {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.eyebrow {
+  font-family: 'Barlow', sans-serif;
+  font-weight: 500;
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.headline {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 800;
+  font-size: 3rem;
+  color: var(--text-primary);
+  text-transform: uppercase;
+  line-height: 0.95;
+}
+
+.subheadline {
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 300;
+  font-size: 0.95rem;
+  line-height: 1.65;
+  color: var(--text-muted);
+  max-width: 340px;
+}
+
+.badge {
+  font-family: 'Barlow', sans-serif;
+  font-weight: 500;
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--amber);
+  border-left: 2px solid var(--amber);
+  padding-left: 10px;
+  line-height: 1.5;
+}
+
+.cta-btn {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 800;
+  font-size: 14px;
+  color: var(--text-primary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  background: var(--cta);
+  border: none;
+  border-radius: 4px;
+  padding: 16px 32px;
+  width: 100%;
+  cursor: pointer;
+  box-shadow: 0 0 20px rgba(16, 96, 224, 0.4);
+  transition: box-shadow 0.2s, background 0.2s;
+  min-height: 44px;
+}
+
+.cta-btn:hover {
+  background: #1a6ef5;
+  box-shadow: 0 0 32px rgba(16, 96, 224, 0.65);
+}
+
+.cta-btn:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+/* ─── RESPONSIVE: DESKTOP ────────────────────────────────────── */
+@media (min-width: 768px) {
+  .brand-name { font-size: 5.5rem; }
+
+  .headline { font-size: 4.5rem; }
+
+  .hero-copy {
+    padding: 0 48px 64px;
+    max-width: 600px;
+  }
+
+  .cta-btn { width: auto; padding: 16px 48px; }
+}
+
+/* ─── REDUCED MOTION ─────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .chevron { animation: none; }
+  .bloque1,
+  .bloque3,
+  .hero-copy .eyebrow,
+  .hero-copy .headline,
+  .hero-copy .subheadline,
+  .hero-copy .badge,
+  .hero-copy .cta-btn { transition: none; animation: none; opacity: 1; transform: none; }
+}

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CenitDigital Pro</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;800&family=Barlow:wght@500&family=DM+Sans:wght@300&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- BLOQUE 1: PANTALLA DE ENTRADA CON SPARKLES -->
+  <section id="bloque1" class="bloque1">
+    <div id="particles-white" class="particles-layer"></div>
+    <div id="particles-blue" class="particles-layer"></div>
+
+    <div class="bloque1-content">
+      <h1 class="brand-name">CENITDIGITAL PRO</h1>
+      <div class="led-line" aria-hidden="true">
+        <span class="led-1"></span>
+        <span class="led-2"></span>
+        <span class="led-3"></span>
+        <span class="led-4"></span>
+      </div>
+    </div>
+
+    <div class="scroll-hint" aria-label="Desliza hacia abajo">
+      <span class="scroll-text">DESLIZA HACIA ABAJO</span>
+      <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <polyline points="6 9 12 15 18 9"></polyline>
+      </svg>
+    </div>
+  </section>
+
+  <!-- BLOQUE 3: HERO PRINCIPAL CON VIDEO -->
+  <section id="bloque3" class="bloque3">
+    <!-- Videos de fondo -->
+    <video
+      id="hero-intro"
+      class="hero-video"
+      src="https://res.cloudinary.com/dal6clylx/video/upload/v1779463329/Man_on_terrace_planet_arrival_202605221105_bhtpqd.mov"
+      autoplay
+      muted
+      playsinline
+      preload="auto"
+    ></video>
+    <video
+      id="hero-loop"
+      class="hero-video hero-video--hidden"
+      src="https://res.cloudinary.com/dal6clylx/video/upload/v1779463330/Man_on_terrace_at_night_202605221117_lmn7dg.mov"
+      muted
+      playsinline
+      loop
+      preload="auto"
+    ></video>
+
+    <!-- Overlay gradiente -->
+    <div class="hero-overlay" aria-hidden="true"></div>
+
+    <!-- Botón de play para dispositivos que bloquean autoplay -->
+    <button id="play-btn" class="play-btn" aria-label="Reproducir video">
+      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+        <polygon points="5 3 19 12 5 21 5 3"></polygon>
+      </svg>
+    </button>
+
+    <!-- Copy del hero -->
+    <div class="hero-copy" id="hero-copy">
+      <p class="eyebrow">DISEÑO WEB PARA CORREDORES DE PROPIEDADES — CHILE</p>
+      <h2 class="headline">LA PRESENCIA DIGITAL QUE CONVIERTE VISITAS EN CLIENTES</h2>
+      <p class="subheadline">Diseño web 3D premium de última generación. Tu sitio aparece en Google y en búsquedas de inteligencia artificial captando leads mientras tú cierras propiedades.</p>
+      <p class="badge">5 CONSULTAS GARANTIZADAS EN 30 DÍAS O DEVOLUCIÓN TOTAL</p>
+      <button class="cta-btn" type="button">QUIERO MI SITIO WEB</button>
+    </div>
+  </section>
+
+  <script src="https://cdn.jsdelivr.net/npm/tsparticles-slim@2.12.0/tsparticles.slim.bundle.min.js"></script>
+  <script src="main.js"></script>
+</body>
+</html>
