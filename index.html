@@ -11,26 +11,19 @@
 </head>
 <body>
 
-  <!-- BLOQUE 1: PANTALLA DE ENTRADA CON SPARKLES -->
+  <!-- BLOQUE 1: PANTALLA DE ENTRADA -->
   <section id="bloque1" class="bloque1">
     <div id="particles-white" class="particles-layer"></div>
     <div id="particles-blue" class="particles-layer"></div>
-
     <div class="bloque1-content">
       <h1 class="brand-name">CENITDIGITAL PRO</h1>
       <div class="led-line" aria-hidden="true">
-        <span class="led-1"></span>
-        <span class="led-2"></span>
-        <span class="led-3"></span>
-        <span class="led-4"></span>
+        <span class="led-1"></span><span class="led-2"></span><span class="led-3"></span><span class="led-4"></span>
       </div>
     </div>
-
     <div class="scroll-hint" aria-label="Desliza hacia abajo">
       <span class="scroll-text">DESLIZA HACIA ABAJO</span>
-      <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-        <polyline points="6 9 12 15 18 9"></polyline>
-      </svg>
+      <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg>
     </div>
   </section>
 
@@ -44,54 +37,25 @@
     <button class="nav-cta" type="button">CONTACTAR</button>
   </nav>
 
-  <!-- BLOQUE 3: HERO PRINCIPAL CON VIDEO -->
+  <!-- BLOQUE 3: HERO -->
   <section id="bloque3" class="bloque3">
-    <!-- Videos de fondo -->
-    <video
-      id="hero-intro"
-      class="hero-video"
-      src="https://res.cloudinary.com/dal6clylx/video/upload/v1779463329/Man_on_terrace_planet_arrival_202605221105_bhtpqd.mov"
-      autoplay
-      muted
-      playsinline
-      preload="auto"
-    ></video>
-    <video
-      id="hero-loop"
-      class="hero-video hero-video--hidden"
-      src="https://res.cloudinary.com/dal6clylx/video/upload/v1779463330/Man_on_terrace_at_night_202605221117_lmn7dg.mov"
-      muted
-      playsinline
-      loop
-      preload="auto"
-    ></video>
-
-    <!-- Overlay gradiente -->
+    <video id="hero-intro" class="hero-video" src="https://res.cloudinary.com/dal6clylx/video/upload/v1779463329/Man_on_terrace_planet_arrival_202605221105_bhtpqd.mov" autoplay muted playsinline preload="auto"></video>
+    <video id="hero-loop" class="hero-video hero-video--hidden" src="https://res.cloudinary.com/dal6clylx/video/upload/v1779463330/Man_on_terrace_at_night_202605221117_lmn7dg.mov" muted playsinline loop preload="auto"></video>
     <div class="hero-overlay" aria-hidden="true"></div>
-
-    <!-- Botón de play para dispositivos que bloquean autoplay -->
     <button id="play-btn" class="play-btn" aria-label="Reproducir video">
-      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-        <polygon points="5 3 19 12 5 21 5 3"></polygon>
-      </svg>
+      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
     </button>
-
-    <!-- Copy del hero -->
     <div class="hero-copy" id="hero-copy">
       <p class="eyebrow">DISEÑO WEB PREMIUM PARA CORREDORES — CHILE</p>
-
       <h2 class="headline">
         <span class="headline-line1">LA PRESENCIA</span><br>
         <span class="headline-line2"><span class="headline-que">QUE</span> CIERRA VENTAS</span>
       </h2>
-
       <p class="subheadline">Diseño web 3D de última generación. Captación de leads vía Google y búsquedas de inteligencia artificial. Para corredores independientes en todo Chile.</p>
-
       <div class="badge">
         <span class="badge-dot" aria-hidden="true"></span>
         <span class="badge-text">5 CONSULTAS EN 30 DÍAS O DEVOLUCIÓN TOTAL</span>
       </div>
-
       <div class="cta-group">
         <button class="cta-btn cta-primary" type="button">QUIERO MI SITIO WEB</button>
         <button class="cta-btn cta-secondary" type="button">VER CÓMO FUNCIONA</button>
@@ -99,10 +63,9 @@
     </div>
   </section>
 
-  <!-- DATA STRIP: Barra de propuestas de valor con scroll infinito -->
-  <div id="data-strip" class="data-strip" aria-hidden="true">
+  <!-- DATA STRIP -->
+  <div class="data-strip" aria-hidden="true">
     <div class="data-strip-track">
-      <!-- Set 1 -->
       <div class="ds-card"><span class="ds-diamond">◆</span><span class="ds-text">ENTREGA EN 7 DÍAS HÁBILES</span></div>
       <div class="ds-card"><span class="ds-diamond">◆</span><span class="ds-text">DISEÑO 3D PREMIUM</span></div>
       <div class="ds-card"><span class="ds-diamond">◆</span><span class="ds-text">GARANTÍA TOTAL O DEVOLUCIÓN</span></div>
@@ -113,7 +76,6 @@
       <div class="ds-card"><span class="ds-diamond">◆</span><span class="ds-text">CAPTACIÓN DE LEADS VÍA IA</span></div>
       <div class="ds-card"><span class="ds-diamond">◆</span><span class="ds-text">FORMULARIO DIRECTO A WHATSAPP</span></div>
       <div class="ds-card"><span class="ds-diamond">◆</span><span class="ds-text">VELOCIDAD MENOR A 2 SEGUNDOS</span></div>
-      <!-- Set 2: duplicado para loop seamless -->
       <div class="ds-card"><span class="ds-diamond">◆</span><span class="ds-text">ENTREGA EN 7 DÍAS HÁBILES</span></div>
       <div class="ds-card"><span class="ds-diamond">◆</span><span class="ds-text">DISEÑO 3D PREMIUM</span></div>
       <div class="ds-card"><span class="ds-diamond">◆</span><span class="ds-text">GARANTÍA TOTAL O DEVOLUCIÓN</span></div>
@@ -126,6 +88,160 @@
       <div class="ds-card"><span class="ds-diamond">◆</span><span class="ds-text">VELOCIDAD MENOR A 2 SEGUNDOS</span></div>
     </div>
   </div>
+
+  <!-- EL PROBLEMA: Transformación con bento grid interactivo -->
+  <section id="el-problema" class="problema-section" aria-label="Sin vs Con CenitDigital Pro">
+
+    <div class="problema-titulo-wrap">
+      <div class="problema-titulo titulo-rojo" id="titulo-rojo">
+        <span class="punto-pulse punto-rojo" aria-hidden="true"></span>
+        <span>SIN CENITDIGITAL PRO</span>
+      </div>
+      <div class="problema-titulo titulo-azul" id="titulo-azul" aria-hidden="true">
+        <span class="punto-pulse punto-azul" aria-hidden="true"></span>
+        <span>CON CENITDIGITAL PRO</span>
+      </div>
+    </div>
+
+    <div class="problema-grid">
+
+      <article class="flip-card" data-card="1" data-index="0">
+        <div class="flip-card-inner">
+          <div class="flip-card-front">
+            <div class="card-accent card-accent--rojo"></div>
+            <span class="card-icon card-icon--rojo" aria-hidden="true">&#10005;</span>
+            <p class="card-text">Tu cliente ideal te buscó anoche. No te encontró.</p>
+          </div>
+          <div class="flip-card-back">
+            <div class="card-accent card-accent--azul"></div>
+            <span class="card-icon card-icon--azul" aria-hidden="true">&#10003;</span>
+            <p class="card-text">Mientras duermes, tu web capta consultas solas.</p>
+          </div>
+        </div>
+      </article>
+
+      <article class="flip-card" data-card="2" data-index="1">
+        <div class="flip-card-inner">
+          <div class="flip-card-front">
+            <div class="card-accent card-accent--rojo"></div>
+            <span class="card-icon card-icon--rojo" aria-hidden="true">&#10005;</span>
+            <p class="card-text">No es que seas mal corredor. Es que digitalmente no existes.</p>
+          </div>
+          <div class="flip-card-back">
+            <div class="card-accent card-accent--azul"></div>
+            <span class="card-icon card-icon--azul" aria-hidden="true">&#10003;</span>
+            <p class="card-text">7 días y pasas de invisible a referente digital de tu zona.</p>
+          </div>
+        </div>
+      </article>
+
+      <div class="saturn-wrap" id="saturn-wrap">
+        <button class="saturn-container" id="saturn-btn" type="button" aria-pressed="false" aria-label="Toca para ver cómo CenitDigital Pro transforma tu situación">
+          <div class="saturn-sphere" aria-hidden="true"></div>
+          <div class="saturn-ring" aria-hidden="true"></div>
+          <div class="saturn-pulse-ring" aria-hidden="true"></div>
+          <div class="saturn-hint" aria-hidden="true">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <circle cx="12" cy="12" r="4" fill="currentColor"/>
+              <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.5" opacity="0.4"/>
+            </svg>
+            <span>TOCA</span>
+          </div>
+        </button>
+      </div>
+
+      <article class="flip-card" data-card="3" data-index="2">
+        <div class="flip-card-inner">
+          <div class="flip-card-front">
+            <div class="card-accent card-accent--rojo"></div>
+            <span class="card-icon card-icon--rojo" aria-hidden="true">&#10005;</span>
+            <p class="card-text">Llevas años cerrando propiedades y sigues dependiendo del boca a boca.</p>
+          </div>
+          <div class="flip-card-back">
+            <div class="card-accent card-accent--azul"></div>
+            <span class="card-icon card-icon--azul" aria-hidden="true">&#10003;</span>
+            <p class="card-text">El próximo cliente que busque corredor en tu zona te encuentra a ti primero.</p>
+          </div>
+        </div>
+      </article>
+
+      <article class="flip-card" data-card="4" data-index="3">
+        <div class="flip-card-inner">
+          <div class="flip-card-front">
+            <div class="card-accent card-accent--rojo"></div>
+            <span class="card-icon card-icon--rojo" aria-hidden="true">&#10005;</span>
+            <p class="card-text">Te esfuerzas más que nadie y aún así eres invisible para el 90% de tus clientes potenciales.</p>
+          </div>
+          <div class="flip-card-back">
+            <div class="card-accent card-accent--azul"></div>
+            <span class="card-icon card-icon--azul" aria-hidden="true">&#10003;</span>
+            <p class="card-text">Tu experiencia finalmente tiene una vitrina que la demuestra. Visible para todos.</p>
+          </div>
+        </div>
+      </article>
+
+      <article class="flip-card" data-card="5" data-index="4">
+        <div class="flip-card-inner">
+          <div class="flip-card-front">
+            <div class="card-accent card-accent--rojo"></div>
+            <span class="card-icon card-icon--rojo" aria-hidden="true">&#10005;</span>
+            <p class="card-text">Publicas en Instagram todos los días. Tus consultas no aumentan.</p>
+          </div>
+          <div class="flip-card-back">
+            <div class="card-accent card-accent--azul"></div>
+            <span class="card-icon card-icon--azul" aria-hidden="true">&#10003;</span>
+            <p class="card-text">Tu imagen premium convence antes de que abras la boca.</p>
+          </div>
+        </div>
+      </article>
+
+      <article class="flip-card" data-card="6" data-index="5">
+        <div class="flip-card-inner">
+          <div class="flip-card-front">
+            <div class="card-accent card-accent--rojo"></div>
+            <span class="card-icon card-icon--rojo" aria-hidden="true">&#10005;</span>
+            <p class="card-text">El cliente que perdiste esta semana no eligió a otro corredor. Eligió al que apareció primero en Google.</p>
+          </div>
+          <div class="flip-card-back">
+            <div class="card-accent card-accent--azul"></div>
+            <span class="card-icon card-icon--azul" aria-hidden="true">&#10003;</span>
+            <p class="card-text">Dejas de perseguir clientes. Los clientes empiezan a buscarte a ti.</p>
+          </div>
+        </div>
+      </article>
+
+      <article class="flip-card" data-card="7" data-index="6">
+        <div class="flip-card-inner">
+          <div class="flip-card-front">
+            <div class="card-accent card-accent--rojo"></div>
+            <span class="card-icon card-icon--rojo" aria-hidden="true">&#10005;</span>
+            <p class="card-text">Tienes años de experiencia que nadie puede ver porque no tienes dónde mostrarlos.</p>
+          </div>
+          <div class="flip-card-back">
+            <div class="card-accent card-accent--azul"></div>
+            <span class="card-icon card-icon--azul" aria-hidden="true">&#10003;</span>
+            <p class="card-text">Cada propiedad que publicas trabaja para posicionarte, no solo para venderse.</p>
+          </div>
+        </div>
+      </article>
+
+      <article class="flip-card" data-card="8" data-index="7">
+        <div class="flip-card-inner">
+          <div class="flip-card-front">
+            <div class="card-accent card-accent--rojo"></div>
+            <span class="card-icon card-icon--rojo" aria-hidden="true">&#10005;</span>
+            <p class="card-text">Tu competencia cierra propiedades mientras tú esperas que suene el teléfono.</p>
+          </div>
+          <div class="flip-card-back">
+            <div class="card-accent card-accent--azul"></div>
+            <span class="card-icon card-icon--azul" aria-hidden="true">&#10003;</span>
+            <p class="card-text">El corredor que tiene web cierra más. Los números no mienten.</p>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </section>
 
   <script src="https://cdn.jsdelivr.net/npm/tsparticles-slim@2.12.0/tsparticles.slim.bundle.min.js"></script>
   <script src="main.js"></script>
