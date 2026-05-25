@@ -46,6 +46,7 @@ const heroCopy   = document.getElementById('hero-copy');
 const navbar     = document.getElementById('navbar');
 const bloque3    = document.getElementById('bloque3');
 const playBtn    = document.getElementById('play-btn');
+const dataStrip  = document.getElementById('data-strip');
 
 /* ─── PRE-BUFFER LOOP VIDEO ─────────────────────────────────── */
 function prebufferLoop() {
@@ -101,6 +102,8 @@ function triggerTransition() {
 
   bloque3.classList.add('active');
   bloque1.classList.add('exit');
+
+  if (dataStrip) setTimeout(() => dataStrip.classList.add('visible'), 600);
 
   bloque1.addEventListener('transitionend', () => {
     bloque1.style.display = 'none';
