@@ -83,10 +83,12 @@ window.addEventListener('wheel',      (e) => { if (e.deltaY > 0) triggerTransiti
 window.addEventListener('touchstart', (e) => { window._tY = e.touches[0].clientY; },    { passive: true });
 window.addEventListener('touchend',   (e) => { if (window._tY - e.changedTouches[0].clientY > 30) triggerTransition(); }, { passive: true });
 
-/* ─── EL PROBLEMA: FLIP SYSTEM v2 ──────────────────────────── */
+/* ─── SECTION-PROBLEMA: FLIP SYSTEM ─────────────────────────── */
 const problemaSection = document.getElementById('el-problema');
 const saturnBtn       = document.getElementById('saturn-btn');
 const saturnWrapEl    = document.getElementById('saturn-wrap');
+const saturnRedImg    = document.getElementById('saturn-red');
+const saturnBlueImg   = document.getElementById('saturn-blue');
 const flipCards       = document.querySelectorAll('.flip-card');
 const tituloRojo      = document.getElementById('titulo-rojo');
 const tituloAzul      = document.getElementById('titulo-azul');
@@ -98,9 +100,18 @@ const FLIP_STAGGER = [0, 60, 120, 180, 240, 300, 360, 420];
 function handleFlip() {
   problemFlipped = !problemFlipped;
 
+  /* Crossfade imágenes Saturn */
+  if (saturnRedImg && saturnBlueImg) {
+    saturnRedImg.style.opacity  = problemFlipped ? '0' : '1';
+    saturnBlueImg.style.opacity = problemFlipped ? '1' : '0';
+  }
+
   flipCards.forEach((card, i) => {
     card.querySelector('.flip-card-inner').style.transitionDelay = FLIP_STAGGER[i] + 'ms';
     card.classList.toggle('flipped', problemFlipped);
+    /* Bloquea hover durante la animación de flip (CAMBIO 4) */
+    card.classList.add('is-flipping');
+    setTimeout(() => card.classList.remove('is-flipping'), FLIP_STAGGER[i] + 550);
   });
 
   problemaSection.classList.toggle('flipped', problemFlipped);

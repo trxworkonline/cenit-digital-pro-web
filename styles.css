@@ -423,7 +423,7 @@ body.scroll-locked { overflow: hidden; }
   white-space: nowrap;
 }
 
-/* ─── EL PROBLEMA v2 ─────────────────────────────────────────── */
+/* ─── SECTION-PROBLEMA ─────────────────────────────────────── */
 .problema-section {
   position: relative;
   padding: 80px 16px;
@@ -446,7 +446,7 @@ body.scroll-locked { overflow: hidden; }
 
 .problema-section > * { position: relative; z-index: 1; }
 
-/* TÍTULO */
+/* PROBLEMA-TITLE */
 .problema-titulo-wrap {
   position: relative;
   height: 40px;
@@ -488,7 +488,7 @@ body.scroll-locked { overflow: hidden; }
   50%       { transform: scale(1.5); opacity: 0.5; }
 }
 
-/* GRID MOBILE: 2 columnas con grid-template-areas */
+/* GRID MOBILE */
 .problema-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -503,7 +503,7 @@ body.scroll-locked { overflow: hidden; }
   margin: 0 auto;
 }
 
-/* Asignación de grid-areas */
+/* Grid areas */
 .flip-card[data-card="1"] { grid-area: card1; height: 160px; }
 .flip-card[data-card="2"] { grid-area: card2; height: 150px; }
 .flip-card[data-card="3"] { grid-area: card3; height: 150px; }
@@ -514,7 +514,7 @@ body.scroll-locked { overflow: hidden; }
 .flip-card[data-card="8"] { grid-area: card8; height: 150px; }
 .saturn-wrap { grid-area: saturn; }
 
-/* SATURN WRAP */
+/* SATURN-CONTAINER wrap */
 .saturn-wrap {
   position: relative;
   display: flex;
@@ -528,173 +528,111 @@ body.scroll-locked { overflow: hidden; }
 
 @keyframes saturn-enter { to { opacity: 1; transform: scale(1); } }
 
-/* SATURN GLOW: sibling al botón, se extiende más allá del contenedor */
-.saturn-glow {
-  position: absolute;
-  top: 50%; left: 50%;
-  transform: translate(-50%, -50%);
-  width: calc(100% + 40px);
-  height: calc(100% + 40px);
-  border-radius: 24px;
-  background: transparent;
-  box-shadow: 0 0 60px rgba(255,59,92,0.25), inset 0 0 40px rgba(255,59,92,0.1);
-  pointer-events: none;
-  z-index: 0;
-  transition: box-shadow 0.8s ease;
-}
-
-.problema-section.flipped .saturn-glow {
-  box-shadow: 0 0 60px rgba(96,200,255,0.25), inset 0 0 40px rgba(96,200,255,0.1);
-}
-
-/* SATURN CONTAINER */
+/* SATURN-CONTAINER botón */
 .saturn-container {
   position: relative;
   width: 175px; height: 175px;
-  background: radial-gradient(circle at 40% 35%, #3D0A14 0%, #1A0408 50%, #0A0206 100%);
   border: none;
-  border-radius: 20px;
+  border-radius: 16px;
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;
   touch-action: manipulation;
-  z-index: 1;
+  overflow: hidden;
   flex-shrink: 0;
-  transition: background 0.8s ease;
 }
 
 .saturn-container:focus-visible {
   outline: 2px solid rgba(96,200,255,0.5);
   outline-offset: 8px;
-  border-radius: 20px;
+  border-radius: 16px;
 }
 
-.problema-section.flipped .saturn-container {
-  background: radial-gradient(circle at 40% 35%, #041840 0%, #010612 50%, #010612 100%);
-}
-
-/* SATURN SPHERE */
-.saturn-sphere {
+/* Imágenes del planeta (crossfade) */
+.saturn-img {
   position: absolute;
-  width: 65%; height: 65%;
-  border-radius: 50%;
-  top: 50%; left: 50%;
-  transform: translate(-50%, -50%);
-  background: radial-gradient(circle at 35% 35%, #5D1525 0%, #3D0A14 50%, #1A0408 100%);
-  box-shadow: 0 0 20px rgba(255,59,92,0.15), inset 0 -8px 20px rgba(0,0,0,0.5);
-  transition: background 0.8s ease, box-shadow 0.8s ease;
-  z-index: 2;
+  inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  border-radius: 16px;
+  transition: opacity 0.8s ease;
 }
 
-.problema-section.flipped .saturn-sphere {
-  background: radial-gradient(circle at 35% 35%, #1a5090 0%, #041840 50%, #010612 100%);
-  box-shadow: 0 0 20px rgba(96,200,255,0.15), inset 0 -8px 20px rgba(0,0,0,0.5);
-}
+#saturn-red  { opacity: 1; z-index: 1; }
+#saturn-blue { opacity: 0; z-index: 2; }
 
-/* SATURN RING */
-.saturn-ring {
+/* Texto TOCA PARA VER EL CAMBIO */
+.saturn-toca {
   position: absolute;
-  width: 95%; height: 30%;
-  border-radius: 50%;
-  top: 50%; left: 50%;
-  transform: translate(-50%, -50%) perspective(300px) rotateX(75deg);
-  border: 3px solid #FF3B5C;
-  box-shadow: 0 0 15px rgba(255,59,92,0.6), 0 0 30px rgba(255,59,92,0.3);
-  transition: border-color 0.8s ease, box-shadow 0.8s ease;
-  z-index: 3;
-  pointer-events: none;
-}
-
-.problema-section.flipped .saturn-ring {
-  border-color: #60C8FF;
-  box-shadow: 0 0 15px rgba(96,200,255,0.6), 0 0 30px rgba(96,200,255,0.3);
-}
-
-/* SATURN ATTENTION RING: anillo exterior pulsante */
-.saturn-attention-ring {
-  position: absolute;
-  width: 110%; height: 35%;
-  border-radius: 50%;
-  top: 50%; left: 50%;
-  transform: translate(-50%, -50%) perspective(300px) rotateX(75deg) scale(1);
-  border: 1px solid rgba(255,59,92,0.3);
-  animation: attention-pulse 2s ease-in-out infinite;
-  z-index: 1;
-  pointer-events: none;
-  transition: border-color 0.8s ease;
-}
-
-.problema-section.flipped .saturn-attention-ring {
-  border-color: rgba(96,200,255,0.3);
-}
-
-@keyframes attention-pulse {
-  0%, 100% { transform: translate(-50%, -50%) perspective(300px) rotateX(75deg) scale(1); }
-  50%       { transform: translate(-50%, -50%) perspective(300px) rotateX(75deg) scale(1.08); }
-}
-
-/* SATURN HINT */
-.saturn-hint {
-  position: absolute;
-  top: 50%; left: 50%;
-  transform: translate(-50%, -50%);
+  bottom: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 3px;
-  z-index: 10;
-  animation: hint-pulse 2s ease-in-out infinite;
+  gap: 4px;
   pointer-events: none;
-  transition: opacity 0.4s ease;
+  white-space: nowrap;
+  opacity: 0.65;
+  animation: toca-pulse 2s ease-in-out infinite;
 }
 
-.saturn-hint-emoji {
-  font-size: 18px;
-  line-height: 1;
-}
-
-.saturn-hint-text {
+.saturn-toca-text {
   font-family: 'Barlow', sans-serif;
   font-weight: 500;
   font-size: 9px;
-  letter-spacing: 0.15em;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: #EAF4FF;
-  opacity: 0.8;
+  color: #FF3B5C;
+  transition: color 0.8s ease;
 }
 
-@keyframes hint-pulse {
-  0%, 100% { transform: translate(-50%, -50%) scale(1);    opacity: 0.7; }
-  50%       { transform: translate(-50%, -50%) scale(1.05); opacity: 1; }
+.saturn-toca-line {
+  width: 20px;
+  height: 1px;
+  background: #FF3B5C;
+  opacity: 0.5;
+  transition: background 0.8s ease;
 }
 
-.saturn-container:hover .saturn-ring {
-  box-shadow: 0 0 30px rgba(255,59,92,0.8), 0 0 60px rgba(255,59,92,0.4);
+.problema-section.flipped .saturn-toca-text { color: #60C8FF; }
+.problema-section.flipped .saturn-toca-line { background: #60C8FF; }
+
+@keyframes toca-pulse {
+  0%, 100% { opacity: 0.65; }
+  50%       { opacity: 0.9; }
 }
 
-.problema-section.flipped .saturn-container:hover .saturn-ring {
-  box-shadow: 0 0 30px rgba(96,200,255,0.8), 0 0 60px rgba(96,200,255,0.4);
-}
-
-.problema-section.flipped .saturn-hint { opacity: 0; }
-
-/* FLIP CARDS */
+/* CARD-PROBLEMA: entrada con transición */
 .flip-card {
-  border-radius: 14px;
+  border-radius: 16px;
   perspective: 1200px;
   opacity: 0;
   transform: translateY(20px);
+  position: relative;
 }
 
-.flip-card.in-view { animation: card-enter 0.5s ease forwards; }
+.flip-card.in-view {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
 
-@keyframes card-enter { to { opacity: 1; transform: translateY(0); } }
+.flip-card.in-view:not(.is-flipping):hover {
+  transform: scale(1.02);
+  transition: transform 0.3s ease, opacity 0.5s ease;
+  z-index: 2;
+}
+
+/* Bloquea hover durante el flip para evitar conflicto */
+.flip-card.is-flipping { pointer-events: none; }
 
 .flip-card-inner {
   position: relative;
   width: 100%; height: 100%;
   transform-style: preserve-3d;
   transition: transform 0.55s ease-in-out;
-  border-radius: 14px;
+  border-radius: 16px;
 }
 
 .flip-card.flipped .flip-card-inner { transform: rotateY(180deg); }
@@ -702,58 +640,113 @@ body.scroll-locked { overflow: hidden; }
 .flip-card-face {
   position: absolute;
   inset: 0;
-  border-radius: 14px;
+  border-radius: 16px;
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
-  padding: 16px;
+  padding: 18px;
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
+  gap: 12px;
+  overflow: hidden;
+  transition: box-shadow 0.3s ease;
 }
 
 .flip-card-front {
-  background: rgba(42,8,16,0.9);
-  border: 1px solid rgba(255,59,92,0.2);
+  background: linear-gradient(135deg, rgba(42,8,16,0.95) 0%, rgba(18,3,6,0.98) 100%);
+  border: 1px solid rgba(255,59,92,0.25);
+  box-shadow: 0 4px 24px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,59,92,0.1);
 }
 
 .flip-card-back {
-  background: rgba(4,24,64,0.9);
-  border: 1px solid rgba(96,200,255,0.2);
+  background: linear-gradient(135deg, rgba(4,24,64,0.95) 0%, rgba(1,6,18,0.98) 100%);
+  border: 1px solid rgba(96,200,255,0.25);
+  box-shadow: 0 4px 24px rgba(0,0,0,0.4), inset 0 1px 0 rgba(96,200,255,0.1);
   transform: rotateY(180deg);
 }
 
-.card-accent {
-  height: 2px;
-  width: 40%;
-  border-radius: 1px;
+.flip-card.in-view:not(.is-flipping):hover .flip-card-front {
+  box-shadow: 0 8px 32px rgba(255,59,92,0.15), inset 0 1px 0 rgba(255,59,92,0.1);
+}
+
+.flip-card.in-view:not(.is-flipping):hover .flip-card-back {
+  box-shadow: 0 8px 32px rgba(96,200,255,0.15), inset 0 1px 0 rgba(96,200,255,0.1);
+}
+
+/* Internals de CARD-PROBLEMA */
+.card-row-top {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
   flex-shrink: 0;
 }
 
-.card-accent--rojo { background: linear-gradient(90deg, #FF3B5C, transparent); }
-.card-accent--azul { background: linear-gradient(90deg, #60C8FF, transparent); }
+.card-badge {
+  font-family: 'Barlow', sans-serif;
+  font-weight: 500;
+  font-size: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  border-radius: 4px;
+  padding: 3px 8px;
+  line-height: 1.4;
+}
 
-.card-icon {
+.card-badge--rojo {
+  color: #FF3B5C;
+  background: rgba(255,59,92,0.1);
+  border: 1px solid rgba(255,59,92,0.2);
+}
+
+.card-badge--azul {
+  color: #60C8FF;
+  background: rgba(96,200,255,0.1);
+  border: 1px solid rgba(96,200,255,0.2);
+}
+
+.card-icon-circle {
+  width: 28px; height: 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   font-size: 12px;
   font-weight: 700;
-  line-height: 1;
   flex-shrink: 0;
 }
 
-.card-icon--rojo { color: #FF3B5C; }
-.card-icon--azul { color: #60C8FF; }
+.card-icon-circle--rojo {
+  background: rgba(255,59,92,0.12);
+  border: 1px solid rgba(255,59,92,0.2);
+  color: #FF3B5C;
+}
+
+.card-icon-circle--azul {
+  background: rgba(96,200,255,0.12);
+  border: 1px solid rgba(96,200,255,0.2);
+  color: #60C8FF;
+}
 
 .card-text {
   font-family: 'DM Sans', sans-serif;
   font-weight: 300;
-  font-size: 0.82rem;
-  line-height: 1.5;
+  font-size: 0.85rem;
+  line-height: 1.55;
   color: #EAF4FF;
   margin: 0;
+  flex: 1;
+  overflow: hidden;
 }
 
-/* ─── RESPONSIVE: DESKTOP ────────────────────────────────────── */
+.card-line {
+  height: 1px;
+  flex-shrink: 0;
+}
+
+.card-line--rojo { background: linear-gradient(to right, rgba(255,59,92,0.4), transparent); }
+.card-line--azul { background: linear-gradient(to right, rgba(96,200,255,0.4), transparent); }
+
+/* ─── RESPONSIVE: DESKTOP ───────────────────────────────────── */
 @media (min-width: 768px) {
   .brand-name { font-size: 5.5rem; }
   .headline   { font-size: 4.5rem; }
@@ -779,7 +772,6 @@ body.scroll-locked { overflow: hidden; }
     max-width: 960px;
   }
 
-  /* Alturas desktop */
   .flip-card[data-card="1"] { height: 160px; }
   .flip-card[data-card="2"] { height: 160px; }
   .flip-card[data-card="3"] { height: auto; }
@@ -800,11 +792,12 @@ body.scroll-locked { overflow: hidden; }
 
 /* ─── REDUCED MOTION ─────────────────────────────────────────── */
 @media (prefers-reduced-motion: reduce) {
-  .chevron, .punto-pulse, .saturn-attention-ring, .saturn-hint,
+  .chevron, .punto-pulse, .saturn-toca,
   .data-strip-track { animation: none; }
   .navbar, .bloque1  { transition: none; }
   .flip-card-inner   { transition: none; }
-  .flip-card.in-view, .saturn-wrap.in-view { animation: none; opacity: 1; transform: none; }
+  .saturn-img        { transition: none; }
+  .flip-card.in-view, .saturn-wrap.in-view { animation: none; opacity: 1; transform: none; transition: none; }
   .hero-copy .eyebrow, .hero-copy .headline, .hero-copy .subheadline,
   .hero-copy .badge,   .hero-copy .cta-group { animation: none; opacity: 1; transform: none; }
 }
