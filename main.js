@@ -83,7 +83,7 @@ window.addEventListener('wheel',      (e) => { if (e.deltaY > 0) triggerTransiti
 window.addEventListener('touchstart', (e) => { window._tY = e.touches[0].clientY; },    { passive: true });
 window.addEventListener('touchend',   (e) => { if (window._tY - e.changedTouches[0].clientY > 30) triggerTransition(); }, { passive: true });
 
-/* ─── EL PROBLEMA: FLIP SYSTEM ─────────────────────────────── */
+/* ─── EL PROBLEMA: FLIP SYSTEM v2 ──────────────────────────── */
 const problemaSection = document.getElementById('el-problema');
 const saturnBtn       = document.getElementById('saturn-btn');
 const saturnWrapEl    = document.getElementById('saturn-wrap');
@@ -93,14 +93,13 @@ const tituloAzul      = document.getElementById('titulo-azul');
 
 let problemFlipped = false;
 
-function isMob() { return window.innerWidth < 768; }
+const FLIP_STAGGER = [0, 60, 120, 180, 240, 300, 360, 420];
 
 function handleFlip() {
   problemFlipped = !problemFlipped;
-  const stagger = isMob() ? 0.04 : 0.06;
 
   flipCards.forEach((card, i) => {
-    card.querySelector('.flip-card-inner').style.transitionDelay = (i * stagger).toFixed(2) + 's';
+    card.querySelector('.flip-card-inner').style.transitionDelay = FLIP_STAGGER[i] + 'ms';
     card.classList.toggle('flipped', problemFlipped);
   });
 
@@ -121,8 +120,8 @@ if (saturnBtn) {
 if (problemaSection) {
   const obs = new IntersectionObserver((entries) => {
     if (!entries[0].isIntersecting) return;
-    flipCards.forEach((card, i) => setTimeout(() => card.classList.add('in-view'), i * 80));
-    if (saturnWrapEl) setTimeout(() => saturnWrapEl.classList.add('in-view'), 200);
+    flipCards.forEach((card, i) => setTimeout(() => card.classList.add('in-view'), i * 50));
+    if (saturnWrapEl) setTimeout(() => saturnWrapEl.classList.add('in-view'), 300);
     obs.disconnect();
   }, { threshold: 0.08 });
   obs.observe(problemaSection);

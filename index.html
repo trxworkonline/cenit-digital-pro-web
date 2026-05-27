@@ -89,7 +89,7 @@
     </div>
   </div>
 
-  <!-- EL PROBLEMA: Transformación con bento grid interactivo -->
+  <!-- EL PROBLEMA v2: bento grid interactivo -->
   <section id="el-problema" class="problema-section" aria-label="Sin vs Con CenitDigital Pro">
 
     <div class="problema-titulo-wrap">
@@ -105,14 +105,14 @@
 
     <div class="problema-grid">
 
-      <article class="flip-card" data-card="1" data-index="0">
+      <article class="flip-card" data-card="1">
         <div class="flip-card-inner">
-          <div class="flip-card-front">
+          <div class="flip-card-face flip-card-front">
             <div class="card-accent card-accent--rojo"></div>
             <span class="card-icon card-icon--rojo" aria-hidden="true">&#10005;</span>
             <p class="card-text">Tu cliente ideal te buscó anoche. No te encontró.</p>
           </div>
-          <div class="flip-card-back">
+          <div class="flip-card-face flip-card-back">
             <div class="card-accent card-accent--azul"></div>
             <span class="card-icon card-icon--azul" aria-hidden="true">&#10003;</span>
             <p class="card-text">Mientras duermes, tu web capta consultas solas.</p>
@@ -120,14 +120,27 @@
         </div>
       </article>
 
-      <article class="flip-card" data-card="2" data-index="1">
+      <div class="saturn-wrap" id="saturn-wrap">
+        <div class="saturn-glow" aria-hidden="true"></div>
+        <button class="saturn-container" id="saturn-btn" type="button" aria-pressed="false" aria-label="Toca para ver cómo CenitDigital Pro transforma tu situación">
+          <div class="saturn-sphere" aria-hidden="true"></div>
+          <div class="saturn-ring" aria-hidden="true"></div>
+          <div class="saturn-attention-ring" aria-hidden="true"></div>
+          <div class="saturn-hint" aria-hidden="true">
+            <span class="saturn-hint-emoji">👆</span>
+            <span class="saturn-hint-text">TOCA</span>
+          </div>
+        </button>
+      </div>
+
+      <article class="flip-card" data-card="2">
         <div class="flip-card-inner">
-          <div class="flip-card-front">
+          <div class="flip-card-face flip-card-front">
             <div class="card-accent card-accent--rojo"></div>
             <span class="card-icon card-icon--rojo" aria-hidden="true">&#10005;</span>
             <p class="card-text">No es que seas mal corredor. Es que digitalmente no existes.</p>
           </div>
-          <div class="flip-card-back">
+          <div class="flip-card-face flip-card-back">
             <div class="card-accent card-accent--azul"></div>
             <span class="card-icon card-icon--azul" aria-hidden="true">&#10003;</span>
             <p class="card-text">7 días y pasas de invisible a referente digital de tu zona.</p>
@@ -135,59 +148,29 @@
         </div>
       </article>
 
-      <div class="saturn-wrap" id="saturn-wrap">
-        <button class="saturn-container" id="saturn-btn" type="button" aria-pressed="false" aria-label="Toca para ver cómo CenitDigital Pro transforma tu situación">
-          <div class="saturn-sphere" aria-hidden="true"></div>
-          <div class="saturn-ring" aria-hidden="true"></div>
-          <div class="saturn-pulse-ring" aria-hidden="true"></div>
-          <div class="saturn-hint" aria-hidden="true">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-              <circle cx="12" cy="12" r="4" fill="currentColor"/>
-              <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.5" opacity="0.4"/>
-            </svg>
-            <span>TOCA</span>
-          </div>
-        </button>
-      </div>
-
-      <article class="flip-card" data-card="3" data-index="2">
+      <article class="flip-card" data-card="3">
         <div class="flip-card-inner">
-          <div class="flip-card-front">
+          <div class="flip-card-face flip-card-front">
             <div class="card-accent card-accent--rojo"></div>
             <span class="card-icon card-icon--rojo" aria-hidden="true">&#10005;</span>
-            <p class="card-text">Llevas años cerrando propiedades y sigues dependiendo del boca a boca.</p>
+            <p class="card-text">Llevas años en el rubro y sigues dependiendo del boca a boca.</p>
           </div>
-          <div class="flip-card-back">
+          <div class="flip-card-face flip-card-back">
             <div class="card-accent card-accent--azul"></div>
             <span class="card-icon card-icon--azul" aria-hidden="true">&#10003;</span>
-            <p class="card-text">El próximo cliente que busque corredor en tu zona te encuentra a ti primero.</p>
+            <p class="card-text">El próximo cliente que busque corredor en tu zona te encuentra primero a ti.</p>
           </div>
         </div>
       </article>
 
-      <article class="flip-card" data-card="4" data-index="3">
+      <article class="flip-card" data-card="4">
         <div class="flip-card-inner">
-          <div class="flip-card-front">
-            <div class="card-accent card-accent--rojo"></div>
-            <span class="card-icon card-icon--rojo" aria-hidden="true">&#10005;</span>
-            <p class="card-text">Te esfuerzas más que nadie y aún así eres invisible para el 90% de tus clientes potenciales.</p>
-          </div>
-          <div class="flip-card-back">
-            <div class="card-accent card-accent--azul"></div>
-            <span class="card-icon card-icon--azul" aria-hidden="true">&#10003;</span>
-            <p class="card-text">Tu experiencia finalmente tiene una vitrina que la demuestra. Visible para todos.</p>
-          </div>
-        </div>
-      </article>
-
-      <article class="flip-card" data-card="5" data-index="4">
-        <div class="flip-card-inner">
-          <div class="flip-card-front">
+          <div class="flip-card-face flip-card-front">
             <div class="card-accent card-accent--rojo"></div>
             <span class="card-icon card-icon--rojo" aria-hidden="true">&#10005;</span>
             <p class="card-text">Publicas en Instagram todos los días. Tus consultas no aumentan.</p>
           </div>
-          <div class="flip-card-back">
+          <div class="flip-card-face flip-card-back">
             <div class="card-accent card-accent--azul"></div>
             <span class="card-icon card-icon--azul" aria-hidden="true">&#10003;</span>
             <p class="card-text">Tu imagen premium convence antes de que abras la boca.</p>
@@ -195,14 +178,14 @@
         </div>
       </article>
 
-      <article class="flip-card" data-card="6" data-index="5">
+      <article class="flip-card" data-card="5">
         <div class="flip-card-inner">
-          <div class="flip-card-front">
+          <div class="flip-card-face flip-card-front">
             <div class="card-accent card-accent--rojo"></div>
             <span class="card-icon card-icon--rojo" aria-hidden="true">&#10005;</span>
-            <p class="card-text">El cliente que perdiste esta semana no eligió a otro corredor. Eligió al que apareció primero en Google.</p>
+            <p class="card-text">El cliente que perdiste esta semana no eligió a otro. Eligió al que apareció primero.</p>
           </div>
-          <div class="flip-card-back">
+          <div class="flip-card-face flip-card-back">
             <div class="card-accent card-accent--azul"></div>
             <span class="card-icon card-icon--azul" aria-hidden="true">&#10003;</span>
             <p class="card-text">Dejas de perseguir clientes. Los clientes empiezan a buscarte a ti.</p>
@@ -210,14 +193,29 @@
         </div>
       </article>
 
-      <article class="flip-card" data-card="7" data-index="6">
+      <article class="flip-card" data-card="6">
         <div class="flip-card-inner">
-          <div class="flip-card-front">
+          <div class="flip-card-face flip-card-front">
+            <div class="card-accent card-accent--rojo"></div>
+            <span class="card-icon card-icon--rojo" aria-hidden="true">&#10005;</span>
+            <p class="card-text">Te esfuerzas más que nadie y eres invisible para el 90% de tus clientes potenciales.</p>
+          </div>
+          <div class="flip-card-face flip-card-back">
+            <div class="card-accent card-accent--azul"></div>
+            <span class="card-icon card-icon--azul" aria-hidden="true">&#10003;</span>
+            <p class="card-text">Tu experiencia finalmente tiene una vitrina que la demuestra.</p>
+          </div>
+        </div>
+      </article>
+
+      <article class="flip-card" data-card="7">
+        <div class="flip-card-inner">
+          <div class="flip-card-face flip-card-front">
             <div class="card-accent card-accent--rojo"></div>
             <span class="card-icon card-icon--rojo" aria-hidden="true">&#10005;</span>
             <p class="card-text">Tienes años de experiencia que nadie puede ver porque no tienes dónde mostrarlos.</p>
           </div>
-          <div class="flip-card-back">
+          <div class="flip-card-face flip-card-back">
             <div class="card-accent card-accent--azul"></div>
             <span class="card-icon card-icon--azul" aria-hidden="true">&#10003;</span>
             <p class="card-text">Cada propiedad que publicas trabaja para posicionarte, no solo para venderse.</p>
@@ -225,17 +223,17 @@
         </div>
       </article>
 
-      <article class="flip-card" data-card="8" data-index="7">
+      <article class="flip-card" data-card="8">
         <div class="flip-card-inner">
-          <div class="flip-card-front">
+          <div class="flip-card-face flip-card-front">
             <div class="card-accent card-accent--rojo"></div>
             <span class="card-icon card-icon--rojo" aria-hidden="true">&#10005;</span>
-            <p class="card-text">Tu competencia cierra propiedades mientras tú esperas que suene el teléfono.</p>
+            <p class="card-text">Tu competencia cierra mientras tú esperas que suene el teléfono.</p>
           </div>
-          <div class="flip-card-back">
+          <div class="flip-card-face flip-card-back">
             <div class="card-accent card-accent--azul"></div>
             <span class="card-icon card-icon--azul" aria-hidden="true">&#10003;</span>
-            <p class="card-text">El corredor que tiene web cierra más. Los números no mienten.</p>
+            <p class="card-text">El corredor con web cierra más. Los números no mienten.</p>
           </div>
         </div>
       </article>
