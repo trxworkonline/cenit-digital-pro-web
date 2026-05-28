@@ -1,4 +1,4 @@
-/* ─── PARTICLES ─────────────────────────────────────────────── */
+/* ─── PARTICLES ─────────────────────────────────────────── */
 (async () => {
   if (typeof tsParticles === 'undefined') return;
   await tsParticles.load({ id: 'particles-white', options: {
@@ -25,7 +25,7 @@
   }});
 })();
 
-/* ─── HERO ELEMENTS ─────────────────────────────────────────── */
+/* ─── HERO ELEMENTS ───────────────────────────────────────── */
 const introVideo = document.getElementById('hero-intro');
 const loopVideo  = document.getElementById('hero-loop');
 const heroCopy   = document.getElementById('hero-copy');
@@ -66,7 +66,7 @@ playBtn.addEventListener('click', () => {
   introVideo.play().catch(() => {});
 });
 
-/* ─── SCROLL TRANSITION ────────────────────────────────────── */
+/* ─── SCROLL TRANSITION ──────────────────────────────────── */
 let transitioned = false;
 
 function triggerTransition() {
@@ -83,7 +83,7 @@ window.addEventListener('wheel',      (e) => { if (e.deltaY > 0) triggerTransiti
 window.addEventListener('touchstart', (e) => { window._tY = e.touches[0].clientY; },    { passive: true });
 window.addEventListener('touchend',   (e) => { if (window._tY - e.changedTouches[0].clientY > 30) triggerTransition(); }, { passive: true });
 
-/* ─── SECTION-PROBLEMA: FLIP SYSTEM ─────────────────────────── */
+/* ─── SECTION-PROBLEMA: FLIP SYSTEM ──────────────────────────── */
 const problemaSection = document.getElementById('el-problema');
 const saturnBtn       = document.getElementById('saturn-btn');
 const saturnWrapEl    = document.getElementById('saturn-wrap');
@@ -127,7 +127,7 @@ if (saturnBtn) {
   });
 }
 
-/* ─── INTERSECTION OBSERVER: entrada de sección ─────────────── */
+/* ─── INTERSECTION OBSERVER: entrada de sección PROBLEMA ─────────── */
 if (problemaSection) {
   const obs = new IntersectionObserver((entries) => {
     if (!entries[0].isIntersecting) return;
@@ -137,3 +137,100 @@ if (problemaSection) {
   }, { threshold: 0.08 });
   obs.observe(problemaSection);
 }
+
+/* ─── SECTION-MOCKUP ────────────────────────────────────────── */
+
+/* MOCKUP-AMBIENT: campo de estrellas en canvas */
+(function initMockupStars() {
+  const canvas = document.getElementById('mockup-stars');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  let stars = [];
+
+  function resize() {
+    canvas.width  = canvas.offsetWidth  || canvas.parentElement.offsetWidth;
+    canvas.height = canvas.offsetHeight || canvas.parentElement.offsetHeight;
+    stars = Array.from({ length: 90 }, () => ({
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height,
+      r: Math.random() * 1.2 + 0.3,
+      o: Math.random() * 0.5 + 0.2
+    }));
+    draw();
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    stars.forEach(s => {
+      ctx.beginPath();
+      ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(255,255,255,${s.o})`;
+      ctx.fill();
+    });
+  }
+
+  resize();
+  window.addEventListener('resize', resize);
+})();
+
+/* MOCKUP-VIDEO: play/pause controlado por IntersectionObserver */
+(function initMockupVideo() {
+  const video   = document.getElementById('mockup-video');
+  const section = document.getElementById('mockup-section');
+  if (!video || !section) return;
+
+  let fadingOut = false;
+
+  /* Loop suave con crossfade de opacidad */
+  video.addEventListener('timeupdate', () => {
+    if (!video.duration || fadingOut) return;
+    if (video.currentTime > video.duration - 0.8) {
+      fadingOut = true;
+      video.style.opacity = '0';
+    }
+  });
+
+  video.addEventListener('ended', () => {
+    video.currentTime = 0;
+    video.play().catch(() => {});
+    requestAnimationFrame(() => {
+      video.style.opacity = '1';
+      fadingOut = false;
+    });
+  });
+
+  const videoObs = new IntersectionObserver((entries) => {
+    if (entries[0].isIntersecting) {
+      video.currentTime = 0;
+      video.play().catch(() => {});
+    } else {
+      video.pause();
+      video.currentTime = 0;
+      video.style.opacity = '1';
+      fadingOut = false;
+    }
+  }, { threshold: 0.5 });
+
+  videoObs.observe(section);
+})();
+
+/* MOCKUP: animaciones de entrada */
+(function initMockupEntry() {
+  const section     = document.getElementById('mockup-section');
+  const titleEl     = document.getElementById('mockup-title');
+  const phoneWrapEl = document.getElementById('mockup-phone-wrap');
+  const badgeEl     = document.getElementById('mockup-badge');
+  const ctaEl       = document.getElementById('mockup-cta');
+  if (!section) return;
+
+  const entryObs = new IntersectionObserver((entries) => {
+    if (!entries[0].isIntersecting) return;
+    if (titleEl)     titleEl.classList.add('in-view');
+    if (phoneWrapEl) phoneWrapEl.classList.add('in-view');
+    if (badgeEl)     badgeEl.classList.add('in-view');
+    if (ctaEl)       ctaEl.classList.add('in-view');
+    entryObs.disconnect();
+  }, { threshold: 0.2 });
+
+  entryObs.observe(section);
+})();

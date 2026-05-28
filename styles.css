@@ -745,6 +745,318 @@ body.scroll-locked { overflow: hidden; }
 .card-line--rojo { background: linear-gradient(to right, rgba(255,59,92,0.4), transparent); }
 .card-line--azul { background: linear-gradient(to right, rgba(96,200,255,0.4), transparent); }
 
+/* ─── SECTION-MOCKUP ──────────────────────────────────────────── */
+/* SECTION-MOCKUP — Sección 3: Mockup móvil con video scroll */
+.mockup-section {
+  position: relative;
+  padding: 100px 24px;
+  overflow: hidden;
+  background: #010612;
+}
+
+.mockup-section::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 70% 50%, rgba(16,96,224,0.08) 0%, transparent 60%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* MOCKUP-AMBIENT */
+.mockup-stars {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  opacity: 0.4;
+  pointer-events: none;
+}
+
+.mockup-inner {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+/* MOCKUP-TITLE */
+.mockup-title {
+  opacity: 0;
+  transform: translateX(-30px);
+}
+
+.mockup-title.in-view {
+  opacity: 1;
+  transform: translateX(0);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.mockup-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'Barlow', sans-serif;
+  font-weight: 500;
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #60C8FF;
+  margin-bottom: 16px;
+}
+
+.mockup-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #60C8FF;
+  flex-shrink: 0;
+  animation: pulse-dot 1.5s ease-in-out infinite;
+}
+
+.mockup-headline {
+  display: flex;
+  flex-direction: column;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 800;
+  text-transform: uppercase;
+  line-height: 0.9;
+}
+
+.mockup-hl-a { font-size: 2rem;   color: #80B0D0; }
+.mockup-hl-b { font-size: 3.8rem; color: #EAF4FF; }
+.mockup-hl-c { font-size: 3.8rem; color: #60C8FF; padding-left: 24px; margin-bottom: 20px; }
+
+.mockup-desc {
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 300;
+  font-size: 0.9rem;
+  line-height: 1.65;
+  color: #80B0D0;
+  max-width: 340px;
+  margin-bottom: 32px;
+}
+
+/* MOCKUP-BADGE */
+.mockup-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(96,200,255,0.08);
+  border: 1px solid rgba(96,200,255,0.2);
+  border-radius: 24px;
+  padding: 8px 16px;
+  margin-bottom: 40px;
+  opacity: 0;
+  transform: translateY(10px);
+}
+
+.mockup-badge.in-view {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.5s ease 0.4s, transform 0.5s ease 0.4s;
+}
+
+.mockup-badge-icon { flex-shrink: 0; }
+
+.mockup-badge-text {
+  font-family: 'Barlow', sans-serif;
+  font-weight: 500;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #60C8FF;
+}
+
+/* MOCKUP-CTA */
+.mockup-cta-wrap {
+  opacity: 0;
+  transform: translateY(10px);
+}
+
+.mockup-cta-wrap.in-view {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.5s ease 0.6s, transform 0.5s ease 0.6s;
+}
+
+.mockup-cta-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background: #1060E0;
+  padding: 18px 36px;
+  border-radius: 8px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 800;
+  font-size: 15px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #EAF4FF;
+  text-decoration: none;
+  box-shadow: 0 0 30px rgba(16,96,224,0.4), 0 4px 20px rgba(0,0,0,0.3);
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.mockup-cta-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(to right, transparent, rgba(255,255,255,0.12), transparent);
+  transform: skewX(-20deg);
+  animation: shimmer 4s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+  0%   { left: -100%; }
+  40%  { left: 150%; }
+  100% { left: 150%; }
+}
+
+.mockup-cta-btn:hover {
+  transform: scale(1.03);
+  box-shadow: 0 0 50px rgba(16,96,224,0.6), 0 4px 20px rgba(0,0,0,0.3);
+}
+
+.mockup-cta-btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+.mockup-wa-icon { flex-shrink: 0; }
+
+.mockup-sub {
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 300;
+  font-size: 0.78rem;
+  color: #80B0D0;
+  margin-top: 12px;
+}
+
+/* MOCKUP-PHONE-CONTAINER */
+.mockup-phone-wrap {
+  position: relative;
+  width: 260px;
+  margin: 48px auto 0;
+  perspective: 1200px;
+  opacity: 0;
+  transform: translateX(30px) scale(0.95);
+}
+
+.mockup-phone-wrap.in-view {
+  opacity: 1;
+  transform: translateX(0) scale(1);
+  transition: opacity 0.8s ease 0.2s, transform 0.8s ease 0.2s;
+}
+
+/* MOCKUP-AMBIENT: glow detrás del teléfono */
+.mockup-phone-glow {
+  position: absolute;
+  width: 120%;
+  height: 120%;
+  top: -10%;
+  left: -10%;
+  border-radius: 50%;
+  background: radial-gradient(ellipse, rgba(16,96,224,0.2) 0%, transparent 70%);
+  filter: blur(40px);
+  z-index: 1;
+  pointer-events: none;
+  animation: glow-pulse 3s ease-in-out infinite alternate;
+}
+
+@keyframes glow-pulse {
+  from { transform: scale(1); }
+  to   { transform: scale(1.05); }
+}
+
+.mockup-phone {
+  position: relative;
+  width: 260px;
+  height: 540px;
+  border-radius: 44px;
+  background: linear-gradient(145deg, #1A1A2E 0%, #0D0D1A 50%, #1A1A2E 100%);
+  border: 1.5px solid rgba(255,255,255,0.12);
+  box-shadow: 0 0 0 1px rgba(0,0,0,0.8), 0 25px 60px rgba(0,0,0,0.6), 0 0 40px rgba(16,96,224,0.15), inset 0 1px 0 rgba(255,255,255,0.08);
+  transform: rotateX(4deg) rotateY(-10deg) rotateZ(1deg);
+  transition: transform 0.6s ease;
+  z-index: 2;
+}
+
+.mockup-phone:hover {
+  transform: rotateX(2deg) rotateY(-5deg) rotateZ(0.5deg);
+}
+
+.phone-dynamic-island {
+  position: absolute;
+  top: 14px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 22px;
+  background: #000;
+  border-radius: 12px;
+  z-index: 10;
+}
+
+.phone-vol-1 {
+  position: absolute;
+  left: -2px; top: 100px;
+  width: 3px; height: 28px;
+  background: rgba(255,255,255,0.15);
+  border-radius: 2px;
+}
+
+.phone-vol-2 {
+  position: absolute;
+  left: -2px; top: 138px;
+  width: 3px; height: 28px;
+  background: rgba(255,255,255,0.15);
+  border-radius: 2px;
+}
+
+.phone-power {
+  position: absolute;
+  right: -2px; top: 120px;
+  width: 3px; height: 44px;
+  background: rgba(255,255,255,0.12);
+  border-radius: 2px;
+}
+
+.phone-screen {
+  position: absolute;
+  top: 12px; left: 12px; right: 12px; bottom: 12px;
+  border-radius: 34px;
+  overflow: hidden;
+  background: #000;
+}
+
+.phone-screen-reflection {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 40%;
+  background: linear-gradient(to bottom, rgba(255,255,255,0.04), transparent);
+  z-index: 5;
+  pointer-events: none;
+  border-radius: 34px 34px 0 0;
+}
+
+/* MOCKUP-VIDEO */
+.mockup-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top;
+  transition: opacity 0.3s ease;
+}
+
 /* ─── RESPONSIVE: DESKTOP ───────────────────────────────────── */
 @media (min-width: 768px) {
   .brand-name { font-size: 5.5rem; }
@@ -781,6 +1093,30 @@ body.scroll-locked { overflow: hidden; }
   .flip-card[data-card="8"] { height: 150px; }
 
   .saturn-container { width: 220px; height: 220px; }
+
+  /* Mockup desktop layout */
+  .mockup-inner {
+    flex-direction: row;
+    gap: 60px;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .mockup-title {
+    flex: 1;
+    max-width: 420px;
+  }
+
+  .mockup-phone-wrap {
+    width: 300px;
+    flex-shrink: 0;
+    margin: 0;
+  }
+
+  .mockup-phone {
+    width: 300px;
+    height: 620px;
+  }
 }
 
 /* ─── MOBILE: data strip ──────────────────────────────── */
@@ -792,11 +1128,16 @@ body.scroll-locked { overflow: hidden; }
 /* ─── REDUCED MOTION ─────────────────────────────────────────── */
 @media (prefers-reduced-motion: reduce) {
   .chevron, .punto-pulse, .saturn-toca,
-  .data-strip-track { animation: none; }
+  .data-strip-track, .mockup-dot,
+  .mockup-phone-glow, .mockup-cta-btn::before { animation: none; }
   .navbar, .bloque1  { transition: none; }
   .flip-card-inner   { transition: none; }
   .saturn-img        { transition: none; }
+  .mockup-video      { transition: none; }
+  .mockup-phone      { transition: none; }
   .flip-card.in-view, .saturn-wrap.in-view { animation: none; opacity: 1; transform: none; transition: none; }
+  .mockup-title, .mockup-phone-wrap,
+  .mockup-badge, .mockup-cta-wrap { opacity: 1; transform: none; transition: none; }
   .hero-copy .eyebrow, .hero-copy .headline, .hero-copy .subheadline,
   .hero-copy .badge,   .hero-copy .cta-group { animation: none; opacity: 1; transform: none; }
 }
