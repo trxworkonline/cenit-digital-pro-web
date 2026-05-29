@@ -251,7 +251,7 @@ if (problemaSection) {
   const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
   renderer.setSize(window.innerWidth, window.innerHeight);
   renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
-  renderer.setClearColor(0x010612, 1);
+  renderer.setClearColor(0x000000, 0);
 
   /* Scene & Camera */
   const scene  = new THREE.Scene();
@@ -270,24 +270,24 @@ if (problemaSection) {
   }
 
   /* Particle counts (reduced on mobile) */
-  const N1 = isMobile ? 1500 : 3000;
+  const N1 = isMobile ? 1500 : 4000;
   const N2 = isMobile ?  800 : 1500;
   const N3 = isMobile ?  200 :  400;
 
   /* ─ Layer 1: Far stars */
   const geo1 = new THREE.BufferGeometry();
-  geo1.setAttribute('position', new THREE.BufferAttribute(makePos(N1, 1500, 1500, 500, 2000), 3));
+  geo1.setAttribute('position', new THREE.BufferAttribute(makePos(N1, 1500, 1500, 200, 1500), 3));
   const layer1 = new THREE.Points(geo1, new THREE.PointsMaterial({
-    size: 0.8, color: 0xEAF4FF, opacity: 0.6, transparent: true, sizeAttenuation: true
+    size: 2.5, color: 0xEAF4FF, opacity: 1, transparent: true, sizeAttenuation: true, depthWrite: false
   }));
   scene.add(layer1);
 
-  /* ─ Layer 2: Mid stars (15% blue) */
+  /* ─ Layer 2: Mid stars (25% blue) */
   const geo2  = new THREE.BufferGeometry();
-  geo2.setAttribute('position', new THREE.BufferAttribute(makePos(N2, 1000, 1000, 100, 1500), 3));
+  geo2.setAttribute('position', new THREE.BufferAttribute(makePos(N2, 1000, 1000, 50, 800), 3));
   const cols2 = new Float32Array(N2 * 3);
   for (let i = 0; i < N2; i++) {
-    if (Math.random() < 0.15) {
+    if (Math.random() < 0.25) {
       cols2[i*3] = 0.376; cols2[i*3+1] = 0.784; cols2[i*3+2] = 1.0;
     } else {
       cols2[i*3] = 0.918; cols2[i*3+1] = 0.957; cols2[i*3+2] = 1.0;
@@ -295,49 +295,36 @@ if (problemaSection) {
   }
   geo2.setAttribute('color', new THREE.BufferAttribute(cols2, 3));
   const layer2 = new THREE.Points(geo2, new THREE.PointsMaterial({
-    size: 1.4, opacity: 0.8, transparent: true, sizeAttenuation: true, vertexColors: true
+    size: 4, opacity: 1, transparent: true, sizeAttenuation: true, vertexColors: true, depthWrite: false
   }));
   scene.add(layer2);
 
-  /* ─ Layer 3: Close stars with twinkle shader (20% blue) */
-  const geo3     = new THREE.BufferGeometry();
-  geo3.setAttribute('position', new THREE.BufferAttribute(makePos(N3, 600, 600, 0, 400), 3));
-  const offs3    = new Float32Array(N3);
-  const cols3    = new Float32Array(N3 * 3);
-  for (let i = 0; i < N3; i++) {
-    offs3[i] = Math.random() * Math.PI * 2;
-    if (Math.random() < 0.20) {
-      cols3[i*3] = 0.376; cols3[i*3+1] = 0.784; cols3[i*3+2] = 1.0;
-    } else {
-      cols3[i*3] = 1.0; cols3[i*3+1] = 1.0; cols3[i*3+2] = 1.0;
-    }
-  }
+  /* ─ Layer 3: Close stars — pure white, full opacity */
+  const geo3  = new THREE.BufferGeometry();
+  geo3.setAttribute('position', new THREE.BufferAttribute(makePos(N3, 600, 600, -100, 200), 3));
+  const offs3 = new Float32Array(N3);
+  for (let i = 0; i < N3; i++) offs3[i] = Math.random() * Math.PI * 2;
   geo3.setAttribute('randomOffset', new THREE.BufferAttribute(offs3, 1));
-  geo3.setAttribute('color',        new THREE.BufferAttribute(cols3, 3));
 
   const mat3 = new THREE.ShaderMaterial({
     uniforms: { time: { value: 0.0 } },
     vertexShader: [
       'attribute float randomOffset;',
-      'attribute vec3 color;',
       'uniform float time;',
-      'varying vec3  vColor;',
       'varying float vAlpha;',
       'void main() {',
-      '  vColor = color;',
-      '  vAlpha = 0.8 + sin(time + randomOffset) * 0.2;',
+      '  vAlpha = 1.0;',
       '  vec4 mv = modelViewMatrix * vec4(position, 1.0);',
-      '  gl_PointSize = 2.5 * (300.0 / -mv.z);',
+      '  gl_PointSize = 7.0 * (300.0 / -mv.z);',
       '  gl_Position  = projectionMatrix * mv;',
       '}'
     ].join('\n'),
     fragmentShader: [
-      'varying vec3  vColor;',
       'varying float vAlpha;',
       'void main() {',
       '  float r = length(gl_PointCoord - vec2(0.5));',
       '  if (r > 0.5) discard;',
-      '  gl_FragColor = vec4(vColor, vAlpha * (1.0 - r * 1.5));',
+      '  gl_FragColor = vec4(1.0, 1.0, 1.0, vAlpha * (1.0 - r * 1.5));',
       '}'
     ].join('\n'),
     transparent:  true,
@@ -346,6 +333,14 @@ if (problemaSection) {
   });
   const layer3 = new THREE.Points(geo3, mat3);
   scene.add(layer3);
+
+  /* ─ Layer 4: Brightest stars (80 points) */
+  const geo4 = new THREE.BufferGeometry();
+  geo4.setAttribute('position', new THREE.BufferAttribute(makePos(80, 1200, 1200, 50, 1000), 3));
+  const layer4 = new THREE.Points(geo4, new THREE.PointsMaterial({
+    size: 8, color: 0xFFFFFF, opacity: 1, transparent: true, sizeAttenuation: true, depthWrite: false
+  }));
+  scene.add(layer4);
 
   /* ─ Nebulae (desktop only) */
   if (!isMobile) {
@@ -374,6 +369,7 @@ if (problemaSection) {
     gsap.to(layer1.rotation, { y: 0.150, x: 0.050, ease: 'none', scrollTrigger: st });
     gsap.to(layer2.rotation, { y: 0.075, x: 0.025, ease: 'none', scrollTrigger: st });
     gsap.to(layer3.rotation, { y: 0.038, x: 0.013, ease: 'none', scrollTrigger: st });
+    gsap.to(layer4.rotation, { y: 0.100, x: 0.030, ease: 'none', scrollTrigger: st });
   }
 
   /* ─ Lenis smooth scroll */
@@ -413,6 +409,7 @@ if (problemaSection) {
     layer1.rotation.y += 0.00008; layer1.rotation.x += 0.00003;
     layer2.rotation.y += 0.00012; layer2.rotation.x += 0.00005;
     layer3.rotation.y += 0.00018; layer3.rotation.x += 0.00007;
+    layer4.rotation.y += 0.00010; layer4.rotation.x += 0.00004;
 
     cRotX += (tRotX - cRotX) * 0.03;
     cRotY += (tRotY - cRotY) * 0.03;
