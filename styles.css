@@ -944,7 +944,7 @@ body.scroll-locked { overflow: hidden; }
 /* MOCKUP-PHONE-CONTAINER */
 .mockup-phone-wrap {
   position: relative;
-  width: 240px;
+  width: 290px;
   margin: 48px auto 0;
   perspective: 1200px;
   opacity: 0;
@@ -979,8 +979,8 @@ body.scroll-locked { overflow: hidden; }
 
 .mockup-phone {
   position: relative;
-  width: 240px;
-  height: 476px;
+  width: 290px;
+  height: 516px;
   border-radius: 44px;
   background: linear-gradient(145deg, #1A1A2E 0%, #0D0D1A 50%, #1A1A2E 100%);
   border: 1.5px solid rgba(255,255,255,0.12);
@@ -1108,14 +1108,14 @@ body.scroll-locked { overflow: hidden; }
   }
 
   .mockup-phone-wrap {
-    width: 270px;
+    width: 320px;
     flex-shrink: 0;
     margin: 0;
   }
 
   .mockup-phone {
-    width: 270px;
-    height: 534px;
+    width: 320px;
+    height: 569px;
   }
 }
 
