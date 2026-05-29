@@ -8,13 +8,31 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;800&family=Barlow:wght@500&family=DM+Sans:wght@300&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
+  <style>
+    /* BACKGROUND-SPACE-3D — canvas fijo detrás de todo el contenido */
+    html, body { background: transparent; }
+    #space-canvas {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      z-index: 0;
+      pointer-events: none;
+    }
+    /* Secciones principales sobre el canvas (z-index:0) */
+    .bloque3, .data-strip,
+    .problema-section, .mockup-section, .features-section {
+      position: relative;
+      z-index: 1;
+    }
+  </style>
 </head>
 <body>
 
+  <!-- BACKGROUND-SPACE-3D: canvas Three.js global -->
+  <canvas id="space-canvas" aria-hidden="true"></canvas>
+
   <!-- BLOQUE 1: PANTALLA DE ENTRADA -->
   <section id="bloque1" class="bloque1">
-    <div id="particles-white" class="particles-layer"></div>
-    <div id="particles-blue" class="particles-layer"></div>
     <div class="bloque1-content">
       <h1 class="brand-name">CENITDIGITAL PRO</h1>
       <div class="led-line" aria-hidden="true">
@@ -300,9 +318,6 @@
   <!-- SECTION-MOCKUP — Sección 3: Mockup móvil con video scroll -->
   <section id="mockup-section" class="mockup-section" aria-label="Vista previa del sitio web en celular">
 
-    <!-- MOCKUP-AMBIENT -->
-    <canvas id="mockup-stars" class="mockup-stars" aria-hidden="true"></canvas>
-
     <div class="mockup-inner">
 
       <!-- MOCKUP-TITLE -->
@@ -356,7 +371,6 @@
   <!-- SECTION-FEATURES — Sección 4: Lo que incluye el Sistema Corredor Élite -->
   <section id="features-section" class="features-section" aria-label="Lo que incluye el Sistema Corredor Élite">
 
-    <canvas id="features-stars" class="features-stars" aria-hidden="true"></canvas>
     <div class="features-nebula features-nebula--1" aria-hidden="true"></div>
     <div class="features-nebula features-nebula--2" aria-hidden="true"></div>
 
@@ -470,7 +484,11 @@
 
   </section>
 
-  <script src="https://cdn.jsdelivr.net/npm/tsparticles-slim@2.12.0/tsparticles.slim.bundle.min.js"></script>
+  <!-- CDN: Three.js + GSAP + ScrollTrigger + Lenis -->
+  <script src="https://cdn.jsdelivr.net/npm/three@0.165.0/build/three.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.14/dist/lenis.min.js"></script>
   <script src="main.js"></script>
 </body>
 </html>
