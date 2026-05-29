@@ -282,11 +282,13 @@ if (problemaSection) {
 
   function updateActiveState() {
     cards.forEach((card, i) => {
-      const dist = Math.abs(i - activeIndex);
-      card.classList.remove('is-active', 'is-adjacent', 'is-far');
-      if (dist === 0)      card.classList.add('is-active');
-      else if (dist === 1) card.classList.add('is-adjacent');
-      else                 card.classList.add('is-far');
+      const dist = i - activeIndex;
+      card.classList.remove('is-active', 'is-adj-l', 'is-adj-r', 'is-far-l', 'is-far-r');
+      if (dist === 0)       card.classList.add('is-active');
+      else if (dist === -1) card.classList.add('is-adj-l');
+      else if (dist === 1)  card.classList.add('is-adj-r');
+      else if (dist < -1)   card.classList.add('is-far-l');
+      else                  card.classList.add('is-far-r');
     });
   }
 
