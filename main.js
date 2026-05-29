@@ -1,4 +1,4 @@
-/* ─── PARTICLES ─────────────────────────────────────────── */
+/* ─── PARTICLES ────────────────────────────────────────── */
 (async () => {
   if (typeof tsParticles === 'undefined') return;
   await tsParticles.load({ id: 'particles-white', options: {
@@ -25,7 +25,7 @@
   }});
 })();
 
-/* ─── HERO ELEMENTS ───────────────────────────────────────── */
+/* ─── HERO ELEMENTS ─────────────────────────────────────────────── */
 const introVideo = document.getElementById('hero-intro');
 const loopVideo  = document.getElementById('hero-loop');
 const heroCopy   = document.getElementById('hero-copy');
@@ -66,7 +66,7 @@ playBtn.addEventListener('click', () => {
   introVideo.play().catch(() => {});
 });
 
-/* ─── SCROLL TRANSITION ──────────────────────────────────── */
+/* ─── SCROLL TRANSITION ───────────────────────────────────────── */
 let transitioned = false;
 
 function triggerTransition() {
@@ -83,7 +83,7 @@ window.addEventListener('wheel',      (e) => { if (e.deltaY > 0) triggerTransiti
 window.addEventListener('touchstart', (e) => { window._tY = e.touches[0].clientY; },    { passive: true });
 window.addEventListener('touchend',   (e) => { if (window._tY - e.changedTouches[0].clientY > 30) triggerTransition(); }, { passive: true });
 
-/* ─── SECTION-PROBLEMA: FLIP SYSTEM ──────────────────────────── */
+/* ─── SECTION-PROBLEMA: FLIP SYSTEM ──────────────────────────────── */
 const problemaSection = document.getElementById('el-problema');
 const saturnBtn       = document.getElementById('saturn-btn');
 const saturnWrapEl    = document.getElementById('saturn-wrap');
@@ -100,7 +100,6 @@ const FLIP_STAGGER = [0, 60, 120, 180, 240, 300, 360, 420];
 function handleFlip() {
   problemFlipped = !problemFlipped;
 
-  /* Crossfade imágenes Saturn */
   if (saturnRedImg && saturnBlueImg) {
     saturnRedImg.style.opacity  = problemFlipped ? '0' : '1';
     saturnBlueImg.style.opacity = problemFlipped ? '1' : '0';
@@ -109,7 +108,6 @@ function handleFlip() {
   flipCards.forEach((card, i) => {
     card.querySelector('.flip-card-inner').style.transitionDelay = FLIP_STAGGER[i] + 'ms';
     card.classList.toggle('flipped', problemFlipped);
-    /* Bloquea hover durante la animación de flip (CAMBIO 4) */
     card.classList.add('is-flipping');
     setTimeout(() => card.classList.remove('is-flipping'), FLIP_STAGGER[i] + 550);
   });
@@ -127,7 +125,7 @@ if (saturnBtn) {
   });
 }
 
-/* ─── INTERSECTION OBSERVER: entrada de sección PROBLEMA ─────────── */
+/* ─── INTERSECTION OBSERVER: entrada PROBLEMA ─────────────────────── */
 if (problemaSection) {
   const obs = new IntersectionObserver((entries) => {
     if (!entries[0].isIntersecting) return;
@@ -138,7 +136,7 @@ if (problemaSection) {
   obs.observe(problemaSection);
 }
 
-/* ─── SECTION-MOCKUP ────────────────────────────────────────── */
+/* ─── SECTION-MOCKUP ──────────────────────────────────────────── */
 
 /* MOCKUP-AMBIENT: campo de estrellas en canvas */
 (function initMockupStars() {
@@ -181,7 +179,6 @@ if (problemaSection) {
 
   let fadingOut = false;
 
-  /* Loop suave con crossfade de opacidad */
   video.addEventListener('timeupdate', () => {
     if (!video.duration || fadingOut) return;
     if (video.currentTime > video.duration - 0.8) {
@@ -233,4 +230,142 @@ if (problemaSection) {
   }, { threshold: 0.2 });
 
   entryObs.observe(section);
+})();
+
+/* ─── SECTION-FEATURES ─────────────────────────────────────────── */
+
+/* Campo de estrellas en canvas */
+(function initFeaturesStars() {
+  const canvas = document.getElementById('features-stars');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  let stars = [];
+
+  function resize() {
+    canvas.width  = canvas.offsetWidth  || canvas.parentElement.offsetWidth;
+    canvas.height = canvas.offsetHeight || canvas.parentElement.offsetHeight;
+    stars = Array.from({ length: 80 }, () => ({
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height,
+      r: Math.random() * 1.2 + 0.3,
+      o: Math.random() * 0.45 + 0.15
+    }));
+    draw();
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    stars.forEach(s => {
+      ctx.beginPath();
+      ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(255,255,255,${s.o})`;
+      ctx.fill();
+    });
+  }
+
+  resize();
+  window.addEventListener('resize', resize);
+})();
+
+/* FEATURES-CAROUSEL: sistema de card activa + navegación */
+(function initFeaturesCarousel() {
+  const section = document.getElementById('features-section');
+  const track   = document.getElementById('features-track');
+  const cards   = document.querySelectorAll('.features-card');
+  const prevBtn = document.getElementById('features-prev');
+  const nextBtn = document.getElementById('features-next');
+  if (!track || !cards.length) return;
+
+  let activeIndex      = 3; /* FEATURES-CARD-4 por defecto */
+  let isScrollByCode   = false;
+  let scrollTimer;
+
+  function updateActiveState() {
+    cards.forEach((card, i) => {
+      const dist = Math.abs(i - activeIndex);
+      card.classList.remove('is-active', 'is-adjacent', 'is-far');
+      if (dist === 0)      card.classList.add('is-active');
+      else if (dist === 1) card.classList.add('is-adjacent');
+      else                 card.classList.add('is-far');
+    });
+  }
+
+  function scrollToCard(index, smooth) {
+    smooth = (smooth === undefined) ? true : smooth;
+    activeIndex = Math.max(0, Math.min(cards.length - 1, index));
+    const card     = cards[activeIndex];
+    const halfTrack = track.offsetWidth / 2;
+    const halfCard  = card.offsetWidth  / 2;
+    const target    = card.offsetLeft - halfTrack + halfCard;
+
+    isScrollByCode = true;
+    track.scrollTo({ left: target, behavior: smooth ? 'smooth' : 'instant' });
+    updateActiveState();
+    setTimeout(() => { isScrollByCode = false; }, smooth ? 700 : 60);
+  }
+
+  function findActiveCard() {
+    const center = track.scrollLeft + track.offsetWidth / 2;
+    let closest = activeIndex;
+    let minDist = Infinity;
+    cards.forEach((card, i) => {
+      const d = Math.abs(card.offsetLeft + card.offsetWidth / 2 - center);
+      if (d < minDist) { minDist = d; closest = i; }
+    });
+    if (closest !== activeIndex) {
+      activeIndex = closest;
+      updateActiveState();
+    }
+  }
+
+  /* Click en card */
+  cards.forEach((card, i) => {
+    card.addEventListener('click', () => scrollToCard(i));
+  });
+
+  /* Botones de navegación (desktop) */
+  if (prevBtn) prevBtn.addEventListener('click', () => scrollToCard(activeIndex - 1));
+  if (nextBtn) nextBtn.addEventListener('click', () => scrollToCard(activeIndex + 1));
+
+  /* Scroll manual del usuario (mobile) */
+  track.addEventListener('scroll', () => {
+    if (isScrollByCode) return;
+    clearTimeout(scrollTimer);
+    scrollTimer = setTimeout(findActiveCard, 120);
+  }, { passive: true });
+
+  /* Resize: recentrar card activa */
+  window.addEventListener('resize', () => scrollToCard(activeIndex, false));
+
+  /* Estado inicial: fijar clases de distancia antes de la animación de entrada */
+  updateActiveState();
+
+  /* Scroll inicial a FEATURES-CARD-4 sin animación */
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      scrollToCard(3, false);
+    });
+  });
+
+  /* Animación de entrada via IntersectionObserver */
+  if (section) {
+    const entryObs = new IntersectionObserver((entries) => {
+      if (!entries[0].isIntersecting) return;
+
+      const titleEl = document.getElementById('features-title');
+      const ctaEl   = document.getElementById('features-cta');
+
+      if (titleEl) titleEl.classList.add('in-view');
+
+      cards.forEach((card, i) => {
+        setTimeout(() => card.classList.add('in-view'), i * 60);
+      });
+
+      if (ctaEl) setTimeout(() => ctaEl.classList.add('in-view'), 500);
+
+      entryObs.disconnect();
+    }, { threshold: 0.15 });
+
+    entryObs.observe(section);
+  }
 })();
