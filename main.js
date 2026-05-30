@@ -239,220 +239,106 @@ if (problemaSection) {
   }
 })();
 
-/* ─── BACKGROUND-SPACE-3D ──────────────────────────────────────── */
-/* BACKGROUND-SPACE-3D — Fondo espacial Three.js global, reemplaza todos los canvas de partículas existentes */
+/* ─── BACKGROUND-SPACE-CSS ──────────────────────────────────────── */
+/* BACKGROUND-SPACE-CSS — Fondo espacial CSS puro, funciona en iOS Safari y todos los dispositivos */
 (function initSpaceBackground() {
-  if (typeof THREE === 'undefined') return;
+  const farLayer    = document.getElementById('stars-layer-far');
+  const midLayer    = document.getElementById('stars-layer-mid');
+  const nearLayer   = document.getElementById('stars-layer-near');
+  const brightLayer = document.getElementById('stars-bright');
+  if (!farLayer) return;
 
   const isMobile = window.innerWidth < 768;
+  const vw = window.innerWidth;
+  const vh = window.innerHeight;
+  const spreadX = Math.max(vw * 1.5, 800);
+  const spreadY = Math.max(vh * 4,  2000);
 
-  /* Renderer — opciones iOS */
-  const canvas   = document.getElementById('space-canvas');
-  const renderer = new THREE.WebGLRenderer({
-    canvas,
-    antialias: true,
-    alpha: true,
-    preserveDrawingBuffer: true,
-    powerPreference: 'high-performance',
-    failIfMajorPerformanceCaveat: false
-  });
-  renderer.setSize(window.innerWidth, window.innerHeight);
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-  renderer.setClearColor(0x000000, 0);
-
-  /* Scene & Camera */
-  const scene  = new THREE.Scene();
-  const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 2000);
-  camera.position.z = 80;
-
-  /* Helper: random positions in a volume */
-  function makePos(count, xR, yR, zMin, zMax) {
-    const arr = new Float32Array(count * 3);
-    for (let i = 0; i < count; i++) {
-      arr[i*3]   = (Math.random() - 0.5) * xR * 2;
-      arr[i*3+1] = (Math.random() - 0.5) * yR * 2;
-      arr[i*3+2] = -(Math.random() * (zMax - zMin) + zMin);
+  /* Generate box-shadow star fields */
+  function makeStars(count, sx, sy, colorPool) {
+    var parts = [];
+    for (var i = 0; i < count; i++) {
+      var x = Math.round((Math.random() - 0.5) * sx * 2);
+      var y = Math.round((Math.random() - 0.5) * sy * 2);
+      var c = colorPool[Math.floor(Math.random() * colorPool.length)];
+      parts.push(x + 'px ' + y + 'px 0 0 ' + c);
     }
-    return arr;
+    return parts.join(',');
   }
 
-  /* Particle counts */
-  const N1 = isMobile ? 2000 : 4000;
-  const N2 = isMobile ? 1000 : 1500;
-  const N3 = isMobile ?  300 :  400;
-  const N4 = isMobile ?   60 :   80;
-
-  /* ─ Layer 1: Far stars */
-  const geo1 = new THREE.BufferGeometry();
-  geo1.setAttribute('position', new THREE.BufferAttribute(makePos(N1, 750, 750, 50, 400), 3));
-  const layer1 = new THREE.Points(geo1, new THREE.PointsMaterial({
-    size: isMobile ? 1.2 : 2.5, color: 0xEAF4FF, opacity: 1, transparent: true, sizeAttenuation: !isMobile, depthWrite: false
-  }));
-  scene.add(layer1);
-
-  /* ─ Layer 2: Mid stars (25% blue) */
-  const geo2  = new THREE.BufferGeometry();
-  geo2.setAttribute('position', new THREE.BufferAttribute(makePos(N2, 500, 500, 20, 200), 3));
-  const cols2 = new Float32Array(N2 * 3);
-  for (let i = 0; i < N2; i++) {
-    if (Math.random() < 0.25) {
-      cols2[i*3] = 0.376; cols2[i*3+1] = 0.784; cols2[i*3+2] = 1.0;
-    } else {
-      cols2[i*3] = 0.918; cols2[i*3+1] = 0.957; cols2[i*3+2] = 1.0;
+  function makeBrightStars(count) {
+    var parts = [];
+    for (var i = 0; i < count; i++) {
+      var x = Math.round((Math.random() - 0.5) * spreadX * 2);
+      var y = Math.round((Math.random() - 0.5) * spreadY * 2);
+      parts.push(x + 'px ' + y + 'px 0 2px rgba(255,255,255,1),' + x + 'px ' + y + 'px 8px 4px rgba(255,255,255,0.3)');
     }
-  }
-  geo2.setAttribute('color', new THREE.BufferAttribute(cols2, 3));
-  const layer2 = new THREE.Points(geo2, new THREE.PointsMaterial({
-    size: isMobile ? 2 : 4, opacity: 1, transparent: true, sizeAttenuation: !isMobile, vertexColors: true, depthWrite: false
-  }));
-  scene.add(layer2);
-
-  /* ─ Layer 3: Close stars */
-  const geo3  = new THREE.BufferGeometry();
-  geo3.setAttribute('position', new THREE.BufferAttribute(makePos(N3, 300, 300, -10, 80), 3));
-  const offs3 = new Float32Array(N3);
-  for (let i = 0; i < N3; i++) offs3[i] = Math.random() * Math.PI * 2;
-  geo3.setAttribute('randomOffset', new THREE.BufferAttribute(offs3, 1));
-
-  const mat3 = new THREE.ShaderMaterial({
-    uniforms: { time: { value: 0.0 }, fixedSize: { value: isMobile ? 3.0 : 0.0 } },
-    vertexShader: [
-      'attribute float randomOffset;',
-      'uniform float time;',
-      'uniform float fixedSize;',
-      'varying float vAlpha;',
-      'void main() {',
-      '  vAlpha = 1.0;',
-      '  vec4 mv = modelViewMatrix * vec4(position, 1.0);',
-      '  if (fixedSize > 0.0) {',
-      '    gl_PointSize = fixedSize;',
-      '  } else {',
-      '    gl_PointSize = 7.0 * (300.0 / -mv.z);',
-      '  }',
-      '  gl_Position  = projectionMatrix * mv;',
-      '}'
-    ].join('\n'),
-    fragmentShader: [
-      'varying float vAlpha;',
-      'void main() {',
-      '  float r = length(gl_PointCoord - vec2(0.5));',
-      '  if (r > 0.5) discard;',
-      '  gl_FragColor = vec4(1.0, 1.0, 1.0, vAlpha * (1.0 - r * 1.5));',
-      '}'
-    ].join('\n'),
-    transparent:  true,
-    blending:     THREE.AdditiveBlending,
-    depthWrite:   false
-  });
-  const layer3 = new THREE.Points(geo3, mat3);
-  scene.add(layer3);
-
-  /* ─ Layer 4: Brightest stars */
-  const geo4 = new THREE.BufferGeometry();
-  geo4.setAttribute('position', new THREE.BufferAttribute(makePos(N4, 600, 600, -5, 50), 3));
-  const layer4 = new THREE.Points(geo4, new THREE.PointsMaterial({
-    size: isMobile ? 5 : 8, color: 0xFFFFFF, opacity: 1, transparent: true, sizeAttenuation: !isMobile, depthWrite: false
-  }));
-  scene.add(layer4);
-
-  /* ─ TEST VISIBILIDAD: esfera roja en 0,0,0 — confirmar renderer en iOS */
-  const testSphere = new THREE.Mesh(
-    new THREE.SphereGeometry(2, 8, 8),
-    new THREE.MeshBasicMaterial({ color: 0xFF0000 })
-  );
-  testSphere.position.set(0, 0, 0);
-  scene.add(testSphere);
-
-  /* ─ Nebulae (desktop only) */
-  if (!isMobile) {
-    [
-      { r: 400, x: -300, y:  200, z:  -800, c: 0x041840, o: 0.15 },
-      { r: 350, x:  400, y: -150, z:  -600, c: 0x060B20, o: 0.12 },
-      { r: 500, x:    0, y:    0, z: -1200, c: 0x010612, o: 0.08 }
-    ].forEach(d => {
-      const mesh = new THREE.Mesh(
-        new THREE.SphereGeometry(d.r, 16, 16),
-        new THREE.MeshBasicMaterial({
-          color: d.c, transparent: true, opacity: d.o,
-          blending: THREE.AdditiveBlending, depthWrite: false, side: THREE.BackSide
-        })
-      );
-      mesh.position.set(d.x, d.y, d.z);
-      scene.add(mesh);
-    });
+    return parts.join(',');
   }
 
-  /* ─ GSAP ScrollTrigger: camera Z + parallax rotations */
-  if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
-    gsap.registerPlugin(ScrollTrigger);
-    const st = { trigger: document.body, start: 'top top', end: 'bottom bottom', scrub: 2 };
-    gsap.to(camera.position, { z: 200,   ease: 'none', scrollTrigger: st });
-    gsap.to(layer1.rotation, { y: 0.150, x: 0.050, ease: 'none', scrollTrigger: st });
-    gsap.to(layer2.rotation, { y: 0.075, x: 0.025, ease: 'none', scrollTrigger: st });
-    gsap.to(layer3.rotation, { y: 0.038, x: 0.013, ease: 'none', scrollTrigger: st });
-    gsap.to(layer4.rotation, { y: 0.100, x: 0.030, ease: 'none', scrollTrigger: st });
+  var colorsFar  = ['rgba(255,255,255,0.3)','rgba(255,255,255,0.4)','rgba(255,255,255,0.5)','rgba(255,255,255,0.6)','rgba(255,255,255,0.7)'];
+  var colorsMid  = ['rgba(255,255,255,0.8)','rgba(255,255,255,0.8)','rgba(255,255,255,0.8)','rgba(255,255,255,0.8)','rgba(96,200,255,0.6)','rgba(96,200,255,0.6)','rgba(96,200,255,0.6)'];
+  var colorsNear = ['rgba(255,255,255,0.8)','rgba(255,255,255,0.9)','rgba(255,255,255,1.0)','rgba(96,200,255,0.7)','rgba(96,200,255,0.8)'];
+
+  farLayer.style.boxShadow    = makeStars(isMobile ? 100 : 200, spreadX, spreadY, colorsFar);
+  midLayer.style.boxShadow    = makeStars(isMobile ?  60 : 120, spreadX * 0.8, spreadY, colorsMid);
+  nearLayer.style.boxShadow   = makeStars(isMobile ?  25 :  50, spreadX * 0.6, spreadY, colorsNear);
+  brightLayer.style.boxShadow = makeBrightStars(isMobile ? 8 : 15);
+
+  /* Parallax state */
+  var scrollY  = 0;
+  var curFarX  = 0, curFarY  = 0, tgtFarX  = 0, tgtFarY  = 0;
+  var curMidX  = 0, curMidY  = 0, tgtMidX  = 0, tgtMidY  = 0;
+  var curNearX = 0, curNearY = 0, tgtNearX = 0, tgtNearY = 0;
+  var LERP = 0.04;
+
+  function applyTransforms() {
+    farLayer.style.transform  = 'translate3d(' + curFarX  + 'px,' + (scrollY * 0.02 + curFarY)  + 'px,0)';
+    midLayer.style.transform  = 'translate3d(' + curMidX  + 'px,' + (scrollY * 0.05 + curMidY)  + 'px,0)';
+    nearLayer.style.transform = 'translate3d(' + curNearX + 'px,' + (scrollY * 0.10 + curNearY) + 'px,0)';
+    brightLayer.style.transform = 'translate3d(' + curFarX + 'px,' + (scrollY * 0.02 + curFarY) + 'px,0)';
   }
 
-  /* ─ Lenis smooth scroll */
+  /* Lenis smooth scroll + animation loop */
   if (typeof Lenis !== 'undefined') {
-    const lenis = new Lenis({
-      duration: 1.2,
-      easing: t => 1 - Math.pow(1 - t, 4)
-    });
-    if (typeof ScrollTrigger !== 'undefined') {
-      lenis.on('scroll', ScrollTrigger.update);
+    var lenis = new Lenis({ duration: 1.2, easing: function(t) { return 1 - Math.pow(1 - t, 4); } });
+    lenis.on('scroll', function(e) { scrollY = e.scroll; });
+    function lenisLoop(ts) {
+      lenis.raf(ts);
+      curFarX  += (tgtFarX  - curFarX)  * LERP;
+      curFarY  += (tgtFarY  - curFarY)  * LERP;
+      curMidX  += (tgtMidX  - curMidX)  * LERP;
+      curMidY  += (tgtMidY  - curMidY)  * LERP;
+      curNearX += (tgtNearX - curNearX) * LERP;
+      curNearY += (tgtNearY - curNearY) * LERP;
+      applyTransforms();
+      requestAnimationFrame(lenisLoop);
     }
-    if (typeof gsap !== 'undefined') {
-      gsap.ticker.add(time => lenis.raf(time * 1000));
-      gsap.ticker.lagSmoothing(0);
-    }
-  }
-
-  /* ─ Mouse / device-orientation parallax */
-  let tRotX = 0, tRotY = 0, cRotX = 0, cRotY = 0;
-
-  if (!isMobile) {
-    window.addEventListener('mousemove', e => {
-      tRotY =  (e.clientX / window.innerWidth  - 0.5) *  0.12;
-      tRotX = -(e.clientY / window.innerHeight - 0.5) *  0.08;
-    }, { passive: true });
+    requestAnimationFrame(lenisLoop);
   } else {
-    window.addEventListener('deviceorientation', e => {
-      if (e.gamma !== null) tRotY =  e.gamma * (Math.PI / 180) * 0.02;
-      if (e.beta  !== null) tRotX = -e.beta  * (Math.PI / 180) * 0.02;
+    window.addEventListener('scroll', function() { scrollY = window.scrollY; }, { passive: true });
+    function fallbackLoop() {
+      curFarX  += (tgtFarX  - curFarX)  * LERP;
+      curFarY  += (tgtFarY  - curFarY)  * LERP;
+      curMidX  += (tgtMidX  - curMidX)  * LERP;
+      curMidY  += (tgtMidY  - curMidY)  * LERP;
+      curNearX += (tgtNearX - curNearX) * LERP;
+      curNearY += (tgtNearY - curNearY) * LERP;
+      applyTransforms();
+      requestAnimationFrame(fallbackLoop);
+    }
+    requestAnimationFrame(fallbackLoop);
+  }
+
+  /* Mouse parallax — desktop only */
+  if (!isMobile) {
+    window.addEventListener('mousemove', function(e) {
+      tgtFarX  =  (e.clientX / window.innerWidth  - 0.5) * 15;
+      tgtFarY  =  (e.clientY / window.innerHeight - 0.5) * 10;
+      tgtMidX  =  (e.clientX / window.innerWidth  - 0.5) * 25;
+      tgtMidY  =  (e.clientY / window.innerHeight - 0.5) * 18;
+      tgtNearX =  (e.clientX / window.innerWidth  - 0.5) * 40;
+      tgtNearY =  (e.clientY / window.innerHeight - 0.5) * 28;
     }, { passive: true });
   }
-
-  /* ─ Animation loop */
-  function animate(time) {
-    requestAnimationFrame(animate);
-
-    layer1.rotation.y += 0.00008; layer1.rotation.x += 0.00003;
-    layer2.rotation.y += 0.00012; layer2.rotation.x += 0.00005;
-    layer3.rotation.y += 0.00018; layer3.rotation.x += 0.00007;
-    layer4.rotation.y += 0.00010; layer4.rotation.x += 0.00004;
-
-    cRotX += (tRotX - cRotX) * 0.03;
-    cRotY += (tRotY - cRotY) * 0.03;
-    camera.rotation.x = cRotX;
-    camera.rotation.y = cRotY;
-
-    mat3.uniforms.time.value = time * 0.001;
-
-    renderer.render(scene, camera);
-  }
-  requestAnimationFrame(animate);
-
-  /* ─ Resize handler */
-  let resizeTimer;
-  window.addEventListener('resize', () => {
-    clearTimeout(resizeTimer);
-    resizeTimer = setTimeout(() => {
-      camera.aspect = window.innerWidth / window.innerHeight;
-      camera.updateProjectionMatrix();
-      renderer.setSize(window.innerWidth, window.innerHeight);
-      renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
-    }, 250);
-  });
-
 })();
