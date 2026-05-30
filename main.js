@@ -246,17 +246,24 @@ if (problemaSection) {
 
   const isMobile = window.innerWidth < 768;
 
-  /* Renderer */
+  /* Renderer — opciones iOS */
   const canvas   = document.getElementById('space-canvas');
-  const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
+  const renderer = new THREE.WebGLRenderer({
+    canvas,
+    antialias: true,
+    alpha: true,
+    preserveDrawingBuffer: true,
+    powerPreference: 'high-performance',
+    failIfMajorPerformanceCaveat: false
+  });
   renderer.setSize(window.innerWidth, window.innerHeight);
-  renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
   renderer.setClearColor(0x000000, 0);
 
   /* Scene & Camera */
   const scene  = new THREE.Scene();
   const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 2000);
-  camera.position.z = 500;
+  camera.position.z = 80;
 
   /* Helper: random positions in a volume */
   function makePos(count, xR, yR, zMin, zMax) {
@@ -269,22 +276,23 @@ if (problemaSection) {
     return arr;
   }
 
-  /* Particle counts (reduced on mobile) */
-  const N1 = isMobile ? 1500 : 4000;
-  const N2 = isMobile ?  800 : 1500;
-  const N3 = isMobile ?  200 :  400;
+  /* Particle counts */
+  const N1 = isMobile ? 2000 : 4000;
+  const N2 = isMobile ? 1000 : 1500;
+  const N3 = isMobile ?  300 :  400;
+  const N4 = isMobile ?   60 :   80;
 
   /* ─ Layer 1: Far stars */
   const geo1 = new THREE.BufferGeometry();
-  geo1.setAttribute('position', new THREE.BufferAttribute(makePos(N1, 1500, 1500, 200, 1500), 3));
+  geo1.setAttribute('position', new THREE.BufferAttribute(makePos(N1, 750, 750, 50, 400), 3));
   const layer1 = new THREE.Points(geo1, new THREE.PointsMaterial({
-    size: 2.5, color: 0xEAF4FF, opacity: 1, transparent: true, sizeAttenuation: true, depthWrite: false
+    size: isMobile ? 1.2 : 2.5, color: 0xEAF4FF, opacity: 1, transparent: true, sizeAttenuation: !isMobile, depthWrite: false
   }));
   scene.add(layer1);
 
   /* ─ Layer 2: Mid stars (25% blue) */
   const geo2  = new THREE.BufferGeometry();
-  geo2.setAttribute('position', new THREE.BufferAttribute(makePos(N2, 1000, 1000, 50, 800), 3));
+  geo2.setAttribute('position', new THREE.BufferAttribute(makePos(N2, 500, 500, 20, 200), 3));
   const cols2 = new Float32Array(N2 * 3);
   for (let i = 0; i < N2; i++) {
     if (Math.random() < 0.25) {
@@ -295,27 +303,32 @@ if (problemaSection) {
   }
   geo2.setAttribute('color', new THREE.BufferAttribute(cols2, 3));
   const layer2 = new THREE.Points(geo2, new THREE.PointsMaterial({
-    size: 4, opacity: 1, transparent: true, sizeAttenuation: true, vertexColors: true, depthWrite: false
+    size: isMobile ? 2 : 4, opacity: 1, transparent: true, sizeAttenuation: !isMobile, vertexColors: true, depthWrite: false
   }));
   scene.add(layer2);
 
-  /* ─ Layer 3: Close stars — pure white, full opacity */
+  /* ─ Layer 3: Close stars */
   const geo3  = new THREE.BufferGeometry();
-  geo3.setAttribute('position', new THREE.BufferAttribute(makePos(N3, 600, 600, -100, 200), 3));
+  geo3.setAttribute('position', new THREE.BufferAttribute(makePos(N3, 300, 300, -10, 80), 3));
   const offs3 = new Float32Array(N3);
   for (let i = 0; i < N3; i++) offs3[i] = Math.random() * Math.PI * 2;
   geo3.setAttribute('randomOffset', new THREE.BufferAttribute(offs3, 1));
 
   const mat3 = new THREE.ShaderMaterial({
-    uniforms: { time: { value: 0.0 } },
+    uniforms: { time: { value: 0.0 }, fixedSize: { value: isMobile ? 3.0 : 0.0 } },
     vertexShader: [
       'attribute float randomOffset;',
       'uniform float time;',
+      'uniform float fixedSize;',
       'varying float vAlpha;',
       'void main() {',
       '  vAlpha = 1.0;',
       '  vec4 mv = modelViewMatrix * vec4(position, 1.0);',
-      '  gl_PointSize = 7.0 * (300.0 / -mv.z);',
+      '  if (fixedSize > 0.0) {',
+      '    gl_PointSize = fixedSize;',
+      '  } else {',
+      '    gl_PointSize = 7.0 * (300.0 / -mv.z);',
+      '  }',
       '  gl_Position  = projectionMatrix * mv;',
       '}'
     ].join('\n'),
@@ -334,13 +347,21 @@ if (problemaSection) {
   const layer3 = new THREE.Points(geo3, mat3);
   scene.add(layer3);
 
-  /* ─ Layer 4: Brightest stars (80 points) */
+  /* ─ Layer 4: Brightest stars */
   const geo4 = new THREE.BufferGeometry();
-  geo4.setAttribute('position', new THREE.BufferAttribute(makePos(80, 1200, 1200, 50, 1000), 3));
+  geo4.setAttribute('position', new THREE.BufferAttribute(makePos(N4, 600, 600, -5, 50), 3));
   const layer4 = new THREE.Points(geo4, new THREE.PointsMaterial({
-    size: 8, color: 0xFFFFFF, opacity: 1, transparent: true, sizeAttenuation: true, depthWrite: false
+    size: isMobile ? 5 : 8, color: 0xFFFFFF, opacity: 1, transparent: true, sizeAttenuation: !isMobile, depthWrite: false
   }));
   scene.add(layer4);
+
+  /* ─ TEST VISIBILIDAD: esfera roja en 0,0,0 — confirmar renderer en iOS */
+  const testSphere = new THREE.Mesh(
+    new THREE.SphereGeometry(2, 8, 8),
+    new THREE.MeshBasicMaterial({ color: 0xFF0000 })
+  );
+  testSphere.position.set(0, 0, 0);
+  scene.add(testSphere);
 
   /* ─ Nebulae (desktop only) */
   if (!isMobile) {
