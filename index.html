@@ -9,16 +9,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;800&family=Barlow:wght@500&family=DM+Sans:wght@300&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
   <style>
-    /* BACKGROUND-SPACE-3D — canvas fijo detrás de todo el contenido */
+    /* BACKGROUND-SPACE-CSS — base oscura y secciones transparentes */
     html, body { background: #010612; }
-    #space-canvas {
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      z-index: 0;
-      pointer-events: none;
-    }
-    /* Secciones principales sobre el canvas (z-index:0) */
     .bloque3, .data-strip,
     .problema-section, .mockup-section, .features-section {
       position: relative;
@@ -28,8 +20,16 @@
 </head>
 <body>
 
-  <!-- BACKGROUND-SPACE-3D: canvas Three.js global -->
-  <canvas id="space-canvas" aria-hidden="true"></canvas>
+  <!-- BACKGROUND-SPACE-CSS: fondo espacial CSS global -->
+  <div id="space-background" aria-hidden="true">
+    <div id="nebula-layer"></div>
+    <div id="stars-layer-far"></div>
+    <div id="stars-layer-mid"></div>
+    <div id="stars-layer-near"></div>
+    <div id="stars-bright"></div>
+    <div id="nebula-accent"></div>
+    <div id="nebula-accent-2"></div>
+  </div>
 
   <!-- BLOQUE 1: PANTALLA DE ENTRADA -->
   <section id="bloque1" class="bloque1">
@@ -484,10 +484,7 @@
 
   </section>
 
-  <!-- CDN: Three.js + GSAP + ScrollTrigger + Lenis -->
-  <script src="https://cdn.jsdelivr.net/npm/three@0.165.0/build/three.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <!-- CDN: Lenis -->
   <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.14/dist/lenis.min.js"></script>
   <script src="main.js"></script>
 </body>
