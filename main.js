@@ -342,3 +342,142 @@ if (problemaSection) {
     }, { passive: true });
   }
 })();
+
+/* ─── SECTION-COMO-FUNCIONA — GSAP + ScrollTrigger + SplitType ─── */
+(function initComoFunciona() {
+  if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
+  gsap.registerPlugin(ScrollTrigger);
+
+  var section    = document.getElementById('como-funciona');
+  if (!section) return;
+
+  var cfHeadline = document.getElementById('cf-headline');
+  var cfCards    = Array.from(document.querySelectorAll('.cf-card'));
+  var cfLines    = Array.from(document.querySelectorAll('.cf-line'));
+  var cfCta      = document.getElementById('cf-cta');
+  var cfTitle    = document.getElementById('cf-title');
+  var isMobile   = window.innerWidth < 1024;
+
+  /* CF-TITLE: fadeIn translateY 30px cuando sección entra al viewport (threshold 20%) */
+  if (cfTitle) {
+    ScrollTrigger.create({
+      trigger: section,
+      start: 'top 80%',
+      onEnter: function() {
+        gsap.from(cfTitle, { opacity: 0, y: 30, duration: 0.7, ease: 'power2.out' });
+      },
+      once: true
+    });
+  }
+
+  /* CF-HEADLINE: SplitType char animation con stagger */
+  if (cfHeadline && typeof SplitType !== 'undefined') {
+    var split = new SplitType(cfHeadline, { types: 'chars' });
+    if (split.chars && split.chars.length) {
+      gsap.set(split.chars, { opacity: 0, y: 40 });
+      ScrollTrigger.create({
+        trigger: cfHeadline,
+        start: 'top 85%',
+        onEnter: function() {
+          gsap.to(split.chars, {
+            opacity: 1,
+            y: 0,
+            stagger: 0.04,
+            duration: 0.7,
+            ease: 'power2.out'
+          });
+        },
+        once: true
+      });
+    }
+  }
+
+  if (isMobile) {
+    /* Mobile: cada card entra individualmente con su rotación final */
+    cfCards.forEach(function(card) {
+      var rotateProp = getComputedStyle(card).getPropertyValue('--cf-rotate').trim();
+      var deg = parseFloat(rotateProp) || 0;
+      gsap.set(card, { opacity: 0, y: 80, rotation: deg, scale: 0.92 });
+      ScrollTrigger.create({
+        trigger: card,
+        start: 'top 85%',
+        onEnter: function() {
+          gsap.to(card, {
+            opacity: 1,
+            y: 0,
+            rotation: deg,
+            scale: 1,
+            duration: 0.8,
+            ease: 'power2.out'
+          });
+        },
+        once: true
+      });
+    });
+
+    /* CF-LINE: scaleY de 0 a 1 dibujándose hacia abajo */
+    cfLines.forEach(function(line) {
+      gsap.set(line, { scaleY: 0, transformOrigin: 'top' });
+      ScrollTrigger.create({
+        trigger: line,
+        start: 'top 90%',
+        onEnter: function() {
+          gsap.to(line, { scaleY: 1, duration: 0.6, ease: 'power2.out' });
+        },
+        once: true
+      });
+    });
+
+  } else {
+    /* Desktop: cards entran con fade, step display se actualiza al hacer scroll */
+    var stepBig   = document.getElementById('cf-step-big');
+    var stepLabel = document.getElementById('cf-step-label');
+    var stepData  = [
+      { num: '01', name: 'CONVERSACIÓN INICIAL' },
+      { num: '02', name: 'FORMULARIO EN 10 MINUTOS' },
+      { num: '03', name: 'REVISIÓN Y AJUSTES' },
+      { num: '04', name: 'ENTREGA Y ACTIVACIÓN' }
+    ];
+
+    function showStep(i) {
+      if (!stepBig || !stepLabel) return;
+      gsap.to([stepBig, stepLabel], {
+        opacity: 0,
+        duration: 0.2,
+        onComplete: function() {
+          stepBig.textContent   = stepData[i].num;
+          stepLabel.textContent = stepData[i].name;
+          gsap.to([stepBig, stepLabel], { opacity: 1, duration: 0.4 });
+        }
+      });
+    }
+
+    cfCards.forEach(function(card, i) {
+      gsap.from(card, {
+        opacity: 0,
+        y: 30,
+        duration: 0.6,
+        ease: 'power2.out',
+        scrollTrigger: { trigger: card, start: 'top 80%', once: true }
+      });
+
+      ScrollTrigger.create({
+        trigger: card,
+        start: 'top 55%',
+        end: 'bottom 45%',
+        onEnter:     function() { showStep(i); },
+        onEnterBack: function() { showStep(i); }
+      });
+    });
+  }
+
+  /* CF-CTA: entrada con clase in-view */
+  if (cfCta) {
+    ScrollTrigger.create({
+      trigger: cfCta,
+      start: 'top 90%',
+      onEnter: function() { cfCta.classList.add('in-view'); },
+      once: true
+    });
+  }
+})();

@@ -12,7 +12,7 @@
     /* BACKGROUND-SPACE-CSS — base oscura y secciones transparentes */
     html, body { background: #010612; }
     .bloque3, .data-strip,
-    .problema-section, .mockup-section, .features-section {
+    .problema-section, .mockup-section, .features-section, .cf-section {
       position: relative;
       z-index: 1;
     }
@@ -484,8 +484,104 @@
 
   </section>
 
+  <!-- SECTION-COMO-FUNCIONA — Sección 5: Los 4 pasos del proceso -->
+  <section id="como-funciona" class="cf-section" aria-label="Los 4 pasos del proceso">
+
+    <div class="cf-inner">
+
+      <!-- CF-TITLE -->
+      <div class="cf-title" id="cf-title">
+        <p class="cf-eyebrow">
+          <span class="cf-dot" aria-hidden="true"></span>
+          ASÍ DE SIMPLE ES EL PROCESO
+        </p>
+        <h2 class="cf-headline" id="cf-headline">TODO LISTO EN <span class="cf-highlight">7 DÍAS</span></h2>
+        <p class="cf-desc">Tú te enfocas en cerrar propiedades. Nosotros construimos tu presencia digital.</p>
+        <div class="cf-step-info" id="cf-step-info" aria-hidden="true">
+          <span class="cf-step-big" id="cf-step-big">01</span>
+          <p class="cf-step-label" id="cf-step-label">CONVERSACIÓN INICIAL</p>
+        </div>
+      </div>
+
+      <!-- CF-RIGHT column -->
+      <div class="cf-col-right">
+        <div class="cf-cards-wrap" id="cf-cards-wrap">
+
+          <!-- CF-CARD-1 -->
+          <article class="cf-card" data-cf="1" style="--cf-rotate: -3deg">
+            <div class="cf-card-shine" aria-hidden="true"></div>
+            <span class="cf-card-num" aria-hidden="true">1</span>
+            <p class="cf-card-eyebrow">PASO 01</p>
+            <h3 class="cf-card-title">CONVERSACIÓN INICIAL</h3>
+            <p class="cf-card-body">Cuéntame tu negocio, tu zona y qué propiedades manejas. Sin formularios aún, solo una charla directa de 15 minutos.</p>
+            <span class="cf-card-icon" aria-hidden="true">💬</span>
+            <div class="cf-card-accent" aria-hidden="true"></div>
+          </article>
+
+          <!-- CF-LINE -->
+          <div class="cf-line" aria-hidden="true"></div>
+
+          <!-- CF-CARD-2 -->
+          <article class="cf-card" data-cf="2" style="--cf-rotate: 5deg">
+            <div class="cf-card-shine" aria-hidden="true"></div>
+            <span class="cf-card-num" aria-hidden="true">2</span>
+            <p class="cf-card-eyebrow">PASO 02</p>
+            <h3 class="cf-card-title">FORMULARIO EN 10 MINUTOS</h3>
+            <p class="cf-card-body">Te envío un formulario que completas en 10 minutos con toda la información de tu marca. Con eso arrancamos producción de inmediato.</p>
+            <span class="cf-card-icon" aria-hidden="true">📋</span>
+            <div class="cf-card-accent" aria-hidden="true"></div>
+          </article>
+
+          <!-- CF-LINE -->
+          <div class="cf-line" aria-hidden="true"></div>
+
+          <!-- CF-CARD-3 -->
+          <article class="cf-card" data-cf="3" style="--cf-rotate: -5deg">
+            <div class="cf-card-shine" aria-hidden="true"></div>
+            <span class="cf-card-num" aria-hidden="true">3</span>
+            <p class="cf-card-eyebrow">PASO 03</p>
+            <h3 class="cf-card-title">REVISIÓN Y AJUSTES</h3>
+            <p class="cf-card-body">Te muestro el borrador de tu sitio. Revisamos juntos y afinamos cada detalle hasta que quede exactamente como lo imaginas.</p>
+            <span class="cf-card-icon" aria-hidden="true">🔍</span>
+            <div class="cf-card-accent" aria-hidden="true"></div>
+          </article>
+
+          <!-- CF-LINE -->
+          <div class="cf-line" aria-hidden="true"></div>
+
+          <!-- CF-CARD-4 -->
+          <article class="cf-card" data-cf="4" style="--cf-rotate: 4deg">
+            <div class="cf-card-shine" aria-hidden="true"></div>
+            <span class="cf-card-num" aria-hidden="true">4</span>
+            <p class="cf-card-eyebrow">PASO 04</p>
+            <h3 class="cf-card-title">ENTREGA Y ACTIVACIÓN</h3>
+            <p class="cf-card-body">Tu sitio queda live. Google Business optimizado. Y te entregamos los bonos sorpresa que no estaban en el contrato.</p>
+            <span class="cf-card-icon" aria-hidden="true">🚀</span>
+            <span class="cf-card-badge">7 DÍAS HÁBILES</span>
+            <div class="cf-card-accent" aria-hidden="true"></div>
+          </article>
+
+        </div>
+      </div>
+
+    </div>
+
+    <!-- CF-CTA -->
+    <div class="cf-cta" id="cf-cta">
+      <p class="cf-cta-text">¿Listo para empezar?</p>
+      <a class="cf-cta-btn" href="https://wa.me/569XXXXXXXX?text=Hola%2C+quiero+mi+Sistema+Corredor+%C3%89lite" target="_blank" rel="noopener noreferrer">
+        QUIERO MI SITIO WEB
+      </a>
+    </div>
+
+  </section>
+
   <!-- CDN: Lenis -->
   <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.14/dist/lenis.min.js"></script>
+  <!-- CDN: GSAP + ScrollTrigger + SplitType -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://unpkg.com/split-type@0.3.4/umd/index.min.js"></script>
   <script src="main.js"></script>
 </body>
 </html>

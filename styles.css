@@ -1455,7 +1455,310 @@ body.scroll-locked { overflow: hidden; }
   text-align: center;
 }
 
-/* ─── RESPONSIVE: DESKTOP ───────────────────────────────────── */
+/* ─── SECTION-COMO-FUNCIONA — Sección 5: Los 4 pasos del proceso ── */
+.cf-section {
+  position: relative;
+  padding: 100px 0;
+  overflow: hidden;
+  background: transparent;
+}
+
+.cf-inner {
+  display: flex;
+  flex-direction: column;
+  padding: 0 24px;
+}
+
+/* CF-TITLE */
+.cf-title {
+  margin-bottom: 64px;
+}
+
+.cf-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'Barlow', sans-serif;
+  font-weight: 500;
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #60C8FF;
+  margin-bottom: 16px;
+}
+
+.cf-dot {
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  background: #60C8FF;
+  flex-shrink: 0;
+  animation: pulse-dot 1.5s ease-in-out infinite;
+}
+
+.cf-headline {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 800;
+  font-size: 3.5rem;
+  text-transform: uppercase;
+  line-height: 0.9;
+  color: #EAF4FF;
+  margin-bottom: 16px;
+  overflow: visible;
+}
+
+.cf-headline .char {
+  display: inline-block;
+  overflow: visible;
+  will-change: transform, opacity;
+}
+
+/* CF-LINE */
+.cf-highlight {
+  color: #60C8FF;
+  text-shadow: 0 0 20px rgba(96,200,255,0.5);
+}
+
+.cf-desc {
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 300;
+  font-size: 0.9rem;
+  line-height: 1.65;
+  color: #80B0D0;
+  margin-top: 16px;
+  max-width: 340px;
+}
+
+.cf-step-info {
+  display: none;
+  margin-top: 40px;
+}
+
+.cf-step-big {
+  display: block;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 800;
+  font-size: 6rem;
+  color: #60C8FF;
+  opacity: 0.2;
+  line-height: 1;
+}
+
+.cf-step-label {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 800;
+  font-size: 1.4rem;
+  text-transform: uppercase;
+  color: #EAF4FF;
+  margin-top: 8px;
+  line-height: 1.1;
+}
+
+/* CF-COL-RIGHT */
+.cf-col-right {
+  width: 100%;
+}
+
+/* CF-CARDS-WRAP mobile: flex column centrado */
+.cf-cards-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* CF-LINE: línea conectora animada */
+.cf-line {
+  width: 2px;
+  height: 60px;
+  background: linear-gradient(to bottom, #60C8FF, rgba(96,200,255,0.1));
+  flex-shrink: 0;
+  transform-origin: top;
+}
+
+/* CF-CARD */
+.cf-card {
+  width: 88%;
+  max-width: 360px;
+  min-height: 220px;
+  border-radius: 24px;
+  background: rgba(4,24,64,0.55);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(96,200,255,0.15);
+  padding: 28px 24px;
+  position: relative;
+  overflow: hidden;
+  -webkit-tap-highlight-color: transparent;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.cf-card:active {
+  border-color: rgba(96,200,255,0.4) !important;
+  box-shadow: 0 0 30px rgba(96,200,255,0.15) !important;
+  transform: scale(1.03) rotate(var(--cf-rotate)) !important;
+}
+
+/* CF-CARD-SHINE */
+.cf-card-shine {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(to right, transparent, rgba(96,200,255,0.4), transparent);
+  pointer-events: none;
+}
+
+/* CF-CARD number decorativo */
+.cf-card-num {
+  position: absolute;
+  top: -10px; right: 16px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 800;
+  font-size: 7rem;
+  color: #60C8FF;
+  opacity: 0.08;
+  line-height: 1;
+  pointer-events: none;
+  user-select: none;
+  z-index: 0;
+}
+
+/* CF-CARD eyebrow */
+.cf-card-eyebrow {
+  font-family: 'Barlow', sans-serif;
+  font-weight: 500;
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: #60C8FF;
+  margin-bottom: 10px;
+  position: relative;
+  z-index: 1;
+}
+
+/* CF-CARD title */
+.cf-card-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 800;
+  font-size: 1.6rem;
+  text-transform: uppercase;
+  line-height: 1;
+  color: #EAF4FF;
+  margin-bottom: 12px;
+  position: relative;
+  z-index: 1;
+}
+
+/* CF-CARD body */
+.cf-card-body {
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 300;
+  font-size: 0.88rem;
+  line-height: 1.6;
+  color: #80B0D0;
+  position: relative;
+  z-index: 1;
+}
+
+/* CF-CARD icon */
+.cf-card-icon {
+  position: absolute;
+  top: 16px; right: 44px;
+  font-size: 20px;
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* CF-CARD badge (card 4) */
+.cf-card-badge {
+  display: inline-block;
+  background: rgba(208,144,48,0.15);
+  border: 1px solid rgba(208,144,48,0.3);
+  color: #D09030;
+  font-family: 'Barlow', sans-serif;
+  font-weight: 500;
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 4px 10px;
+  border-radius: 4px;
+  margin-top: 12px;
+  position: relative;
+  z-index: 1;
+}
+
+/* CF-CARD accent line bottom */
+.cf-card-accent {
+  position: absolute;
+  bottom: 0; left: 24px; right: 24px;
+  height: 1px;
+  background: linear-gradient(to right, #60C8FF, transparent);
+  opacity: 0.3;
+  pointer-events: none;
+}
+
+/* CF-CTA */
+.cf-cta {
+  margin-top: 64px;
+  padding: 0 24px;
+  text-align: center;
+  opacity: 0;
+  transform: translateY(15px);
+}
+
+.cf-cta.in-view {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.cf-cta-text {
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 300;
+  font-size: 1rem;
+  color: #80B0D0;
+  margin-bottom: 20px;
+}
+
+.cf-cta-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: #1060E0;
+  padding: 18px 36px;
+  border-radius: 8px;
+  width: 100%;
+  max-width: 360px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 800;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #EAF4FF;
+  text-decoration: none;
+  box-shadow: 0 0 30px rgba(16,96,224,0.4), 0 4px 20px rgba(0,0,0,0.3);
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.cf-cta-btn::before {
+  content: '';
+  position: absolute;
+  top: 0; left: -100%;
+  width: 60%; height: 100%;
+  background: linear-gradient(to right, transparent, rgba(255,255,255,0.12), transparent);
+  transform: skewX(-20deg);
+  animation: shimmer 4s ease-in-out infinite;
+}
+
+.cf-cta-btn:hover {
+  transform: scale(1.03);
+  box-shadow: 0 0 50px rgba(16,96,224,0.6), 0 4px 20px rgba(0,0,0,0.3);
+}
+
+.cf-cta-btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+/* ─── RESPONSIVE: DESKTOP ───────────────────────────────────────── */
 @media (min-width: 768px) {
   .brand-name { font-size: 5.5rem; }
   .headline   { font-size: 4.5rem; }
@@ -1532,6 +1835,50 @@ body.scroll-locked { overflow: hidden; }
   .features-nav--next { right: 16px; }
 }
 
+/* CF desktop 1024px+ */
+@media (min-width: 1024px) {
+  .cf-inner {
+    flex-direction: row;
+    gap: 80px;
+    align-items: flex-start;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 60px;
+  }
+
+  .cf-title {
+    width: 45%;
+    flex-shrink: 0;
+    position: sticky;
+    top: 40vh;
+    align-self: flex-start;
+    margin-bottom: 0;
+  }
+
+  .cf-step-info { display: block; }
+
+  .cf-col-right { flex: 1; }
+
+  .cf-cards-wrap {
+    align-items: flex-start;
+    gap: 0;
+  }
+
+  .cf-card {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .cf-line { display: none; }
+
+  .cf-cta {
+    max-width: 1100px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0 60px;
+  }
+}
+
 /* ─── MOBILE: data strip ──────────────────────────────── */
 @media (max-width: 767px) {
   .ds-card { padding: 0 20px; }
@@ -1544,6 +1891,7 @@ body.scroll-locked { overflow: hidden; }
   .data-strip-track, .mockup-dot,
   .mockup-phone-glow, .mockup-cta-btn::before,
   .features-dot, .features-cta-btn::before,
+  .cf-dot, .cf-cta-btn::before,
   #stars-bright, #nebula-accent, #nebula-accent-2 { animation: none; }
   .navbar, .bloque1  { transition: none; }
   .flip-card-inner   { transition: none; }
@@ -1563,4 +1911,6 @@ body.scroll-locked { overflow: hidden; }
   .features-card.in-view.is-far-l,
   .features-card.in-view.is-far-r { opacity: 1; transform: none; }
   .features-card-glass { transition: none; }
+  .cf-cta { opacity: 1; transform: none; transition: none; }
+  .cf-card { transition: none; }
 }
