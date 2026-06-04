@@ -237,7 +237,7 @@ if (problemaSection) {
   var colorsNear = ['rgba(255,255,255,0.8)','rgba(255,255,255,0.9)','rgba(255,255,255,1.0)','rgba(96,200,255,0.7)','rgba(96,200,255,0.8)'];
   farLayer.style.boxShadow    = makeStars(isMobile ? 100 : 200, spreadX, spreadY, colorsFar);
   midLayer.style.boxShadow    = makeStars(isMobile ? 60  : 120, spreadX * 0.8, spreadY, colorsMid);
-  nearLayer.style.boxShadow   = makeStars(isMobile ? 25  :  50, spreadX * 0.6, spreadY, colorsNear);
+  nearLayer.style.boxShadow   = makeStars(isMobile ? 25  : 50,  spreadX * 0.6, spreadY, colorsNear);
   brightLayer.style.boxShadow = makeBrightStars(isMobile ? 8 : 15);
   var scrollY = 0;
   var curFarX = 0, curFarY = 0, tgtFarX = 0, tgtFarY = 0;
@@ -366,14 +366,14 @@ if (problemaSection) {
   var section = document.getElementById('garantia');
   if (!section) return;
 
-  var hlC   = document.getElementById('garantia-hl-c');
-  var cards = Array.from(document.querySelectorAll('.garantia-card'));
-  var grid  = section.querySelector('.garantia-grid');
-  var main  = document.getElementById('garantia-main');
-  var text  = document.getElementById('garantia-text');
-  var imgEl = section.querySelector('.garantia-image img');
+  var hlC    = document.getElementById('garantia-hl-c');
+  var shield = document.getElementById('garantia-shield');
+  var text   = document.getElementById('garantia-text');
+  var cards  = Array.from(document.querySelectorAll('.garantia-card'));
+  var grid   = section.querySelector('.garantia-grid');
+  var main   = document.getElementById('garantia-main');
 
-  /* SplitType en "GARANTÍA" — chars desde opacity 0 y y: 30 con stagger 0.05s */
+  /* SplitType en "GARANTÍA" — chars desde opacity 0 y: 30 stagger 0.05s */
   if (hlC && typeof SplitType !== 'undefined') {
     var split = new SplitType(hlC, { types: 'chars' });
     if (split.chars && split.chars.length) {
@@ -389,42 +389,55 @@ if (problemaSection) {
     }
   }
 
-  /* Cards de objeciones: stagger fadeIn translateY 20px cada 0.08s */
+  /* GARANTIA-SHIELD: entrada desde x:60 scale:0.9 + parallax scroll */
+  if (shield && main) {
+    gsap.set(shield, { opacity: 0, x: 60, scale: 0.9 });
+
+    ScrollTrigger.create({
+      trigger: main,
+      start: 'top 80%',
+      onEnter: function() {
+        gsap.to(shield, { opacity: 1, x: 0, scale: 1, duration: 1, delay: 0.2, ease: 'power2.out' });
+      },
+      once: true
+    });
+
+    /* Paralaje sutil: escudo se mueve -30px en Y al hacer scroll */
+    gsap.to(shield, {
+      y: -30,
+      ease: 'none',
+      scrollTrigger: {
+        trigger: main,
+        start: 'top bottom',
+        end: 'bottom top',
+        scrub: 1
+      }
+    });
+  }
+
+  /* GARANTIA-TEXT: entrada desde x:-30 */
+  if (text && main) {
+    gsap.set(text, { opacity: 0, x: -30 });
+    ScrollTrigger.create({
+      trigger: main,
+      start: 'top 80%',
+      onEnter: function() {
+        gsap.to(text, { opacity: 1, x: 0, duration: 0.8, ease: 'power2.out' });
+      },
+      once: true
+    });
+  }
+
+  /* Cards de objeciones: stagger fadeIn translateY 20px cada 0.1s */
   if (cards.length && grid) {
     gsap.set(cards, { opacity: 0, y: 20 });
     ScrollTrigger.create({
       trigger: grid,
       start: 'top 85%',
       onEnter: function() {
-        gsap.to(cards, { opacity: 1, y: 0, stagger: 0.08, duration: 0.6, ease: 'power2.out' });
+        gsap.to(cards, { opacity: 1, y: 0, stagger: 0.1, duration: 0.6, delay: 0.3, ease: 'power2.out' });
       },
       once: true
     });
-  }
-
-  /* GARANTIA-MAIN: imagen scale 1.05 → 1, texto translateX -30 → 0 */
-  if (main) {
-    if (imgEl) {
-      gsap.set(imgEl, { scale: 1.05 });
-      ScrollTrigger.create({
-        trigger: main,
-        start: 'top 80%',
-        onEnter: function() {
-          gsap.to(imgEl, { scale: 1, duration: 1.2, ease: 'power2.out' });
-        },
-        once: true
-      });
-    }
-    if (text) {
-      gsap.set(text, { opacity: 0, x: -30 });
-      ScrollTrigger.create({
-        trigger: main,
-        start: 'top 80%',
-        onEnter: function() {
-          gsap.to(text, { opacity: 1, x: 0, duration: 0.8, delay: 0.3, ease: 'power2.out' });
-        },
-        once: true
-      });
-    }
   }
 })();
