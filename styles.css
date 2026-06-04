@@ -259,7 +259,7 @@ body.scroll-locked { overflow: hidden; }
   background: transparent;
 }
 
-/* Ambient glow amber — blob derecho */
+/* Ambient blob amber derecho */
 .garantia-ambient {
   position: absolute;
   top: 30%; right: -10%;
@@ -273,7 +273,7 @@ body.scroll-locked { overflow: hidden; }
 /* GARANTIA-TITLE */
 .garantia-title {
   padding: 0 24px;
-  margin-bottom: 48px;
+  margin-bottom: 24px;
   position: relative;
   z-index: 2;
 }
@@ -327,18 +327,18 @@ body.scroll-locked { overflow: hidden; }
 /* GARANTIA-MAIN */
 .garantia-main {
   position: relative;
-  min-height: 520px;
+  min-height: 420px;
   z-index: 2;
   overflow: hidden;
 }
 
-/* GARANTIA-SHIELD: PNG con mix-blend-mode screen, flotando a la derecha */
+/* GARANTIA-SHIELD: imagen con fondo #010612, fusionada con gradientes */
 .garantia-shield {
   position: absolute;
-  right: -5%;
+  right: 0;
   top: 50%;
   transform: translateY(-50%);
-  width: 85%;
+  width: 75%;
   max-width: 380px;
   z-index: 1;
   pointer-events: none;
@@ -347,12 +347,38 @@ body.scroll-locked { overflow: hidden; }
 .garantia-shield img {
   width: 100%;
   height: auto;
-  mix-blend-mode: screen;
-  pointer-events: none;
   display: block;
 }
 
-/* GARANTIA-TEXT: izquierda, delante del escudo */
+/* Gradientes de fusión — eliminan cortes visibles en los bordes */
+.garantia-shield-left {
+  position: absolute;
+  top: 0; left: 0; bottom: 0;
+  width: 45%;
+  background: linear-gradient(to right, #010612 0%, transparent 100%);
+  pointer-events: none;
+  z-index: 2;
+}
+
+.garantia-shield-top {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 30%;
+  background: linear-gradient(to bottom, #010612 0%, transparent 100%);
+  pointer-events: none;
+  z-index: 2;
+}
+
+.garantia-shield-bottom {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 30%;
+  background: linear-gradient(to top, #010612 0%, transparent 100%);
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* GARANTIA-TEXT */
 .garantia-text {
   position: relative;
   z-index: 2;
@@ -360,60 +386,17 @@ body.scroll-locked { overflow: hidden; }
   display: flex;
   flex-direction: column;
   justify-content: center;
-  min-height: 520px;
+  min-height: 420px;
   max-width: 75%;
 }
 
-.garantia-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  margin-bottom: 20px;
-}
+.garantia-badge { display: inline-flex; align-items: center; gap: 8px; margin-bottom: 20px; }
+.garantia-badge-dot { width: 8px; height: 8px; border-radius: 50%; background: #D09030; box-shadow: 0 0 10px rgba(208,144,48,0.6); flex-shrink: 0; }
+.garantia-badge-label { font-family: 'Barlow', sans-serif; font-weight: 500; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: #D09030; }
 
-.garantia-badge-dot {
-  width: 8px; height: 8px;
-  border-radius: 50%;
-  background: #D09030;
-  box-shadow: 0 0 10px rgba(208,144,48,0.6);
-  flex-shrink: 0;
-}
-
-.garantia-badge-label {
-  font-family: 'Barlow', sans-serif;
-  font-weight: 500;
-  font-size: 10px;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: #D09030;
-}
-
-.garantia-h1 {
-  display: flex;
-  flex-direction: column;
-  font-family: 'Barlow Condensed', sans-serif;
-  font-weight: 800;
-  font-size: 2.6rem;
-  text-transform: uppercase;
-  line-height: 0.88;
-  color: #EAF4FF;
-  margin-bottom: 12px;
-}
-
-.garantia-h1-amber {
-  color: #D09030;
-  text-shadow: 0 0 20px rgba(208,144,48,0.5);
-}
-
-.garantia-sub {
-  font-family: 'DM Sans', sans-serif;
-  font-weight: 300;
-  font-size: 0.85rem;
-  line-height: 1.6;
-  color: #80B0D0;
-  margin-bottom: 24px;
-  max-width: 260px;
-}
+.garantia-h1 { display: flex; flex-direction: column; font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 2.6rem; text-transform: uppercase; line-height: 0.88; color: #EAF4FF; margin-bottom: 12px; }
+.garantia-h1-amber { color: #D09030; text-shadow: 0 0 20px rgba(208,144,48,0.5); }
+.garantia-sub { font-family: 'DM Sans', sans-serif; font-weight: 300; font-size: 0.85rem; line-height: 1.6; color: #80B0D0; margin-bottom: 24px; max-width: 260px; }
 
 .garantia-seal { display: flex; flex-direction: row; align-items: center; gap: 12px; }
 .garantia-seal-line { width: 2px; height: 36px; background: #D09030; opacity: 0.4; flex-shrink: 0; }
@@ -429,6 +412,15 @@ body.scroll-locked { overflow: hidden; }
   z-index: 2;
 }
 
+/* Ambient sutil amber — reemplaza las 8 partículas */
+.garantia-obj-ambient {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 75% 50%, rgba(208,144,48,0.05) 0%, transparent 55%);
+  pointer-events: none;
+  z-index: 0;
+}
+
 .garantia-obj-label {
   font-family: 'Barlow', sans-serif;
   font-weight: 500;
@@ -438,22 +430,8 @@ body.scroll-locked { overflow: hidden; }
   color: #80B0D0;
   margin-bottom: 20px;
   display: block;
-}
-
-/* Particles */
-.garantia-particle {
-  position: absolute;
-  width: 2px; height: 2px;
-  border-radius: 50%;
-  background: #D09030;
-  opacity: 0.5;
-  pointer-events: none;
-  animation: float-particle 4s ease-in-out infinite alternate;
-}
-
-@keyframes float-particle {
-  from { transform: translateY(0); }
-  to   { transform: translateY(-8px); }
+  position: relative;
+  z-index: 1;
 }
 
 .garantia-grid {
@@ -505,27 +483,8 @@ body.scroll-locked { overflow: hidden; }
   user-select: none;
 }
 
-.garantia-card-q {
-  font-family: 'Barlow Condensed', sans-serif;
-  font-weight: 800;
-  font-size: 0.84rem;
-  text-transform: uppercase;
-  line-height: 1.1;
-  color: #EAF4FF;
-  margin-bottom: 8px;
-  position: relative;
-  z-index: 1;
-}
-
-.garantia-card-a {
-  font-family: 'DM Sans', sans-serif;
-  font-weight: 300;
-  font-size: 0.78rem;
-  line-height: 1.5;
-  color: #80B0D0;
-  position: relative;
-  z-index: 1;
-}
+.garantia-card-q { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 0.84rem; text-transform: uppercase; line-height: 1.1; color: #EAF4FF; margin-bottom: 8px; position: relative; z-index: 1; }
+.garantia-card-a { font-family: 'DM Sans', sans-serif; font-weight: 300; font-size: 0.78rem; line-height: 1.5; color: #80B0D0; position: relative; z-index: 1; }
 
 /* ─── RESPONSIVE: DESKTOP ───────────────────────────────────────── */
 @media (min-width: 768px) {
@@ -550,9 +509,9 @@ body.scroll-locked { overflow: hidden; }
   .features-nav { display: flex; }
   .features-nav--prev { left: 16px; } .features-nav--next { right: 16px; }
   /* Garantia desktop */
+  .garantia-main   { min-height: 560px; }
+  .garantia-text   { min-height: 560px; max-width: 55%; }
   .garantia-shield { width: 55%; max-width: 480px; }
-  .garantia-text   { max-width: 55%; }
-  .garantia-main   { min-height: 600px; }
 }
 
 @media (min-width: 1024px) {
@@ -572,7 +531,7 @@ body.scroll-locked { overflow: hidden; }
 @media (prefers-reduced-motion: reduce) {
   .chevron, .punto-pulse, .saturn-toca, .data-strip-track, .mockup-dot,
   .mockup-phone-glow, .mockup-cta-btn::before, .features-dot, .features-cta-btn::before,
-  .cf-dot, .cf-cta-btn::before, .garantia-dot, .garantia-particle,
+  .cf-dot, .cf-cta-btn::before, .garantia-dot,
   #stars-bright, #nebula-accent, #nebula-accent-2 { animation: none; }
   .navbar, .bloque1 { transition: none; }
   .flip-card-inner { transition: none; } .saturn-img { transition: none; } .mockup-video { transition: none; } .mockup-phone { transition: none; }
