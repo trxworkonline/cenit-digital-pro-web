@@ -58,16 +58,14 @@ body.scroll-locked { overflow: hidden; }
 .play-btn { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); z-index: 60; width: 72px; height: 72px; border-radius: 50%; border: none; background: rgba(1,6,18,0.7); color: var(--accent); display: flex; align-items: center; justify-content: center; cursor: pointer; opacity: 0; pointer-events: none; transition: opacity 0.3s; }
 .play-btn.visible { opacity: 1; pointer-events: auto; }
 .play-btn svg { width: 28px; height: 28px; margin-left: 4px; }
-
-/* ─── HERO COPY ──────────────────────────────────────────────── */
 .hero-copy { position: absolute; bottom: 0; left: 0; right: 0; z-index: 50; padding: 0 24px 56px; display: flex; flex-direction: column; pointer-events: none; }
 .hero-copy.reveal { pointer-events: auto; }
 .hero-copy .eyebrow, .hero-copy .headline, .hero-copy .subheadline, .hero-copy .badge, .hero-copy .cta-group { opacity: 0; transform: translateY(24px); animation: none; }
-.hero-copy.reveal .eyebrow     { animation: fade-up 0.5s ease forwards 0.00s; }
-.hero-copy.reveal .headline    { animation: fade-up 0.5s ease forwards 0.12s; }
+.hero-copy.reveal .eyebrow { animation: fade-up 0.5s ease forwards 0.00s; }
+.hero-copy.reveal .headline { animation: fade-up 0.5s ease forwards 0.12s; }
 .hero-copy.reveal .subheadline { animation: fade-up 0.5s ease forwards 0.24s; }
-.hero-copy.reveal .badge       { animation: fade-up 0.5s ease forwards 0.36s; }
-.hero-copy.reveal .cta-group   { animation: fade-up 0.5s ease forwards 0.48s; }
+.hero-copy.reveal .badge { animation: fade-up 0.5s ease forwards 0.36s; }
+.hero-copy.reveal .cta-group { animation: fade-up 0.5s ease forwards 0.48s; }
 @keyframes fade-up { to { opacity: 1; transform: translateY(0); } }
 .eyebrow { font-family: 'Barlow', sans-serif; font-weight: 500; font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); margin-bottom: 12px; }
 .headline { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 3.2rem; text-transform: uppercase; line-height: 0.9; margin-bottom: 14px; }
@@ -250,36 +248,79 @@ body.scroll-locked { overflow: hidden; }
 .cf-cta-btn:hover { transform: scale(1.03); box-shadow: 0 0 50px rgba(16,96,224,0.6), 0 4px 20px rgba(0,0,0,0.3); }
 .cf-cta-btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
 
-/* ─── SECTION-GARANTIA — Sección 6: Garantía total y objeciones ──── */
-.garantia-section {
+/* ─── SECTION-GARANTIA — Sección 6 ───────────────────────────────── */
+.garantia-section { position: relative; z-index: 1; padding: 100px 0; overflow: hidden; background: transparent; }
+.garantia-ambient { position: absolute; top: 30%; right: -10%; width: 500px; height: 500px; background: radial-gradient(ellipse, rgba(208,144,48,0.07) 0%, transparent 65%); pointer-events: none; z-index: 0; filter: blur(40px); }
+.garantia-title { padding: 0 24px; margin-bottom: 24px; position: relative; z-index: 2; }
+.garantia-eyebrow { display: flex; align-items: center; gap: 8px; font-family: 'Barlow', sans-serif; font-weight: 500; font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: #D09030; margin-bottom: 14px; }
+.garantia-dot { width: 8px; height: 8px; border-radius: 50%; background: #D09030; flex-shrink: 0; animation: pulse-dot 1.5s ease-in-out infinite; }
+.garantia-headline { display: flex; flex-direction: column; font-family: 'Barlow Condensed', sans-serif; font-weight: 800; text-transform: uppercase; line-height: 0.9; overflow: visible; }
+.garantia-hl-a { font-size: 2rem; color: #80B0D0; } .garantia-hl-b { font-size: 3.8rem; color: #EAF4FF; }
+.garantia-hl-c { font-size: 3.8rem; color: #D09030; padding-left: 28px; text-shadow: 0 0 30px rgba(208,144,48,0.4); }
+.garantia-headline .char { display: inline-block; overflow: visible; will-change: transform, opacity; }
+.garantia-main { position: relative; min-height: 420px; z-index: 2; overflow: hidden; }
+.garantia-shield { position: absolute; right: 0; top: 50%; transform: translateY(-50%); width: 75%; max-width: 380px; z-index: 1; pointer-events: none; }
+.garantia-shield img { width: 100%; height: auto; display: block; }
+.garantia-shield-left { position: absolute; top: 0; left: 0; bottom: 0; width: 45%; background: linear-gradient(to right, #010612 0%, transparent 100%); pointer-events: none; z-index: 2; }
+.garantia-shield-top { position: absolute; top: 0; left: 0; right: 0; height: 30%; background: linear-gradient(to bottom, #010612 0%, transparent 100%); pointer-events: none; z-index: 2; }
+.garantia-shield-bottom { position: absolute; bottom: 0; left: 0; right: 0; height: 30%; background: linear-gradient(to top, #010612 0%, transparent 100%); pointer-events: none; z-index: 2; }
+.garantia-text { position: relative; z-index: 2; padding: 0 24px; display: flex; flex-direction: column; justify-content: center; min-height: 420px; max-width: 75%; }
+.garantia-badge { display: inline-flex; align-items: center; gap: 8px; margin-bottom: 20px; }
+.garantia-badge-dot { width: 8px; height: 8px; border-radius: 50%; background: #D09030; box-shadow: 0 0 10px rgba(208,144,48,0.6); flex-shrink: 0; }
+.garantia-badge-label { font-family: 'Barlow', sans-serif; font-weight: 500; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: #D09030; }
+.garantia-h1 { display: flex; flex-direction: column; font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 2.6rem; text-transform: uppercase; line-height: 0.88; color: #EAF4FF; margin-bottom: 12px; }
+.garantia-h1-amber { color: #D09030; text-shadow: 0 0 20px rgba(208,144,48,0.5); }
+.garantia-sub { font-family: 'DM Sans', sans-serif; font-weight: 300; font-size: 0.85rem; line-height: 1.6; color: #80B0D0; margin-bottom: 24px; max-width: 260px; }
+.garantia-seal { display: flex; flex-direction: row; align-items: center; gap: 12px; }
+.garantia-seal-line { width: 2px; height: 36px; background: #D09030; opacity: 0.4; flex-shrink: 0; }
+.garantia-seal-info { display: flex; flex-direction: column; gap: 2px; }
+.garantia-seal-name { font-family: 'Barlow', sans-serif; font-weight: 500; font-size: 0.85rem; color: #EAF4FF; }
+.garantia-seal-role { font-family: 'DM Sans', sans-serif; font-weight: 300; font-size: 0.75rem; color: #80B0D0; }
+.garantia-objections { padding: 0 24px; margin-top: 64px; position: relative; z-index: 2; }
+.garantia-obj-ambient { position: absolute; inset: 0; background: radial-gradient(ellipse at 75% 50%, rgba(208,144,48,0.05) 0%, transparent 55%); pointer-events: none; z-index: 0; }
+.garantia-obj-label { font-family: 'Barlow', sans-serif; font-weight: 500; font-size: 9px; text-transform: uppercase; letter-spacing: 0.16em; color: #80B0D0; margin-bottom: 20px; display: block; position: relative; z-index: 1; }
+.garantia-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; position: relative; z-index: 1; }
+.garantia-card { border-radius: 16px; background: rgba(255,255,255,0.03); backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px); border: 1px solid rgba(208,144,48,0.3); box-shadow: 0 0 20px rgba(208,144,48,0.1), 0 0 40px rgba(208,144,48,0.05), inset 0 1px 0 rgba(208,144,48,0.08); padding: 18px; position: relative; overflow: hidden; transition: all 0.3s ease; }
+.garantia-card:hover { box-shadow: 0 0 30px rgba(208,144,48,0.2); border-color: rgba(208,144,48,0.5); background: rgba(255,255,255,0.05); }
+.garantia-card-top { position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(to right, transparent, rgba(208,144,48,0.6), transparent); pointer-events: none; }
+.garantia-card-num { position: absolute; top: -8px; right: 12px; font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 3rem; color: #D09030; opacity: 0.08; line-height: 1; pointer-events: none; user-select: none; }
+.garantia-card-q { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 0.84rem; text-transform: uppercase; line-height: 1.1; color: #EAF4FF; margin-bottom: 8px; position: relative; z-index: 1; }
+.garantia-card-a { font-family: 'DM Sans', sans-serif; font-weight: 300; font-size: 0.78rem; line-height: 1.5; color: #80B0D0; position: relative; z-index: 1; }
+
+/* ─── SECTION-PRICING — Sección 7: Precios y planes ────────────── */
+.pricing-section {
   position: relative;
   z-index: 1;
-  padding: 100px 0;
+  padding: 100px 0 0;
   overflow: hidden;
   background: transparent;
 }
 
-/* Ambient blob amber derecho */
-.garantia-ambient {
+/* Ambient glow azul central */
+.pricing-ambient {
   position: absolute;
-  top: 30%; right: -10%;
-  width: 500px; height: 500px;
-  background: radial-gradient(ellipse, rgba(208,144,48,0.07) 0%, transparent 65%);
+  top: 20%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 600px;
+  height: 400px;
+  background: radial-gradient(ellipse, rgba(16,96,224,0.06) 0%, transparent 65%);
   pointer-events: none;
   z-index: 0;
-  filter: blur(40px);
+  filter: blur(60px);
 }
 
-/* GARANTIA-TITLE */
-.garantia-title {
+/* PRICING-TITLE */
+.pricing-title {
   padding: 0 24px;
-  margin-bottom: 24px;
+  margin-bottom: 48px;
   position: relative;
   z-index: 2;
+  text-align: center;
 }
 
-.garantia-eyebrow {
-  display: flex;
+.pricing-eyebrow {
+  display: inline-flex;
   align-items: center;
   gap: 8px;
   font-family: 'Barlow', sans-serif;
@@ -287,19 +328,30 @@ body.scroll-locked { overflow: hidden; }
   font-size: 10px;
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: #D09030;
-  margin-bottom: 14px;
+  color: #80B0D0;
+  margin-bottom: 20px;
 }
 
-.garantia-dot {
-  width: 8px; height: 8px;
+.pricing-dot {
+  width: 5px; height: 5px;
   border-radius: 50%;
-  background: #D09030;
+  background: #60C8FF;
   flex-shrink: 0;
   animation: pulse-dot 1.5s ease-in-out infinite;
 }
 
-.garantia-headline {
+.pricing-anchor {
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 300;
+  font-style: italic;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #80B0D0;
+  max-width: 280px;
+  margin: 0 auto 8px;
+}
+
+.pricing-headline {
   display: flex;
   flex-direction: column;
   font-family: 'Barlow Condensed', sans-serif;
@@ -307,184 +359,435 @@ body.scroll-locked { overflow: hidden; }
   text-transform: uppercase;
   line-height: 0.9;
   overflow: visible;
+  align-items: center;
 }
 
-.garantia-hl-a { font-size: 2rem;   color: #80B0D0; }
-.garantia-hl-b { font-size: 3.8rem; color: #EAF4FF; }
-.garantia-hl-c {
-  font-size: 3.8rem;
-  color: #D09030;
-  padding-left: 28px;
-  text-shadow: 0 0 30px rgba(208,144,48,0.4);
+.pricing-hl-a { font-size: 3rem; color: #EAF4FF; }
+.pricing-hl-b { font-size: 3rem; color: #EAF4FF; }
+.pricing-hl-c {
+  font-size: 3rem;
+  color: #60C8FF;
+  padding-left: 20px;
+  align-self: flex-start;
 }
 
-.garantia-headline .char {
-  display: inline-block;
-  overflow: visible;
-  will-change: transform, opacity;
-}
+.pricing-hl-c .char { display: inline-block; overflow: visible; will-change: transform, opacity; }
 
-/* GARANTIA-MAIN */
-.garantia-main {
+/* PRICING-CAROUSEL */
+.pricing-carousel {
   position: relative;
-  min-height: 420px;
   z-index: 2;
-  overflow: hidden;
-}
-
-/* GARANTIA-SHIELD: imagen con fondo #010612, fusionada con gradientes */
-.garantia-shield {
-  position: absolute;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 75%;
-  max-width: 380px;
-  z-index: 1;
-  pointer-events: none;
-}
-
-.garantia-shield img {
   width: 100%;
-  height: auto;
-  display: block;
+  overflow: visible;
+  perspective: 1200px;
 }
 
-/* Gradientes de fusión — eliminan cortes visibles en los bordes */
-.garantia-shield-left {
-  position: absolute;
-  top: 0; left: 0; bottom: 0;
-  width: 45%;
-  background: linear-gradient(to right, #010612 0%, transparent 100%);
-  pointer-events: none;
-  z-index: 2;
+.pricing-track {
+  display: flex;
+  gap: 16px;
+  padding: 24px 24px 32px;
+  overflow-x: scroll;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
 }
 
-.garantia-shield-top {
-  position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 30%;
-  background: linear-gradient(to bottom, #010612 0%, transparent 100%);
-  pointer-events: none;
-  z-index: 2;
-}
+.pricing-track::-webkit-scrollbar { display: none; }
 
-.garantia-shield-bottom {
-  position: absolute;
-  bottom: 0; left: 0; right: 0;
-  height: 30%;
-  background: linear-gradient(to top, #010612 0%, transparent 100%);
-  pointer-events: none;
-  z-index: 2;
-}
-
-/* GARANTIA-TEXT */
-.garantia-text {
+/* Base pricing card */
+.pricing-card {
+  width: 260px;
+  min-height: 480px;
+  flex-shrink: 0;
+  border-radius: 20px;
+  padding: 24px;
   position: relative;
-  z-index: 2;
-  padding: 0 24px;
+  overflow: hidden;
+  cursor: pointer;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  min-height: 420px;
-  max-width: 75%;
+  transition: transform 0.45s ease, opacity 0.45s ease, box-shadow 0.45s ease;
+  -webkit-tap-highlight-color: transparent;
 }
 
-.garantia-badge { display: inline-flex; align-items: center; gap: 8px; margin-bottom: 20px; }
-.garantia-badge-dot { width: 8px; height: 8px; border-radius: 50%; background: #D09030; box-shadow: 0 0 10px rgba(208,144,48,0.6); flex-shrink: 0; }
-.garantia-badge-label { font-family: 'Barlow', sans-serif; font-weight: 500; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: #D09030; }
-
-.garantia-h1 { display: flex; flex-direction: column; font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 2.6rem; text-transform: uppercase; line-height: 0.88; color: #EAF4FF; margin-bottom: 12px; }
-.garantia-h1-amber { color: #D09030; text-shadow: 0 0 20px rgba(208,144,48,0.5); }
-.garantia-sub { font-family: 'DM Sans', sans-serif; font-weight: 300; font-size: 0.85rem; line-height: 1.6; color: #80B0D0; margin-bottom: 24px; max-width: 260px; }
-
-.garantia-seal { display: flex; flex-direction: row; align-items: center; gap: 12px; }
-.garantia-seal-line { width: 2px; height: 36px; background: #D09030; opacity: 0.4; flex-shrink: 0; }
-.garantia-seal-info { display: flex; flex-direction: column; gap: 2px; }
-.garantia-seal-name { font-family: 'Barlow', sans-serif; font-weight: 500; font-size: 0.85rem; color: #EAF4FF; }
-.garantia-seal-role { font-family: 'DM Sans', sans-serif; font-weight: 300; font-size: 0.75rem; color: #80B0D0; }
-
-/* GARANTIA-OBJECTIONS */
-.garantia-objections {
-  padding: 0 24px;
-  margin-top: 64px;
-  position: relative;
-  z-index: 2;
-}
-
-/* Ambient sutil amber — reemplaza las 8 partículas */
-.garantia-obj-ambient {
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(ellipse at 75% 50%, rgba(208,144,48,0.05) 0%, transparent 55%);
-  pointer-events: none;
-  z-index: 0;
-}
-
-.garantia-obj-label {
-  font-family: 'Barlow', sans-serif;
-  font-weight: 500;
-  font-size: 9px;
-  text-transform: uppercase;
-  letter-spacing: 0.16em;
-  color: #80B0D0;
-  margin-bottom: 20px;
-  display: block;
-  position: relative;
-  z-index: 1;
-}
-
-.garantia-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 12px;
-  position: relative;
-  z-index: 1;
-}
-
-/* GARANTIA-CARD: Clear glassmorphism neon amber */
-.garantia-card {
-  border-radius: 16px;
+/* SEO + AUTO cards */
+.pricing-card--seo,
+.pricing-card--auto {
   background: rgba(255,255,255,0.03);
   backdrop-filter: blur(4px);
   -webkit-backdrop-filter: blur(4px);
-  border: 1px solid rgba(208,144,48,0.3);
-  box-shadow: 0 0 20px rgba(208,144,48,0.1), 0 0 40px rgba(208,144,48,0.05), inset 0 1px 0 rgba(208,144,48,0.08);
-  padding: 18px;
-  position: relative;
-  overflow: hidden;
-  transition: all 0.3s ease;
+  border: 1px solid rgba(96,200,255,0.2);
+  box-shadow: 0 0 20px rgba(96,200,255,0.06);
 }
 
-.garantia-card:hover {
-  box-shadow: 0 0 30px rgba(208,144,48,0.2);
-  border-color: rgba(208,144,48,0.5);
-  background: rgba(255,255,255,0.05);
-}
-
-.garantia-card-top {
+/* Line top for SEO/AUTO */
+.pricing-card-line {
   position: absolute;
   top: 0; left: 0; right: 0;
   height: 1px;
-  background: linear-gradient(to right, transparent, rgba(208,144,48,0.6), transparent);
+  background: linear-gradient(to right, transparent, rgba(96,200,255,0.4), transparent);
   pointer-events: none;
 }
 
-.garantia-card-num {
+/* ELITE card — diferenciación total */
+.pricing-card--elite {
+  background: rgba(255,255,255,0.04);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  border: 1px solid rgba(208,144,48,0.45);
+  box-shadow: 0 0 40px rgba(208,144,48,0.15), 0 0 80px rgba(208,144,48,0.06), inset 0 0 30px rgba(208,144,48,0.03);
+}
+
+/* Elite shimmer diagonal */
+.pricing-card--elite::after {
+  content: '';
   position: absolute;
-  top: -8px; right: 12px;
+  top: -100%; left: -100%;
+  width: 60%; height: 200%;
+  background: linear-gradient(105deg, transparent 40%, rgba(208,144,48,0.08) 50%, rgba(255,255,255,0.06) 55%, rgba(208,144,48,0.08) 60%, transparent 70%);
+  z-index: 1;
+  pointer-events: none;
+  animation: shimmer-elite 5s ease-in-out infinite;
+}
+
+@keyframes shimmer-elite {
+  0%   { transform: translate(-100%, -100%); }
+  40%  { transform: translate(200%, 200%); }
+  100% { transform: translate(200%, 200%); }
+}
+
+/* Elite decorative line top */
+.pricing-elite-line {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(to right, transparent, #D09030, rgba(208,144,48,0.3), transparent);
+  box-shadow: 0 0 10px rgba(208,144,48,0.6);
+  pointer-events: none;
+}
+
+/* Elite bottom glow */
+.pricing-elite-glow {
+  position: absolute;
+  bottom: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80%;
+  height: 120px;
+  background: radial-gradient(ellipse, rgba(208,144,48,0.2) 0%, transparent 70%);
+  filter: blur(20px);
+  z-index: 0;
+  pointer-events: none;
+  animation: glow-rise 3s ease-in-out infinite alternate;
+}
+
+@keyframes glow-rise {
+  from { opacity: 0.4; transform: translateX(-50%) translateY(0); }
+  to   { opacity: 1;   transform: translateX(-50%) translateY(-10px); }
+}
+
+/* Elite badge MAS POPULAR */
+.pricing-elite-badge {
+  position: absolute;
+  top: 16px; right: 16px;
+  background: rgba(208,144,48,0.12);
+  border: 1px solid rgba(208,144,48,0.35);
+  border-radius: 20px;
+  padding: 4px 12px;
+  font-family: 'Barlow', sans-serif;
+  font-weight: 500;
+  font-size: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #D09030;
+  z-index: 3;
+}
+
+/* Elite content wrapper (above shimmer) */
+.pricing-elite-content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+/* Plan labels */
+.pricing-plan-label {
+  font-family: 'Barlow', sans-serif;
+  font-weight: 500;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #60C8FF;
+  margin-bottom: 8px;
+}
+
+.pricing-plan-label--amber { color: #D09030; }
+
+.pricing-plan-sub {
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 300;
+  font-size: 0.8rem;
+  color: #80B0D0;
+  margin-bottom: 20px;
+  line-height: 1.4;
+}
+
+/* Price area */
+.pricing-price-wrap {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 4px;
+}
+
+.pricing-price-old {
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 300;
+  font-size: 0.9rem;
+  color: #80B0D0;
+  text-decoration: line-through;
+  opacity: 0.6;
+  margin-bottom: 2px;
+}
+
+.pricing-price {
   font-family: 'Barlow Condensed', sans-serif;
   font-weight: 800;
-  font-size: 3rem;
-  color: #D09030;
-  opacity: 0.08;
+  font-size: 2.8rem;
   line-height: 1;
-  pointer-events: none;
-  user-select: none;
+  color: #EAF4FF;
 }
 
-.garantia-card-q { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 0.84rem; text-transform: uppercase; line-height: 1.1; color: #EAF4FF; margin-bottom: 8px; position: relative; z-index: 1; }
-.garantia-card-a { font-family: 'DM Sans', sans-serif; font-weight: 300; font-size: 0.78rem; line-height: 1.5; color: #80B0D0; position: relative; z-index: 1; }
+.pricing-price--amber {
+  color: #D09030;
+  font-size: 3rem;
+  text-shadow: 0 0 20px rgba(208,144,48,0.4);
+}
+
+.pricing-price--custom { font-size: 2.2rem; }
+
+.pricing-price-period {
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 300;
+  font-size: 0.8rem;
+  color: #80B0D0;
+  margin-top: 2px;
+}
+
+/* Scarcity badge */
+.pricing-scarcity-badge {
+  display: inline-block;
+  background: rgba(208,144,48,0.08);
+  border: 1px solid rgba(208,144,48,0.2);
+  border-radius: 4px;
+  padding: 4px 10px;
+  margin-top: 6px;
+  font-family: 'Barlow', sans-serif;
+  font-weight: 500;
+  font-size: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #D09030;
+}
+
+/* Separator */
+.pricing-separator {
+  height: 1px;
+  background: rgba(96,200,255,0.1);
+  margin: 16px 0;
+}
+
+.pricing-separator--amber { background: rgba(208,144,48,0.15); margin: 14px 0; }
+
+/* Feature lists */
+.pricing-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex: 1;
+}
+
+.pricing-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 300;
+  font-size: 0.82rem;
+  line-height: 1.5;
+  color: #80B0D0;
+}
+
+.pricing-check {
+  color: #60C8FF;
+  font-size: 12px;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.pricing-check--amber { color: #D09030; }
+
+/* Elite list with prices */
+.pricing-list--elite li {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  color: #EAF4FF;
+  font-size: 0.82rem;
+  line-height: 1.6;
+}
+
+.pricing-item-text { flex: 1; }
+
+.pricing-item-price {
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 300;
+  font-size: 0.76rem;
+  color: #80B0D0;
+  opacity: 0.7;
+  white-space: nowrap;
+  flex-shrink: 0;
+  align-self: flex-start;
+  padding-top: 2px;
+}
+
+/* Card CTA text */
+.pricing-card-cta {
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 300;
+  font-size: 0.75rem;
+  color: #80B0D0;
+  margin-top: auto;
+  padding-top: 16px;
+  text-align: center;
+}
+
+/* PRICING-DYNAMIC-FOOTER */
+.pricing-footer {
+  position: relative;
+  z-index: 2;
+  padding: 32px 24px 0;
+  margin-top: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+}
+
+.pf-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+}
+
+.pf-price {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 800;
+  font-size: 2rem;
+  color: #EAF4FF;
+  text-align: center;
+  margin-bottom: 12px;
+}
+
+.pf-price--amber {
+  font-size: 2.4rem;
+  color: #D09030;
+}
+
+.pf-savings {
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 300;
+  font-size: 0.85rem;
+  color: #80B0D0;
+  text-align: center;
+  margin-bottom: 6px;
+}
+
+.pf-scarcity {
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 300;
+  font-size: 0.8rem;
+  color: #D09030;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.pf-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 18px 24px;
+  border-radius: 8px;
+  width: 100%;
+  max-width: 380px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 800;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  text-decoration: none;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+  -webkit-tap-highlight-color: transparent;
+  margin-bottom: 0;
+}
+
+.pf-btn--amber {
+  background: #D09030;
+  color: #010612;
+  box-shadow: 0 0 30px rgba(208,144,48,0.4);
+}
+
+.pf-btn--amber::before {
+  content: '';
+  position: absolute;
+  top: 0; left: -100%;
+  width: 60%; height: 100%;
+  background: linear-gradient(to right, transparent, rgba(255,255,255,0.15), transparent);
+  transform: skewX(-20deg);
+  animation: shimmer 4s ease-in-out infinite;
+}
+
+.pf-btn--amber:hover {
+  background: #E8A035;
+  box-shadow: 0 0 50px rgba(208,144,48,0.6);
+  transform: scale(1.02);
+}
+
+.pf-btn--blue {
+  background: #1060E0;
+  color: #EAF4FF;
+  box-shadow: 0 0 30px rgba(16,96,224,0.4);
+}
+
+.pf-btn--blue::before {
+  content: '';
+  position: absolute;
+  top: 0; left: -100%;
+  width: 60%; height: 100%;
+  background: linear-gradient(to right, transparent, rgba(255,255,255,0.12), transparent);
+  transform: skewX(-20deg);
+  animation: shimmer 4s ease-in-out infinite;
+}
+
+.pf-btn--blue:hover {
+  box-shadow: 0 0 50px rgba(16,96,224,0.6);
+  transform: scale(1.02);
+}
+
+.pf-note {
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 300;
+  font-size: 0.78rem;
+  color: #80B0D0;
+  text-align: center;
+  margin-top: 12px;
+  padding-bottom: 60px;
+}
 
 /* ─── RESPONSIVE: DESKTOP ───────────────────────────────────────── */
 @media (min-width: 768px) {
@@ -508,10 +811,15 @@ body.scroll-locked { overflow: hidden; }
   .features-card { width: 230px; height: 320px; }
   .features-nav { display: flex; }
   .features-nav--prev { left: 16px; } .features-nav--next { right: 16px; }
-  /* Garantia desktop */
   .garantia-main   { min-height: 560px; }
   .garantia-text   { min-height: 560px; max-width: 55%; }
   .garantia-shield { width: 55%; max-width: 480px; }
+  /* Pricing desktop */
+  .pricing-title { margin-bottom: 64px; }
+  .pricing-headline { align-items: center; }
+  .pricing-hl-c { padding-left: 20px; }
+  .pricing-track { padding: 32px 40px 40px; justify-content: center; overflow-x: hidden; }
+  .pricing-card { width: 280px; }
 }
 
 @media (min-width: 1024px) {
@@ -532,6 +840,8 @@ body.scroll-locked { overflow: hidden; }
   .chevron, .punto-pulse, .saturn-toca, .data-strip-track, .mockup-dot,
   .mockup-phone-glow, .mockup-cta-btn::before, .features-dot, .features-cta-btn::before,
   .cf-dot, .cf-cta-btn::before, .garantia-dot,
+  .pricing-dot, .pricing-elite-glow, .pricing-card--elite::after,
+  .pf-btn--amber::before, .pf-btn--blue::before,
   #stars-bright, #nebula-accent, #nebula-accent-2 { animation: none; }
   .navbar, .bloque1 { transition: none; }
   .flip-card-inner { transition: none; } .saturn-img { transition: none; } .mockup-video { transition: none; } .mockup-phone { transition: none; }
@@ -544,4 +854,5 @@ body.scroll-locked { overflow: hidden; }
   .features-card-glass { transition: none; }
   .cf-cta { opacity: 1; transform: none; transition: none; } .cf-card { transition: none; }
   .garantia-card { transition: none; }
+  .pricing-card { transition: none; }
 }
