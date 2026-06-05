@@ -16,6 +16,30 @@
       position: relative;
       z-index: 1;
     }
+    /* GARANTIA-TITLE: anular max-width del CSS de clase */
+    #garantia-title {
+      max-width: none !important;
+      width: 100% !important;
+      text-align: center !important;
+      padding: 0 !important;
+      margin: 0 0 32px 0 !important;
+    }
+    #garantia-title .garantia-eyebrow {
+      justify-content: center !important;
+      text-align: center !important;
+    }
+    #garantia-title .garantia-headline {
+      align-items: center !important;
+      text-align: center !important;
+    }
+    #garantia-title .garantia-hl-a,
+    #garantia-title .garantia-hl-b,
+    #garantia-title .garantia-hl-c {
+      text-align: center !important;
+      padding: 0 !important;
+      margin: 0 !important;
+      width: 100% !important;
+    }
   </style>
 </head>
 <body>
@@ -197,16 +221,16 @@
     <!-- Ambient amber -->
     <div class="garantia-ambient" aria-hidden="true"></div>
 
-    <!-- BLOQUE 1: GARANTIA-TITLE — centrado, sin padding-left ni margin-left -->
-    <div class="garantia-title" id="garantia-title" style="text-align:center;width:100%;padding:0;margin:0 0 32px 0;word-break:keep-all;">
-      <p class="garantia-eyebrow" style="text-align:center;">
+    <!-- BLOQUE 1: GARANTIA-TITLE — centrado con !important en <style> del head -->
+    <div class="garantia-title" id="garantia-title">
+      <p class="garantia-eyebrow">
         <span class="garantia-dot" aria-hidden="true"></span>
         NUESTRA PROMESA
       </p>
-      <h2 class="garantia-headline" style="text-align:center;padding:0;margin:0;">
-        <span class="garantia-hl-a" style="font-size:1.6rem;color:#80B0D0;display:block;text-align:center;padding:0;margin:0;">TU ÉXITO ES</span>
-        <span class="garantia-hl-b" style="font-size:3.2rem;color:#EAF4FF;display:block;text-align:center;padding:0;margin:0;">NUESTRA</span>
-        <span class="garantia-hl-c" id="garantia-hl-c" style="font-size:3.2rem;color:#D09030;display:block;text-align:center;padding:0;margin:0;">GARANTÍA</span>
+      <h2 class="garantia-headline">
+        <span class="garantia-hl-a" style="font-size:1.6rem;">TU ÉXITO ES</span>
+        <span class="garantia-hl-b" style="font-size:3.2rem;">NUESTRA</span>
+        <span class="garantia-hl-c" id="garantia-hl-c" style="font-size:3.2rem;">GARANTÍA</span>
       </h2>
     </div>
 
