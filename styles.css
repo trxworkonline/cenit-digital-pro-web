@@ -297,31 +297,51 @@ body.scroll-locked { overflow: hidden; }
 .pricing-dot { width: 5px; height: 5px; border-radius: 50%; background: #60C8FF; flex-shrink: 0; animation: pulse-dot 1.5s ease-in-out infinite; }
 .pricing-anchor { font-family: 'DM Sans', sans-serif; font-weight: 300; font-style: italic; font-size: 1rem; line-height: 1.5; color: #80B0D0; max-width: 280px; margin: 0 auto 8px; }
 
-/* CAMBIO 1: Headline 2 líneas centradas */
+/* CAMBIO 1: Headline 3 líneas calculadas para 430px, sin overflow */
 .pricing-headline {
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 100%;
+  max-width: 430px;
+  margin: 0 auto;
+  overflow: visible;
   font-family: 'Barlow Condensed', sans-serif;
   font-weight: 800;
   text-transform: uppercase;
-  overflow: visible;
-  text-align: center;
 }
 
 .pricing-hl-a {
-  font-size: 2.2rem;
+  display: block;
+  width: 100%;
+  text-align: center;
+  padding: 0 16px;
+  font-size: 1.4rem;
   color: #80B0D0;
-  line-height: 1;
+  line-height: 1.1;
 }
 
 .pricing-hl-b {
-  font-size: 3.2rem;
+  display: block;
+  width: 100%;
+  text-align: center;
+  padding: 0 16px;
+  font-size: 2.4rem;
   color: #EAF4FF;
-  line-height: 0.9;
+  line-height: 0.95;
 }
 
-.pricing-hl-b .char { display: inline-block; overflow: visible; will-change: transform, opacity; }
+.pricing-hl-c {
+  display: block;
+  width: 100%;
+  text-align: center;
+  padding: 0 16px;
+  font-size: 2.4rem;
+  color: #60C8FF;
+  line-height: 0.95;
+}
+
+.pricing-hl-c .char { display: inline-block; overflow: visible; will-change: transform, opacity; }
 
 /* PRICING-CAROUSEL */
 .pricing-carousel { position: relative; z-index: 2; width: 100%; overflow: visible; perspective: 1200px; }
@@ -376,12 +396,8 @@ body.scroll-locked { overflow: hidden; }
 .pf-price--amber { font-size: 2.4rem; color: #D09030; }
 .pf-savings { font-family: 'DM Sans', sans-serif; font-weight: 300; font-size: 0.85rem; color: #80B0D0; text-align: center; margin-bottom: 6px; }
 
-/* CAMBIO 2: urgencia con punto pulsante amber */
+/* CAMBIO 2: solo texto, sin punto pulsante */
 .pf-scarcity {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
   font-family: 'Barlow', sans-serif;
   font-weight: 500;
   font-size: 0.95rem;
@@ -390,17 +406,6 @@ body.scroll-locked { overflow: hidden; }
   color: #D09030;
   text-align: center;
   margin-bottom: 20px;
-}
-
-.pf-scarcity-dot {
-  display: inline-block;
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: #D09030;
-  box-shadow: 0 0 8px rgba(208,144,48,0.6);
-  flex-shrink: 0;
-  animation: pulse-dot 1.5s ease-in-out infinite;
 }
 
 .pf-btn { display: inline-flex; align-items: center; justify-content: center; padding: 18px 24px; border-radius: 8px; width: 100%; max-width: 380px; font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 14px; text-transform: uppercase; letter-spacing: 0.06em; text-decoration: none; position: relative; overflow: hidden; transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease; -webkit-tap-highlight-color: transparent; margin-bottom: 0; }
@@ -437,7 +442,12 @@ body.scroll-locked { overflow: hidden; }
   .garantia-main   { min-height: 560px; }
   .garantia-text   { min-height: 560px; max-width: 55%; }
   .garantia-shield { width: 55%; max-width: 480px; }
+  /* Pricing desktop */
   .pricing-title { margin-bottom: 64px; }
+  .pricing-headline { max-width: 600px; }
+  .pricing-hl-a { font-size: 1.8rem; }
+  .pricing-hl-b { font-size: 3rem; }
+  .pricing-hl-c { font-size: 3rem; }
   .pricing-track { padding: 32px 40px 40px; justify-content: center; overflow-x: hidden; }
   .pricing-card { width: 280px; }
 }
@@ -461,7 +471,7 @@ body.scroll-locked { overflow: hidden; }
   .mockup-phone-glow, .mockup-cta-btn::before, .features-dot, .features-cta-btn::before,
   .cf-dot, .cf-cta-btn::before, .garantia-dot,
   .pricing-dot, .pricing-elite-glow, .pricing-card--elite::after,
-  .pf-btn--amber::before, .pf-btn--blue::before, .pf-scarcity-dot,
+  .pf-btn--amber::before, .pf-btn--blue::before,
   #stars-bright, #nebula-accent, #nebula-accent-2 { animation: none; }
   .navbar, .bloque1 { transition: none; }
   .flip-card-inner { transition: none; } .saturn-img { transition: none; } .mockup-video { transition: none; } .mockup-phone { transition: none; }
