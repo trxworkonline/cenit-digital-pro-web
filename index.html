@@ -197,32 +197,29 @@
     <!-- Ambient amber -->
     <div class="garantia-ambient" aria-hidden="true"></div>
 
-    <!-- GARANTIA-WRAPPER: escudo + título + main juntos -->
-    <div class="garantia-wrapper" id="garantia-wrapper">
+    <!-- BLOQUE 1: GARANTIA-TITLE — en flujo normal, centrado, fuera del wrapper -->
+    <div class="garantia-title" id="garantia-title" style="text-align:center;width:100%;padding:0 24px;margin-bottom:32px;word-break:keep-all;">
+      <p class="garantia-eyebrow">
+        <span class="garantia-dot" aria-hidden="true"></span>
+        NUESTRA PROMESA
+      </p>
+      <h2 class="garantia-headline">
+        <span class="garantia-hl-a" style="font-size:1.8rem;color:#80B0D0;display:block;padding-left:0;">TU ÉXITO ES</span>
+        <span class="garantia-hl-b" style="font-size:3.2rem;color:#EAF4FF;display:block;">NUESTRA</span>
+        <span class="garantia-hl-c" id="garantia-hl-c" style="font-size:clamp(2.8rem,8vw,3.2rem);color:#D09030;display:block;">GARANTÍA</span>
+      </h2>
+    </div>
 
-      <!-- GARANTIA-SHIELD: absolute, cubre todo el wrapper -->
-      <div class="garantia-shield" id="garantia-shield" aria-hidden="true">
-        <img src="https://res.cloudinary.com/dal6clylx/image/upload/v1780680894/Garantia_1_zogskz.png" alt="" loading="lazy">
-        <div class="garantia-shield-left"></div>
-        <div class="garantia-shield-top"></div>
-        <div class="garantia-shield-bottom"></div>
+    <!-- BLOQUE 2: GARANTIA-WRAPPER — escudo + main -->
+    <div class="garantia-wrapper" id="garantia-wrapper" style="position:relative;width:100%;overflow:hidden;padding-bottom:48px;">
+
+      <!-- GARANTIA-SHIELD: absolute, esquina derecha, mix-blend-mode screen -->
+      <div class="garantia-shield" id="garantia-shield" aria-hidden="true" style="position:absolute;top:0;right:-10%;width:70%;height:100%;z-index:1;pointer-events:none;">
+        <img src="https://res.cloudinary.com/dal6clylx/image/upload/v1780682688/Garantia_srtcwv.png" alt="" loading="lazy" style="width:100%;height:100%;object-fit:contain;object-position:right center;mix-blend-mode:screen;">
       </div>
 
-      <!-- GARANTIA-TITLE -->
-      <div class="garantia-title" id="garantia-title">
-        <p class="garantia-eyebrow">
-          <span class="garantia-dot" aria-hidden="true"></span>
-          NUESTRA PROMESA
-        </p>
-        <h2 class="garantia-headline">
-          <span class="garantia-hl-a">TU ÉXITO ES</span>
-          <span class="garantia-hl-b">NUESTRA</span>
-          <span class="garantia-hl-c" id="garantia-hl-c">GARANTÍA</span>
-        </h2>
-      </div>
-
-      <!-- GARANTIA-MAIN -->
-      <div class="garantia-main" id="garantia-main">
+      <!-- GARANTIA-MAIN: z-index 2, max-width 62% -->
+      <div class="garantia-main" id="garantia-main" style="position:relative;z-index:2;padding:48px 24px;max-width:62%;">
         <div class="garantia-text" id="garantia-text">
           <div class="garantia-badge">
             <span class="garantia-badge-dot" aria-hidden="true"></span>
@@ -249,8 +246,8 @@
 
     </div>
 
-    <!-- GARANTIA-OBJECTIONS: fuera del wrapper -->
-    <div class="garantia-objections" id="garantia-objections">
+    <!-- BLOQUE 3: GARANTIA-OBJECTIONS — fuera del wrapper -->
+    <div class="garantia-objections" id="garantia-objections" style="margin-top:48px;">
       <div class="garantia-obj-ambient" aria-hidden="true"></div>
       <p class="garantia-obj-label">PREGUNTAS QUE TODOS SE HACEN</p>
       <div class="garantia-grid">
@@ -288,7 +285,7 @@
     <div class="pricing-ambient" aria-hidden="true"></div>
     <div class="pricing-title" id="pricing-title">
       <p class="pricing-eyebrow"><span class="pricing-dot" aria-hidden="true"></span>ELIGE TU PLAN</p>
-      <p class="pricing-anchor">“¿Cuánto vale cerrar una sola propiedad más este mes?”</p>
+      <p class="pricing-anchor">"¿Cuánto vale cerrar una sola propiedad más este mes?"</p>
       <div class="pricing-headline">
         <span class="pricing-hl-a">INVIERTE EN</span>
         <span class="pricing-hl-b">TU PRESENCIA</span>
