@@ -214,7 +214,7 @@ body.scroll-locked { overflow: hidden; }
 .features-cta-btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
 .features-sub { font-family: 'DM Sans', sans-serif; font-weight: 300; font-size: 0.78rem; color: #80B0D0; text-align: center; }
 
-/* ─── SECTION-COMO-FUNCIONA — Sección 5 ──────────────────────────── */
+/* ─── SECTION-COMO-FUNCIONA ──────────────────────────────────── */
 .cf-section { position: relative; z-index: 1; padding: 100px 0; overflow: hidden; background: transparent; }
 .cf-inner { display: flex; flex-direction: column; padding: 0 24px; }
 .cf-title { margin-bottom: 64px; }
@@ -248,115 +248,25 @@ body.scroll-locked { overflow: hidden; }
 .cf-cta-btn:hover { transform: scale(1.03); box-shadow: 0 0 50px rgba(16,96,224,0.6), 0 4px 20px rgba(0,0,0,0.3); }
 .cf-cta-btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
 
-/* ─── SECTION-GARANTIA — Sección 6: Garantía total y objeciones ──── */
-.garantia-section {
-  position: relative;
-  z-index: 1;
-  padding: 100px 0;
-  overflow: hidden;
-  background: transparent;
-}
-
-/* Ambient amber blob */
-.garantia-ambient {
-  position: absolute;
-  top: 30%; right: -10%;
-  width: 500px; height: 500px;
-  background: radial-gradient(ellipse, rgba(208,144,48,0.07) 0%, transparent 65%);
-  pointer-events: none;
-  z-index: 0;
-  filter: blur(40px);
-}
-
-/* GARANTIA-WRAPPER: contiene escudo + título + main */
-.garantia-wrapper {
-  position: relative;
-  width: 100%;
-  overflow: hidden;
-  padding-bottom: 48px;
-}
-
-/* GARANTIA-SHIELD: absoluto, cubre todo el wrapper en altura */
-.garantia-shield {
-  position: absolute;
-  top: 0;
-  right: -15%;
-  width: 75%;
-  height: 100%;
-  z-index: 1;
-  pointer-events: none;
-}
-
-.garantia-shield img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  object-position: right center;
-  display: block;
-}
-
-/* Gradientes de fusión del escudo */
-.garantia-shield-left {
-  position: absolute;
-  top: 0; left: 0; bottom: 0;
-  width: 50%;
-  background: linear-gradient(to right, #010612 0%, transparent 100%);
-  pointer-events: none;
-  z-index: 2;
-}
-
-.garantia-shield-top {
-  position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 20%;
-  background: linear-gradient(to bottom, #010612 0%, transparent 100%);
-  pointer-events: none;
-  z-index: 2;
-}
-
-.garantia-shield-bottom {
-  position: absolute;
-  bottom: 0; left: 0; right: 0;
-  height: 20%;
-  background: linear-gradient(to top, #010612 0%, transparent 100%);
-  pointer-events: none;
-  z-index: 2;
-}
-
-/* GARANTIA-TITLE: dentro del wrapper, max-width 65% */
-.garantia-title {
-  position: relative;
-  z-index: 2;
-  padding: 0 24px;
-  margin-bottom: 20px;
-  max-width: 65%;
-}
-
+/* ─── SECTION-GARANTIA ───────────────────────────────────────── */
+.garantia-section { position: relative; z-index: 1; padding: 100px 0; overflow: hidden; background: transparent; }
+.garantia-ambient { position: absolute; top: 30%; right: -10%; width: 500px; height: 500px; background: radial-gradient(ellipse, rgba(208,144,48,0.07) 0%, transparent 65%); pointer-events: none; z-index: 0; filter: blur(40px); }
+.garantia-wrapper { position: relative; width: 100%; overflow: hidden; padding-bottom: 48px; }
+.garantia-shield { position: absolute; top: 0; right: -15%; width: 75%; height: 100%; z-index: 1; pointer-events: none; }
+.garantia-shield img { width: 100%; height: 100%; object-fit: contain; object-position: right center; display: block; }
+.garantia-shield-left { position: absolute; top: 0; left: 0; bottom: 0; width: 50%; background: linear-gradient(to right, #010612 0%, transparent 100%); pointer-events: none; z-index: 2; }
+.garantia-shield-top { position: absolute; top: 0; left: 0; right: 0; height: 20%; background: linear-gradient(to bottom, #010612 0%, transparent 100%); pointer-events: none; z-index: 2; }
+.garantia-shield-bottom { position: absolute; bottom: 0; left: 0; right: 0; height: 20%; background: linear-gradient(to top, #010612 0%, transparent 100%); pointer-events: none; z-index: 2; }
+.garantia-title { position: relative; z-index: 2; padding: 0 24px; margin-bottom: 20px; max-width: 65%; }
 .garantia-eyebrow { display: flex; align-items: center; gap: 8px; font-family: 'Barlow', sans-serif; font-weight: 500; font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: #D09030; margin-bottom: 14px; }
 .garantia-dot { width: 8px; height: 8px; border-radius: 50%; background: #D09030; flex-shrink: 0; animation: pulse-dot 1.5s ease-in-out infinite; }
 .garantia-headline { display: flex; flex-direction: column; font-family: 'Barlow Condensed', sans-serif; font-weight: 800; text-transform: uppercase; line-height: 0.9; overflow: visible; }
-.garantia-hl-a { font-size: 2rem;   color: #80B0D0; }
+.garantia-hl-a { font-size: 2rem; color: #80B0D0; }
 .garantia-hl-b { font-size: 3.8rem; color: #EAF4FF; }
 .garantia-hl-c { font-size: 3.8rem; color: #D09030; text-shadow: 0 0 30px rgba(208,144,48,0.4); }
 .garantia-headline .char { display: inline-block; overflow: visible; will-change: transform, opacity; }
-
-/* GARANTIA-MAIN: dentro del wrapper, sin min-height */
-.garantia-main {
-  position: relative;
-  z-index: 2;
-  padding: 0 24px;
-}
-
-/* GARANTIA-TEXT: max-width 65%, altura por contenido */
-.garantia-text {
-  position: relative;
-  z-index: 2;
-  max-width: 65%;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-}
-
+.garantia-main { position: relative; z-index: 2; padding: 0 24px; }
+.garantia-text { position: relative; z-index: 2; max-width: 65%; display: flex; flex-direction: column; justify-content: flex-start; }
 .garantia-badge { display: inline-flex; align-items: center; gap: 8px; margin-bottom: 20px; }
 .garantia-badge-dot { width: 8px; height: 8px; border-radius: 50%; background: #D09030; box-shadow: 0 0 10px rgba(208,144,48,0.6); flex-shrink: 0; }
 .garantia-badge-label { font-family: 'Barlow', sans-serif; font-weight: 500; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: #D09030; }
@@ -368,15 +278,7 @@ body.scroll-locked { overflow: hidden; }
 .garantia-seal-info { display: flex; flex-direction: column; gap: 2px; }
 .garantia-seal-name { font-family: 'Barlow', sans-serif; font-weight: 500; font-size: 0.85rem; color: #EAF4FF; }
 .garantia-seal-role { font-family: 'DM Sans', sans-serif; font-weight: 300; font-size: 0.75rem; color: #80B0D0; }
-
-/* GARANTIA-OBJECTIONS: fuera del wrapper */
-.garantia-objections {
-  padding: 0 24px;
-  margin-top: 48px;
-  position: relative;
-  z-index: 2;
-}
-
+.garantia-objections { padding: 0 24px; margin-top: 48px; position: relative; z-index: 2; }
 .garantia-obj-ambient { position: absolute; inset: 0; background: radial-gradient(ellipse at 75% 50%, rgba(208,144,48,0.05) 0%, transparent 55%); pointer-events: none; z-index: 0; }
 .garantia-obj-label { font-family: 'Barlow', sans-serif; font-weight: 500; font-size: 9px; text-transform: uppercase; letter-spacing: 0.16em; color: #80B0D0; margin-bottom: 20px; display: block; position: relative; z-index: 1; }
 .garantia-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; position: relative; z-index: 1; }
@@ -387,7 +289,7 @@ body.scroll-locked { overflow: hidden; }
 .garantia-card-q { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 0.84rem; text-transform: uppercase; line-height: 1.1; color: #EAF4FF; margin-bottom: 8px; position: relative; z-index: 1; }
 .garantia-card-a { font-family: 'DM Sans', sans-serif; font-weight: 300; font-size: 0.78rem; line-height: 1.5; color: #80B0D0; position: relative; z-index: 1; }
 
-/* ─── SECTION-PRICING — Sección 7 ─────────────────────────────── */
+/* ─── SECTION-PRICING ────────────────────────────────────────── */
 .pricing-section { position: relative; z-index: 1; padding: 100px 0 0; overflow: hidden; background: transparent; }
 .pricing-ambient { position: absolute; top: 20%; left: 50%; transform: translateX(-50%); width: 600px; height: 400px; background: radial-gradient(ellipse, rgba(16,96,224,0.06) 0%, transparent 65%); pointer-events: none; z-index: 0; filter: blur(60px); }
 .pricing-title { padding: 0 24px; margin-bottom: 48px; position: relative; z-index: 2; text-align: center; }
@@ -448,6 +350,36 @@ body.scroll-locked { overflow: hidden; }
 .pf-btn--blue:hover { box-shadow: 0 0 50px rgba(16,96,224,0.6); transform: scale(1.02); }
 .pf-note { font-family: 'DM Sans', sans-serif; font-weight: 300; font-size: 0.78rem; color: #80B0D0; text-align: center; margin-top: 12px; padding-bottom: 60px; }
 
+/* ─── SECTION-FAQ — Preguntas frecuentes ─────────────────────── */
+.faq-section { position: relative; z-index: 1; padding: 80px 0; }
+.faq-eyebrow { font-family: 'Barlow', sans-serif; font-weight: 500; font-size: 10px; color: #60C8FF; text-transform: uppercase; letter-spacing: 0.16em; text-align: center; margin-bottom: 40px; display: block; }
+.faq-list { margin: 0 24px; border-radius: 16px; background: rgba(255,255,255,0.02); backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px); border: 1px solid rgba(96,200,255,0.1); overflow: hidden; }
+.faq-header { width: 100%; padding: 18px 24px; border: none; border-bottom: 1px solid rgba(96,200,255,0.08); background: transparent; display: flex; justify-content: space-between; align-items: center; cursor: pointer; text-align: left; min-height: 44px; transition: background 0.2s ease; -webkit-tap-highlight-color: transparent; }
+.faq-header:hover { background: rgba(96,200,255,0.03); }
+.faq-header:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
+.faq-question { font-family: 'Barlow', sans-serif; font-weight: 500; font-size: 0.95rem; color: #EAF4FF; line-height: 1.4; padding-right: 16px; }
+.faq-icon { flex-shrink: 0; display: flex; align-items: center; justify-content: center; transition: transform 0.3s ease; width: 20px; height: 20px; }
+.faq-item.open .faq-icon { transform: rotate(45deg); }
+.faq-body { max-height: 0; overflow: hidden; transition: max-height 0.35s ease; }
+.faq-item.open .faq-body { max-height: 300px; }
+.faq-answer { padding: 0 24px 18px; font-family: 'DM Sans', sans-serif; font-weight: 300; font-size: 0.88rem; color: #80B0D0; line-height: 1.65; }
+.faq-item:last-child .faq-header { border-bottom: none; }
+
+/* ─── SECTION-FOOTER ─────────────────────────────────────────── */
+.site-footer { position: relative; z-index: 1; background: rgba(255,255,255,0.02); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-top: 1px solid rgba(96,200,255,0.08); padding: 40px 24px 32px; display: flex; flex-direction: column; gap: 32px; }
+.footer-logo { display: flex; align-items: center; }
+.footer-brand { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 1.4rem; color: #EAF4FF; text-transform: uppercase; letter-spacing: 0.02em; line-height: 1; }
+.footer-divider { display: inline-block; width: 1px; height: 14px; background: #60C8FF; margin: 0 8px; flex-shrink: 0; }
+.footer-sub { font-family: 'Barlow', sans-serif; font-weight: 500; font-size: 0.75rem; color: #60C8FF; text-transform: uppercase; letter-spacing: 0.1em; line-height: 1; }
+.footer-desc { font-family: 'DM Sans', sans-serif; font-weight: 300; font-size: 0.82rem; color: #80B0D0; line-height: 1.6; margin-top: 10px; max-width: 280px; }
+.footer-links-title { font-family: 'Barlow', sans-serif; font-weight: 500; font-size: 9px; color: #60C8FF; text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 12px; display: block; }
+.footer-links { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+.footer-links a { font-family: 'DM Sans', sans-serif; font-weight: 300; font-size: 0.85rem; color: #80B0D0; text-decoration: none; transition: color 0.2s ease; display: flex; align-items: center; min-height: 44px; }
+.footer-links a:hover { color: #EAF4FF; }
+.footer-links a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.footer-copyright { border-top: 1px solid rgba(96,200,255,0.06); padding-top: 20px; margin-top: 8px; }
+.footer-copyright p { font-family: 'DM Sans', sans-serif; font-weight: 300; font-size: 0.75rem; color: #80B0D0; text-align: center; }
+
 /* ─── RESPONSIVE: DESKTOP ───────────────────────────────────────── */
 @media (min-width: 768px) {
   .brand-name { font-size: 5.5rem; }
@@ -470,11 +402,9 @@ body.scroll-locked { overflow: hidden; }
   .features-card { width: 230px; height: 320px; }
   .features-nav { display: flex; }
   .features-nav--prev { left: 16px; } .features-nav--next { right: 16px; }
-  /* Garantia desktop */
   .garantia-title { max-width: 55%; }
   .garantia-text  { max-width: 55%; }
   .garantia-shield { width: 60%; right: -10%; }
-  /* Pricing desktop */
   .pricing-title { margin-bottom: 64px; }
   .pricing-headline { max-width: 600px; }
   .pricing-hl-a { font-size: 1.8rem; }
@@ -482,6 +412,10 @@ body.scroll-locked { overflow: hidden; }
   .pricing-hl-c { font-size: 3rem; }
   .pricing-track { padding: 32px 40px 40px; justify-content: center; overflow-x: hidden; }
   .pricing-card { width: 280px; }
+  /* Footer desktop */
+  .site-footer { flex-direction: row; justify-content: space-between; align-items: flex-start; padding: 48px 48px 40px; }
+  .footer-logo-block { flex: 1; max-width: 320px; }
+  .footer-copyright { border-top: none; padding-top: 0; margin-top: 0; align-self: flex-end; }
 }
 
 @media (min-width: 1024px) {
@@ -517,4 +451,7 @@ body.scroll-locked { overflow: hidden; }
   .cf-cta { opacity: 1; transform: none; transition: none; } .cf-card { transition: none; }
   .garantia-card { transition: none; }
   .pricing-card { transition: none; }
+  .faq-body { transition: none; }
+  .faq-icon { transition: none; }
+  .footer-links a { transition: none; }
 }

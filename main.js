@@ -109,7 +109,7 @@ if (problemaSection) {
   entryObs.observe(section);
 })();
 
-/* ─── SECTION-FEATURES ──────────────────────────────────────── */
+/* ─── SECTION-FEATURES ──────────────────────────────────────────── */
 (function initFeaturesCarousel() {
   const section = document.getElementById('features-section');
   const track = document.getElementById('features-track');
@@ -246,212 +246,147 @@ if (problemaSection) {
 /* ─── SECTION-GARANTIA — GSAP + ScrollTrigger + SplitType ───────── */
 (function initGarantia() {
   if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
-
   var section = document.getElementById('garantia');
   if (!section) return;
-
   var hlC     = document.getElementById('garantia-hl-c');
   var shield  = document.getElementById('garantia-shield');
   var text    = document.getElementById('garantia-text');
   var cards   = Array.from(document.querySelectorAll('.garantia-card'));
   var grid    = section.querySelector('.garantia-grid');
-  /* Usar wrapper como trigger principal para animaciones */
   var wrapper = document.getElementById('garantia-wrapper') || section;
-
-  /* SplitType en "GARANTÍA" */
   if (hlC && typeof SplitType !== 'undefined') {
     var split = new SplitType(hlC, { types: 'chars' });
     if (split.chars && split.chars.length) {
       gsap.set(split.chars, { opacity: 0, y: 30 });
-      ScrollTrigger.create({
-        trigger: hlC,
-        start: 'top 85%',
-        onEnter: function() { gsap.to(split.chars, { opacity: 1, y: 0, stagger: 0.05, duration: 0.6, ease: 'power2.out' }); },
-        once: true
-      });
+      ScrollTrigger.create({ trigger: hlC, start: 'top 85%', onEnter: function() { gsap.to(split.chars, { opacity: 1, y: 0, stagger: 0.05, duration: 0.6, ease: 'power2.out' }); }, once: true });
     }
   }
-
-  /* GARANTIA-SHIELD: entrada desde x:60 scale:0.9 */
   if (shield) {
     gsap.set(shield, { opacity: 0, x: 60, scale: 0.9 });
-
-    ScrollTrigger.create({
-      trigger: wrapper,
-      start: 'top 80%',
-      onEnter: function() {
-        gsap.to(shield, { opacity: 1, x: 0, scale: 1, duration: 1, delay: 0.2, ease: 'power2.out' });
-      },
-      once: true
-    });
-
-    /* Paralaje sutil: escudo se mueve -30px en Y al hacer scroll */
-    gsap.to(shield, {
-      y: -30,
-      ease: 'none',
-      scrollTrigger: {
-        trigger: wrapper,
-        start: 'top bottom',
-        end: 'bottom top',
-        scrub: 1
-      }
-    });
+    ScrollTrigger.create({ trigger: wrapper, start: 'top 80%', onEnter: function() { gsap.to(shield, { opacity: 1, x: 0, scale: 1, duration: 1, delay: 0.2, ease: 'power2.out' }); }, once: true });
+    gsap.to(shield, { y: -30, ease: 'none', scrollTrigger: { trigger: wrapper, start: 'top bottom', end: 'bottom top', scrub: 1 } });
   }
-
-  /* GARANTIA-TEXT: entrada desde x:-30 */
   if (text) {
     gsap.set(text, { opacity: 0, x: -30 });
-    ScrollTrigger.create({
-      trigger: wrapper,
-      start: 'top 80%',
-      onEnter: function() {
-        gsap.to(text, { opacity: 1, x: 0, duration: 0.8, ease: 'power2.out' });
-      },
-      once: true
-    });
+    ScrollTrigger.create({ trigger: wrapper, start: 'top 80%', onEnter: function() { gsap.to(text, { opacity: 1, x: 0, duration: 0.8, ease: 'power2.out' }); }, once: true });
   }
-
-  /* Cards de objeciones: stagger fadeIn */
   if (cards.length && grid) {
     gsap.set(cards, { opacity: 0, y: 20 });
-    ScrollTrigger.create({
-      trigger: grid,
-      start: 'top 85%',
-      onEnter: function() {
-        gsap.to(cards, { opacity: 1, y: 0, stagger: 0.1, duration: 0.6, delay: 0.3, ease: 'power2.out' });
-      },
-      once: true
-    });
+    ScrollTrigger.create({ trigger: grid, start: 'top 85%', onEnter: function() { gsap.to(cards, { opacity: 1, y: 0, stagger: 0.1, duration: 0.6, delay: 0.3, ease: 'power2.out' }); }, once: true });
   }
 })();
 
 /* ─── SECTION-PRICING — GSAP + ScrollTrigger + SplitType ────────────── */
 (function initPricing() {
   if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
-
   var section = document.getElementById('pricing-section');
   if (!section) return;
-
   var track  = document.getElementById('pricing-track');
   var cards  = Array.from(document.querySelectorAll('.pricing-card'));
   var footer = document.getElementById('pricing-footer');
   if (!track || cards.length < 3) return;
-
-  var footerStates = {
-    seo:   document.getElementById('pf-state-seo'),
-    elite: document.getElementById('pf-state-elite'),
-    auto:  document.getElementById('pf-state-auto')
-  };
+  var footerStates = { seo: document.getElementById('pf-state-seo'), elite: document.getElementById('pf-state-elite'), auto: document.getElementById('pf-state-auto') };
   var currentPlan = 'elite';
-
   function switchFooter(plan) {
     if (plan === currentPlan || !footerStates[plan]) return;
-    var outEl = footerStates[currentPlan];
-    var inEl  = footerStates[plan];
-    gsap.to(outEl, { opacity: 0, duration: 0.3, onComplete: function() {
-      outEl.style.display = 'none';
-      inEl.style.display  = 'flex';
-      gsap.fromTo(inEl, { opacity: 0 }, { opacity: 1, duration: 0.3 });
-    }});
+    var outEl = footerStates[currentPlan], inEl = footerStates[plan];
+    gsap.to(outEl, { opacity: 0, duration: 0.3, onComplete: function() { outEl.style.display = 'none'; inEl.style.display = 'flex'; gsap.fromTo(inEl, { opacity: 0 }, { opacity: 1, duration: 0.3 }); }});
     currentPlan = plan;
   }
-
   var cardPlans = cards.map(function(c) { return c.dataset.plan; });
-  var activeIndex = 1;
-  var isScrollByCode = false;
-  var scrollTimer;
-
+  var activeIndex = 1, isScrollByCode = false, scrollTimer;
   function updateCardStates(newIndex, animate) {
     cards.forEach(function(card, i) {
-      var active = (i === newIndex);
-      var ry = i < newIndex ? 5 : (i > newIndex ? -5 : 0);
-      var tgt = active
-        ? { scale: 1.04, y: -6, opacity: 1,   rotationY: 0,  duration: 0.45, ease: 'power2.out' }
-        : { scale: 0.92, y:  0, opacity: 0.7,  rotationY: ry, duration: 0.45, ease: 'power2.out' };
-      if (animate) gsap.to(card, tgt);
-      else         gsap.set(card, tgt);
+      var active = (i === newIndex), ry = i < newIndex ? 5 : (i > newIndex ? -5 : 0);
+      var tgt = active ? { scale: 1.04, y: -6, opacity: 1, rotationY: 0, duration: 0.45, ease: 'power2.out' } : { scale: 0.92, y: 0, opacity: 0.7, rotationY: ry, duration: 0.45, ease: 'power2.out' };
+      if (animate) gsap.to(card, tgt); else gsap.set(card, tgt);
     });
-    switchFooter(cardPlans[newIndex]);
-    activeIndex = newIndex;
+    switchFooter(cardPlans[newIndex]); activeIndex = newIndex;
   }
-
   function scrollToCard(index, smooth) {
     smooth = (smooth !== false);
-    var card      = cards[index];
-    var halfTrack = track.offsetWidth  / 2;
-    var halfCard  = card.offsetWidth   / 2;
-    var target    = card.offsetLeft - halfTrack + halfCard;
+    var card = cards[index], halfTrack = track.offsetWidth / 2, halfCard = card.offsetWidth / 2, target = card.offsetLeft - halfTrack + halfCard;
     isScrollByCode = true;
     track.scrollTo({ left: target, behavior: smooth ? 'smooth' : 'instant' });
     updateCardStates(index, smooth);
     setTimeout(function() { isScrollByCode = false; }, smooth ? 500 : 60);
   }
-
   function findClosestCard() {
-    var center = track.scrollLeft + track.offsetWidth / 2;
-    var closest = 0, minDist = Infinity;
-    cards.forEach(function(card, i) {
-      var d = Math.abs(card.offsetLeft + card.offsetWidth / 2 - center);
-      if (d < minDist) { minDist = d; closest = i; }
-    });
+    var center = track.scrollLeft + track.offsetWidth / 2, closest = 0, minDist = Infinity;
+    cards.forEach(function(card, i) { var d = Math.abs(card.offsetLeft + card.offsetWidth / 2 - center); if (d < minDist) { minDist = d; closest = i; } });
     return closest;
   }
-
-  cards.forEach(function(card, i) {
-    card.addEventListener('click', function() { scrollToCard(i); });
-  });
-
+  cards.forEach(function(card, i) { card.addEventListener('click', function() { scrollToCard(i); }); });
   track.addEventListener('scroll', function() {
     if (isScrollByCode) return;
     clearTimeout(scrollTimer);
-    scrollTimer = setTimeout(function() {
-      var closest = findClosestCard();
-      if (closest !== activeIndex) scrollToCard(closest);
-    }, 150);
+    scrollTimer = setTimeout(function() { var closest = findClosestCard(); if (closest !== activeIndex) scrollToCard(closest); }, 150);
   }, { passive: true });
-
   window.addEventListener('resize', function() { scrollToCard(activeIndex, false); });
-
   var digitalEl = document.getElementById('pricing-hl-digital');
   if (digitalEl && typeof SplitType !== 'undefined') {
     var split = new SplitType(digitalEl, { types: 'chars' });
     if (split.chars && split.chars.length) {
       gsap.set(split.chars, { opacity: 0, y: 30 });
-      ScrollTrigger.create({
-        trigger: digitalEl,
-        start: 'top 85%',
-        onEnter: function() { gsap.to(split.chars, { opacity: 1, y: 0, stagger: 0.05, duration: 0.6, ease: 'power2.out' }); },
-        once: true
-      });
+      ScrollTrigger.create({ trigger: digitalEl, start: 'top 85%', onEnter: function() { gsap.to(split.chars, { opacity: 1, y: 0, stagger: 0.05, duration: 0.6, ease: 'power2.out' }); }, once: true });
     }
   }
-
   gsap.set(cards[0], { opacity: 0, y: 80, scale: 0.92, transformPerspective: 800, rotationY:  5 });
   gsap.set(cards[1], { opacity: 0, y: 80, scale: 0.9,  transformPerspective: 800, rotationY:  0 });
   gsap.set(cards[2], { opacity: 0, y: 80, scale: 0.92, transformPerspective: 800, rotationY: -5 });
-
   ScrollTrigger.create({
-    trigger: section,
-    start: 'top 75%',
+    trigger: section, start: 'top 75%',
     onEnter: function() {
       gsap.to(cards[0], { opacity: 0.7, y: 0, scale: 0.92, rotationY:  5, duration: 0.9, ease: 'power3.out', delay: 0 });
       gsap.to(cards[1], { opacity: 1,   y: -6, scale: 1.04, rotationY:  0, duration: 0.9, ease: 'power3.out', delay: 0.15 });
       gsap.to(cards[2], { opacity: 0.7, y: 0, scale: 0.92, rotationY: -5, duration: 0.9, ease: 'power3.out', delay: 0.30 });
-    },
-    once: true
+    }, once: true
   });
-
   if (footer) {
     gsap.set(footer, { opacity: 0, y: 20 });
-    ScrollTrigger.create({
-      trigger: section,
-      start: 'top 75%',
-      onEnter: function() { gsap.to(footer, { opacity: 1, y: 0, duration: 0.7, delay: 0.6, ease: 'power2.out' }); },
-      once: true
-    });
+    ScrollTrigger.create({ trigger: section, start: 'top 75%', onEnter: function() { gsap.to(footer, { opacity: 1, y: 0, duration: 0.7, delay: 0.6, ease: 'power2.out' }); }, once: true });
   }
+  requestAnimationFrame(function() { requestAnimationFrame(function() { scrollToCard(1, false); }); });
+})();
 
-  requestAnimationFrame(function() {
-    requestAnimationFrame(function() { scrollToCard(1, false); });
+/* ─── SECTION-FAQ — Acordeones ──────────────────────────────────── */
+(function initFAQ() {
+  var items = Array.from(document.querySelectorAll('.faq-item'));
+  if (!items.length) return;
+  items.forEach(function(item) {
+    var header = item.querySelector('.faq-header');
+    if (!header) return;
+    header.addEventListener('click', function() {
+      var isOpen = item.classList.contains('open');
+      items.forEach(function(i) {
+        i.classList.remove('open');
+        var h = i.querySelector('.faq-header');
+        if (h) h.setAttribute('aria-expanded', 'false');
+      });
+      if (!isOpen) {
+        item.classList.add('open');
+        header.setAttribute('aria-expanded', 'true');
+      }
+    });
   });
+  if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+    var section = document.getElementById('faq-section');
+    var list = document.getElementById('faq-list');
+    if (section && list) {
+      var eyebrow = section.querySelector('.faq-eyebrow');
+      if (eyebrow) gsap.set(eyebrow, { opacity: 0, y: 16 });
+      gsap.set(list, { opacity: 0, y: 24 });
+      gsap.set(items, { opacity: 0, x: -16 });
+      ScrollTrigger.create({
+        trigger: section,
+        start: 'top 80%',
+        onEnter: function() {
+          if (eyebrow) gsap.to(eyebrow, { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out' });
+          gsap.to(list, { opacity: 1, y: 0, duration: 0.5, delay: 0.1, ease: 'power2.out' });
+          gsap.to(items, { opacity: 1, x: 0, stagger: 0.07, duration: 0.45, delay: 0.2, ease: 'power2.out' });
+        },
+        once: true
+      });
+    }
+  }
 })();
